@@ -2,12 +2,13 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   getChallenge,
   getChallengeHref,
   getChallenges,
 } from '@/lib/challenges';
+import { mdxComponents } from '@/lib/mdx-components';
+import { withBasePath } from '@/lib/paths';
 import { SiteTop } from '../../site-top';
 
 type ChallengePageProps = {
@@ -55,7 +56,7 @@ export default async function ChallengePage(props: ChallengePageProps) {
         <header className="challenge-hero">
           <figure className="challenge-image-frame">
             <img
-              src={image.src}
+              src={withBasePath(image.src)}
               alt={image.alt}
               style={{ objectPosition: image.position }}
             />
@@ -137,7 +138,7 @@ export default async function ChallengePage(props: ChallengePageProps) {
 
         <div className="challenge-content">
           <div className="challenge-body prose">
-            <MDX components={{ ...defaultMdxComponents }} />
+            <MDX components={mdxComponents} />
           </div>
         </div>
 
