@@ -1,0 +1,12 @@
+version: 1
+challenges:
+  - id: fm-panoptic-segmentation
+    title: Foundation Model Panoptic Segmentation
+    status: draft
+    category: foundation-models
+    technical_area: computer-vision
+    dataset_ids:
+      - lartpc-fm-v1
+    metric_ids:
+      - adjusted-rand-index
+    path: challenges/fm-panoptic-segmentation

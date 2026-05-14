@@ -1,0 +1,32 @@
+---
+title: Site Architecture
+description: How docs, challenge pages, Data Hub pages, metadata, and future surfaces fit together.
+---
+
+The repository is organized around plain, durable challenge and dataset files rather than a single website framework.
+
+```text
+doraemon_site/
+  registry/       # global indexes consumed by future challenge surfaces
+  challenges/     # one folder per challenge
+  datasets/       # one folder per dataset
+  sites/docs/     # fumadocs documentation and top-level web surfaces
+  scripts/        # validation and build helpers
+  schemas/        # metadata contracts
+```
+
+## Design Principles
+
+- Each web surface should be replaceable without rewriting challenge or dataset metadata.
+- Challenge and dataset metadata should be validated before the docs build.
+- Documentation should stay focused on reference material, participation, and maintenance.
+- Notebooks, validators, visualizers, leaderboards, and challenge runners can live beside the docs rather than inside them.
+
+## Possible Future Challenge Surfaces
+
+| Surface | Likely Shape |
+| --- | --- |
+| Public challenge landing page | Custom Next page or separate frontend |
+| Challenge browser | Metadata-driven catalog from `registry/challenges.yml` |
+| Dataset browser | Metadata-driven catalog from `registry/datasets.yml` |
+| Event-display tools | Handmade interactive app consuming dataset examples |

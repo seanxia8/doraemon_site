@@ -1,0 +1,15 @@
+id: fm-panoptic-segmentation
+title: Foundation Model Panoptic Segmentation
+status: draft
+summary: Segment detector hits by semantic particle class, particle instance, and interaction grouping.
+category: foundation-models
+technical_area: computer-vision
+physics_area: neutrino event reconstruction
+datasets:
+  - lartpc-fm-v1
+metrics:
+  - adjusted-rand-index
+links:
+  docs: ../../sites/docs/docs/challenges.md
+  baseline: null
+  leaderboard: null

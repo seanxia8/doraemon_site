@@ -1,0 +1,9 @@
+{
+  "title": "Physics",
+  "defaultOpen": true,
+  "pages": [
+    "particle-physics",
+    "neutrinos",
+    "detecting-neutrinos"
+  ]
+}

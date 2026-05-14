@@ -1,0 +1,45 @@
+---
+title: Event completion
+track: Foundation Model
+slug: fm-event-completion
+description: Reconstruct masked or missing detector activity from partial LArTPC event records using foundation model representations.
+order: 20
+challengeId: FM-EVENT-COMP
+label: Open Dataset Challenge
+status: Planned
+metric:
+  label: Masked-hit recovery
+  goal: Maximize
+  href: /docs/challenge-reference/metrics#masked-hit-recovery
+physics:
+  label: LArTPC reconstruction
+  href: /docs/physics
+dataset:
+  label: LArTPC FM v1
+  href: /data-hub/lartpc-fm-v1
+  type: Sparse LArTPC event records
+facts:
+  - label: Category
+    value: Foundation model evaluation
+  - label: Timeframe
+    value: Dataset split pending
+  - label: Dataset type
+    value: Sparse LArTPC event records
+    href: /data-hub/lartpc-fm-v1
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Event completion
+---
+
+## Scope
+
+This placeholder challenge will evaluate whether models can recover masked detector activity from partial event records. The final protocol should define the masking procedure, target representation, and public validation split.
+
+## References
+
+Dataset schema and download notes should live in the [Data Hub entry](/data-hub/lartpc-fm-v1). Shared metric behavior should live in the [masked-hit recovery definition](/docs/challenge-reference/metrics#masked-hit-recovery), with submission expectations in the [challenge rules](/docs/challenge-reference/challenge-rules).
+
+## Leaderboard
+
+The leaderboard is not open. A baseline should be added once the masking protocol and validator are ready.

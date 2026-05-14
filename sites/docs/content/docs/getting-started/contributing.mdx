@@ -1,0 +1,25 @@
+---
+title: Contributing
+description: How to add or update challenge documentation and metadata.
+---
+
+Most challenge contributors should be able to edit Markdown and YAML without touching a frontend framework.
+
+## Common Tasks
+
+- Edit docs in `sites/docs/content/docs/`.
+- Add nested docs sections with real folders like `sites/docs/content/docs/getting-started/`; each section can have its own `index.mdx` landing page.
+- Add challenge metadata in `challenges/<challenge-id>/challenge.yml`.
+- Add dataset metadata in `datasets/<dataset-id>/dataset.yml`.
+- Update global indexes in `registry/`.
+
+## Checks
+
+Run these before opening a pull request:
+
+```sh
+make validate
+make docs
+```
+
+The validation step catches broken metadata before future challenge pages, dataset pages, leaderboards, or evaluation tooling depend on it.

@@ -1,0 +1,11 @@
+id: lartpc-fm-v1
+title: LArTPC Foundation Model Dataset v1
+status: planned
+summary: Simulated LArTPC event-display dataset for foundation-model pretraining and downstream reconstruction benchmarks.
+modality: lartpc
+version: v1
+access:
+  type: pending
+  url: null
+schema_doc: schema.md
+example_paths: []

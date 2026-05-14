@@ -1,0 +1,12 @@
+[project]
+name = "doraemon-site"
+version = "0.1.0"
+description = "Website, documentation, and benchmark metadata for the DORAEMON community."
+requires-python = ">=3.10"
+dependencies = [
+    "jsonschema>=4.23,<5",
+    "pyyaml>=6.0,<7",
+]
+
+[tool.uv]
+package = false

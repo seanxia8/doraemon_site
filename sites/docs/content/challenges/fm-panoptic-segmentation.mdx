@@ -1,0 +1,71 @@
+---
+title: Panoptic segmentation
+track: Foundation Model
+slug: fm-panoptic-segmentation
+description: Segment detector hits by particle class, particle instance, and interaction group using the public LArTPC foundation model dataset.
+order: 10
+challengeId: FM-PANO-SEG
+label: Open Dataset Challenge
+status: Draft
+image:
+  src: /challenges/fm-panoptic-segmentation.png
+  alt: Panoptic segmentation example from the DORAEMON proposal
+  position: center center
+metric:
+  label: Adjusted Rand Index
+  goal: Maximize
+  href: /docs/challenge-reference/metrics#adjusted-rand-index
+physics:
+  label: LArTPC reconstruction
+  href: /docs/physics
+dataset:
+  label: LArTPC FM v1
+  href: /data-hub/lartpc-fm-v1
+  type: Sparse LArTPC event records
+currentBest:
+  label: Baseline
+  score: "0.412"
+facts:
+  - label: Category
+    value: Physics reconstruction with AI methods
+  - label: Timeframe
+    value: Draft protocol, dates pending
+  - label: Dataset type
+    value: Sparse LArTPC event records
+    href: /data-hub/lartpc-fm-v1
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Computer vision segmentation
+---
+
+## Physics impact
+
+Panoptic segmentation turns dense detector activity into structured physics objects while preserving particle identity and interaction context for downstream reconstruction. For the detector context, see the [LArTPC physics notes](/docs/physics).
+
+## Visualization
+
+This challenge should point to an event display once the dataset preview is ready, so entrants can inspect target labels before reading the full dataset reference. Dataset schema and download notes belong in the [Data Hub entry](/data-hub/lartpc-fm-v1), with reusable definitions kept in [Docs](/docs).
+
+## Submission shape
+
+A valid entry should be reproducible, versioned, and evaluable on a held-out split without private post-processing. Validation details should point back to the [challenge rules](/docs/challenge-reference/challenge-rules), and metric behavior should point to the [Adjusted Rand Index definition](/docs/challenge-reference/metrics#adjusted-rand-index).
+
+- Semantic labels for the target particle taxonomy.
+- Instance ids that remain stable across event-level outputs.
+- Interaction grouping for connected physics activity.
+
+## Baseline and tutorial
+
+A reproducible baseline and a short tutorial should define how to run validation locally before a submission is posted.
+
+| Item | Requirement |
+| --- | --- |
+| Input | Detector hits with geometry and charge features |
+| Output | Particle class, instance id, and interaction group |
+| Validation | Containerized script, public validation split |
+| Tutorial | Baseline notebook link pending |
+
+## Leaderboard
+
+The leaderboard should show the current best score, the submission source, and enough provenance to reproduce the result. Until the challenge opens, the baseline score is the reference value.

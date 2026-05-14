@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DORAEMON Challenge",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status",
+    "summary",
+    "category",
+    "technical_area",
+    "datasets",
+    "metrics"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "completed", "archived"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "technical_area": {
+      "type": "string",
+      "minLength": 1
+    },
+    "physics_area": {
+      "type": "string"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "null"]
+      }
+    }
+  },
+  "additionalProperties": true
+}

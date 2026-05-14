@@ -1,0 +1,7 @@
+version: 1
+datasets:
+  - id: lartpc-fm-v1
+    title: LArTPC Foundation Model Dataset v1
+    status: planned
+    modality: lartpc
+    path: datasets/lartpc-fm-v1

@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+node_modules/
+.next/
+.source/
+sites/docs/out/
+*.tsbuildinfo
+build/
+site/
+__pycache__/
+*.pyc
+context/
+prototypes/

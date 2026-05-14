@@ -1,0 +1,33 @@
+---
+title: Metrics
+description: Metric definitions used by challenge pages.
+---
+
+Challenge pages point here for metric definitions and rationale.
+
+## Adjusted Rand Index
+
+Adjusted Rand Index measures agreement between two partitions while correcting
+for chance.
+
+In compact form, $ARI$ compares an observed rand index against its expected
+value under chance:
+
+$$
+ARI = \frac{RI - \mathbb{E}[RI]}{\max(RI) - \mathbb{E}[RI]}
+$$
+
+## Panoptic Quality
+
+Panoptic quality combines recognition quality and segmentation quality for
+instance-aware segmentation tasks.
+
+## Masked-hit Recovery
+
+Masked-hit recovery measures whether a method reconstructs intentionally hidden
+detector activity from the visible event context.
+
+## Linear Probe Suite
+
+Linear probe suite scores evaluate whether a frozen representation supports
+held-out detector tasks through lightweight supervised probes.

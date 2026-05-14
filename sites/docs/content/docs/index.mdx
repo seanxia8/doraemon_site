@@ -1,0 +1,43 @@
+---
+title: Overview
+description: Reference material for physics, rules, metrics, software, validation, and contribution.
+---
+
+Docs are the reference layer for the site. Challenge catalogs and dataset pages
+are separate surfaces: use <a href="/challenges">Challenges</a> for challenge
+pages and <a href="/data-hub">Data Hub</a> for dataset pages.
+
+<div className="doc-status-grid">
+  <div className="doc-status-item">
+    <strong>Challenge Rules</strong>
+    Shared structure, validation, and submission notes.
+  </div>
+  <div className="doc-status-item">
+    <strong>Metrics</strong>
+    Definitions and rationale used by challenge pages.
+  </div>
+</div>
+
+## What Belongs Here
+
+| Surface | Purpose |
+| --- | --- |
+| Physics | Detector and reconstruction background |
+| Challenge Rules | Shared structure, scoring, validation, and submissions |
+| Metrics | Definitions such as Adjusted Rand Index and panoptic quality |
+| Software Stack | Containers, streamers, notebooks, validators, repositories |
+| Contribution | How to suggest a challenge or candidate solution |
+
+## What Lives Elsewhere
+
+Challenge pages live under <a href="/challenges">Challenges</a>. Dataset
+definitions, schemas, access notes, and visualizations live under
+<a href="/data-hub">Data Hub</a>.
+
+## Local Commands
+
+```sh
+make validate
+make docs
+make docs-serve
+```
