@@ -1,7 +1,13 @@
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 export function withBasePath(path: string): string {
-  if (!basePath || !path.startsWith('/') || path.startsWith('//')) {
+  if (
+    !basePath ||
+    !path.startsWith('/') ||
+    path.startsWith('//') ||
+    path === basePath ||
+    path.startsWith(`${basePath}/`)
+  ) {
     return path;
   }
 
