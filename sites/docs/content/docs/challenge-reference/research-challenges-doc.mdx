@@ -1,0 +1,58 @@
+---
+title: Open Problems and Challenges
+description: Describe the open problems in both physics and AI/ML research, and the related open challenges
+---
+
+# Research Challenges
+
+To better decouple different aspects of research, we categorize the challenges as physical and AI/ML-oriented. 
+
+## Physics Open Problems
+
+The **Monte Carlo (MC) method** is a cornerstone of Experimental High Energy Physics (E-HEP). Instead of solving complex physics equations analytically, researchers generate enormous numbers of simulated "universes," each sampled from a space of possible physics models and measurement uncertainties. If the real universe's behavior falls within that simulated ensemble — and we can quantify *how confidently* it does — we have a principled, statistical way to test our theories against reality.
+
+But MC simulation is not without costs. As experiments grow more ambitious — larger detectors, subtler signals, tighter precision targets — the method's limitations are becoming active bottlenecks.
+
+#### What to model?
+
+Every MC simulation begins with a design question: which physics processes are worth implementing, and at what level of detail? The obvious cases are easy — a water Cherenkov detector does not need a liquid Argon scintillation model. But the boundaries blur quickly. Should one implement Raman scattering alongside Rayleigh and Mie, given that it contributes far less to light propagation? A hand-wavy "it'll be smeared by systematics" might be defensible in isolation, but accumulated across dozens of such decisions, small omissions can quietly propagate into the final analysis.
+
+A fully complete model is rarely an option either — tracking every photon from every point in the detector toward every one of thousands of light sensors is combinatorially infeasible. The right approximation must be *accurate enough* without being prohibitively expensive, and there is no universal answer.
+
+In the end, verifying that the MC faithfully reproduces *known* physics — using data deliberately chosen to be independent of the measurement target — becomes a critical task for every experiment. This is easier said than done, and it leads directly to the next open problem. 
+
+#### Can we ever fully validate?
+
+The short answer is no. Calibration — tuning the MC against real data where the answer is already known — builds confidence that the simulation faithfully represents the detector. But it is never exhaustive. Neither the HK nor DUNE detectors can be probed at every location, energy range, and particle type within real experimental constraints.
+
+Worse, some physics resists calibration by design. Calibration sources cover a finite regime; real signals do not respect those boundaries. Extrapolating MC validity beyond the calibrated region requires assumptions that cannot be directly tested, and assuming smooth, interpolable detector responses is itself a modeling decision that loops back to the first open problem. 
+
+The above points have a direct and underappreciated consequence for reconstruction. Algorithms that identify and classify particle interactions are developed and validated entirely on MC. Conventional methods often rely on computational shortcuts with no physical motivation, such as Gaussian likelihoods chosen for tractability rather than accuracy. Moreover, this part of mis-modeling is usually hard to capture with the associated systematic errors, for example trying to model a binomial distribution with Gaussian errors. Therefore, every MC simulation carries a set of quietly unverified assumptions into the final analysis — a fact that motivates the third open problem.
+
+#### When MC meets reality
+
+Discrepancies between MC and real data are not rare — they are expected. But when they appear after unblinding, they cannot simply be patched: researchers commit to their analysis strategy *before* seeing real data precisely to avoid tailoring the simulation toward a preferred answer.
+
+So what does a gap mean? The possibilities are uncomfortably broad — new physics, an implementation error, a missing model, or a statistical fluctuation — and distinguishing between them is rarely clean. Worse, a convincing explanation for one experiment's discrepancy may be entirely wrong for another. Solutions tend to be ad-hoc, tuned to a specific detector and systematic budget. A universal understanding of MC-data tension has eluded the field for decades — and any approach that hopes to generalize across experiments must contend with all three layers of uncertainty described above.
+
+### Open Challenge P-I - Panoptic Segmentation
+
+Previous works on supervised ML approaches have show great potential of achieving the panoptic segmentation --- segment multi-resolution multi-modal information, e.g. energy deposition types and particle instances (cite SPINE, WatchMaL). However, such models inherit a subtle problem from the MC modeling: a model trained on MC-labeled images learns to reproduce MC's embedded assumptions, not necessarily the true underlying physics.  And since real detector data carries no ground-truth labels, there is no direct way to verify whether the reconstruction is right — only whether it is internally consistent with the MC it was trained on. This is the core difficulty of panoptic segmentation in detectors like LArTPCs: it is not merely a vision problem, but a label-free generalization problem with no clean validation path.
+
+### Open Challenge P-II - Cross-detector Transfer
+
+### Open Challenge P-III - 
+
+
+
+...
+
+\## AI/ML Challenges
+
+\### A model can never be better than its teacher (MC)
+
+\#### How do we fit a giant (model) into a small chamber (GPU memory) (scalability)
+
+\#### I want the last 1% bit…(edge cases)
+
+\#### How can I convince these physicists? 
