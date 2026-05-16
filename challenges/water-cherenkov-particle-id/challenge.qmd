@@ -37,7 +37,7 @@ facts:
     value: Ring-pattern classification
 links:
   docs: null
-  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/water-cherenkov-particle-id
+  baseline: https://github.com/deeplearnphysics/doraemon_site/tree/main/baselines/water-cherenkov-particle-id
   leaderboard: null
 bibliography: ../../bibliography.bib
 format:

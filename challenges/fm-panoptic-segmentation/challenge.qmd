@@ -45,7 +45,7 @@ facts:
     value: Computer vision segmentation
 links:
   docs: null
-  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/fm-panoptic-segmentation
+  baseline: https://github.com/deeplearnphysics/doraemon_site/tree/main/baselines/fm-panoptic-segmentation
   leaderboard: null
 bibliography: ../../bibliography.bib
 format:

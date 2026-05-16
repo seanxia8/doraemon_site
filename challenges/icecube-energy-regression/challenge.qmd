@@ -37,7 +37,7 @@ facts:
     value: Neutrino energy regression
 links:
   docs: null
-  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/icecube-energy-regression
+  baseline: https://github.com/deeplearnphysics/doraemon_site/tree/main/baselines/icecube-energy-regression
   leaderboard: null
 bibliography: ../../bibliography.bib
 format:

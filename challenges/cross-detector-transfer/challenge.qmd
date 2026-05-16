@@ -37,7 +37,7 @@ facts:
     value: Cross-detector generalization
 links:
   docs: null
-  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/cross-detector-transfer
+  baseline: https://github.com/deeplearnphysics/doraemon_site/tree/main/baselines/cross-detector-transfer
   leaderboard: null
 bibliography: ../../bibliography.bib
 format:

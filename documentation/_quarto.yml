@@ -6,8 +6,8 @@ bibliography: ../bibliography.bib
 
 book:
   title: "DORAEMON Documentation"
-  site-url: "https://youngsam.github.io/doraemon_site/documentation/"
-  repo-url: "https://github.com/youngsam/doraemon_site"
+  site-url: "https://deeplearnphysics.github.io/doraemon_site/documentation/"
+  repo-url: "https://github.com/deeplearnphysics/doraemon_site"
   repo-subdir: documentation
   repo-actions: [source]
   page-navigation: true

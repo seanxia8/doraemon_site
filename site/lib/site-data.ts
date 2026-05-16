@@ -4,8 +4,8 @@ export const site = {
   title: 'DORAEMON | Open Dataset Challenge',
   description:
     'DORAEMON organizes public neutrino-detector datasets, shared AI tasks, baseline models, and notes from the Open Data Challenge program.',
-  url: 'https://youngsam.github.io/doraemon_site',
-  githubUrl: 'https://github.com/youngsam/doraemon_site',
+  url: 'https://deeplearnphysics.github.io/doraemon_site',
+  githubUrl: 'https://github.com/deeplearnphysics/doraemon_site',
   address: 'Stanford, California 94305',
 };
 
