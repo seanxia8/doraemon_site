@@ -1,0 +1,68 @@
+---
+id: icecube-energy-regression
+order: 50
+title: IceCube Neutrino Energy Regression
+short_title: IceCube Energy Regression
+status: planned
+summary: Estimate incoming neutrino energy from sparse optical-module observations and reconstructed event-level features.
+category: energy-reconstruction
+technical_area: regression
+physics_area: neutrino energy reconstruction
+detector_type: IceCube
+technical_method: Statistics
+track: Detector Reconstruction
+label: Open Dataset Challenge
+datasets:
+  - icecube-energy-regression-v0
+metrics:
+  - median-absolute-log-error
+metric:
+  label: Median Absolute Log Error
+  goal: Minimize
+  documentation: /documentation/metrics.html#regression-metrics
+facts:
+  - label: Category
+    value: Energy reconstruction
+  - label: Detector type
+    value: IceCube
+  - label: Technical method
+    value: Statistics
+  - label: Timeframe
+    value: Dataset definition pending
+  - label: Dataset type
+    value: IceCube optical-module event records
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Neutrino energy regression
+links:
+  docs: null
+  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/icecube-energy-regression
+  leaderboard: null
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Scope
+
+This planned challenge will evaluate energy regression from IceCube-style sparse detector observations and event summaries. The detector context follows the optical-module geometry and timing structure described for the IceCube Neutrino Observatory [@aartsen2017icecube].
+
+## Protocol needs
+
+The final protocol should define target energy, preprocessing, event containment assumptions, split strategy, and uncertainty reporting. The proposed headline score is median absolute log error,
+
+$$
+\mathrm{MALE} =
+\mathrm{median}_i
+\left|
+\log E_i - \log \hat{E}_i
+\right|.
+$$
+
+## Leaderboard
+
+The leaderboard is not open until the dataset record and baseline regressor are ready. The challenge should separate point-estimate quality from calibrated uncertainty so probabilistic submissions can be compared fairly.

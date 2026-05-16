@@ -1,0 +1,69 @@
+---
+id: fm-event-completion
+order: 20
+title: Event Completion
+short_title: Event Completion
+status: planned
+summary: Reconstruct masked or missing detector activity from partial LArTPC event records using foundation model representations.
+category: foundation-models
+technical_area: event-reconstruction
+physics_area: neutrino event reconstruction
+detector_type: LArTPC
+technical_method: Computer vision
+track: Foundation Model
+label: Open Dataset Challenge
+datasets:
+  - lartpc-fm-v1
+metrics:
+  - masked-hit-recovery
+metric:
+  label: Masked-hit Recovery
+  goal: Maximize
+  documentation: /documentation/metrics.html#masked-hit-recovery
+facts:
+  - label: Category
+    value: Foundation model evaluation
+  - label: Detector type
+    value: LArTPC
+  - label: Technical method
+    value: Computer vision
+  - label: Timeframe
+    value: Dataset split pending
+  - label: Dataset type
+    value: Sparse LArTPC event records
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Event completion
+links:
+  docs: null
+  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/fm-event-completion
+  leaderboard: null
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Scope
+
+This planned challenge will evaluate whether models can recover masked detector activity from partial event records. The task is close in spirit to masked reconstruction objectives used in representation learning [@he2022masked], but the outputs must remain compatible with detector readout coordinates and downstream physics selection.
+
+## Protocol needs
+
+The final protocol should define the masking procedure, target representation, held-out split, and validator behavior. A simple target can be written as minimizing a masked reconstruction loss,
+
+$$
+\mathcal{L}_{\mathrm{mask}} =
+\frac{1}{|\Omega|}
+\sum_{x \in \Omega}
+\ell\left(f_\theta(x_{\setminus \Omega}), x\right),
+$$
+
+where $\Omega$ is the hidden detector activity and $f_\theta$ is the submitted reconstruction model.
+
+## Leaderboard
+
+The leaderboard is not open until the masking protocol and baseline validator are ready. The first release should include example masks, an allowed-feature table, and a reproducibility checklist for stochastic completion methods.

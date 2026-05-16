@@ -1,0 +1,47 @@
+---
+title: Contributing
+description: How to add or update challenge documentation and metadata.
+---
+
+Most challenge contributors should be able to edit Quarto, Markdown, and YAML without touching a frontend framework.
+
+The main rule is simple: public challenge and dataset pages are edited in their record files, not copied into the documentation book.
+
+## Common Tasks
+
+- Edit shared docs in `documentation/`.
+- Add pages by creating `.qmd` files and listing them in `documentation/_quarto.yml`.
+- Add challenge metadata and protocol prose in `challenges/<challenge-id>/challenge.qmd`.
+- Add dataset metadata and notes in `datasets/<dataset-id>/dataset.qmd`.
+- Use the `order` field in challenge and dataset front matter when the public display order matters.
+- Put citations and math directly in the challenge or dataset record body when they belong to one record.
+- Put reusable rules, metric definitions, physics background, and schema conventions in `documentation/`.
+
+## Single-Source Records
+
+Each challenge has one canonical source:
+
+```text
+challenges/<challenge-id>/challenge.qmd
+```
+
+Each dataset has one canonical source:
+
+```text
+datasets/<dataset-id>/dataset.qmd
+```
+
+Those files provide structured YAML front matter for cards, filters, status pills, facts, datasets, metrics, baselines, and links. Their Quarto bodies provide the record-specific prose that appears on the public detail pages.
+
+Avoid creating `documentation/challenge-*.qmd` or `documentation/dataset-*.qmd` pages that restate record metadata. If a challenge needs a shared explanation, add it to the relevant reference page and link to it from the record.
+
+## Checks
+
+Run these before opening a pull request:
+
+```sh
+make validate
+make build
+```
+
+The validation step catches broken metadata before future challenge pages, dataset pages, leaderboards, or evaluation tooling depend on it.

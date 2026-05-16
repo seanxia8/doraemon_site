@@ -1,0 +1,57 @@
+categories:
+  Training:
+    accent: cardinal
+    icon: terminal
+  Evaluation:
+    accent: lagunita
+    icon: scales
+  Datasets:
+    accent: palo
+    icon: bars
+
+repositories:
+  - category: Training
+    title: particle-imaging-models
+    owner: DeepLearnPhysics
+    body: Model code and training utilities for TPC and LArTPC particle-imaging studies.
+    href: https://github.com/DeepLearnPhysics/particle-imaging-models
+  - category: Training
+    title: doraemon-trainers
+    owner: DORAEMON-AI
+    body: Placeholder training entrypoints for segmentation, completion, and transfer baselines.
+    href: https://github.com/DORAEMON-AI/doraemon-trainers
+  - category: Training
+    title: sparse-detector-recipes
+    owner: DORAEMON-AI
+    body: Example configs for sparse detector tensors, masking schedules, and model sweeps.
+    href: https://github.com/DORAEMON-AI/sparse-detector-recipes
+  - category: Evaluation
+    title: opendc-eval
+    owner: DORAEMON-AI
+    body: Placeholder evaluation package for OpenDC metrics and submission validation.
+    href: https://github.com/DORAEMON-AI/opendc-eval
+  - category: Evaluation
+    title: doraemon-leaderboard-runner
+    owner: DORAEMON-AI
+    body: Minimal runner for sealed splits, score reports, and leaderboard artifacts.
+    href: https://github.com/DORAEMON-AI/doraemon-leaderboard-runner
+  - category: Evaluation
+    title: detector-metrics
+    owner: DORAEMON-AI
+    body: Shared metric notes for segmentation, masked recovery, regression, and transfer probes.
+    href: https://github.com/DORAEMON-AI/detector-metrics
+  - category: Datasets
+    title: pimm-data
+    owner: DORAEMON-AI
+    body: Placeholder CLI for saving OpenDC dataset records into a local workspace.
+    href: https://github.com/DORAEMON-AI/pimm-data
+  - category: Datasets
+    title: doraemon-dataset-schemas
+    owner: DORAEMON-AI
+    body: Schema drafts for LArTPC, Water Cherenkov, IceCube, and mixed-detector records.
+    href: https://github.com/DORAEMON-AI/doraemon-dataset-schemas
+  - category: Datasets
+    title: lartpc-fm-loaders
+    owner: DORAEMON-AI
+    body: Example loaders for sparse LArTPC event records and foundation-model tasks.
+    href: https://github.com/DORAEMON-AI/lartpc-fm-loaders

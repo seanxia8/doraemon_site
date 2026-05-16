@@ -1,0 +1,44 @@
+---
+title: Site Architecture
+description: How docs, challenge pages, Data Hub pages, metadata, and future surfaces fit together.
+---
+
+The repository is organized around plain, durable challenge and dataset files rather than a single website framework.
+
+```text
+doraemon_site/
+  challenges/     # one folder per challenge
+  datasets/       # one folder per dataset
+  documentation/  # editable Quarto documentation source
+  site/           # static exported Next.js public site
+  scripts/        # validation and build helpers
+  schemas/        # metadata contracts
+```
+
+## Design Principles
+
+- Each web surface should be replaceable without rewriting challenge or dataset metadata.
+- Challenge and dataset metadata should be validated before the docs build.
+- Documentation should stay focused on reference material, participation, and maintenance.
+- Notebooks, validators, visualizers, leaderboards, and challenge runners can live beside the docs rather than inside them.
+- Challenge and dataset records should have one canonical editable file each.
+- The documentation book should not restate per-record status, access commands, baselines, or protocol text.
+
+## Content Sources
+
+| Content | Canonical Source | Public Surface |
+| --- | --- | --- |
+| Challenge metadata and protocol prose | `challenges/<challenge-id>/challenge.qmd` | `/challenges/<challenge-id>/` |
+| Dataset metadata and notes | `datasets/<dataset-id>/dataset.qmd` | `/data-hub/<dataset-id>/` |
+| Shared rules and submission expectations | `documentation/challenge-rules.qmd` | `/documentation/challenge-rules.html` |
+| Metric definitions | `documentation/metrics.qmd` | `/documentation/metrics.html` |
+| Dataset schema conventions | `documentation/dataset-*-schema.qmd` | `/documentation/dataset-*-schema.html` |
+
+## Possible Future Challenge Surfaces
+
+| Surface | Likely Shape |
+| --- | --- |
+| Public challenge landing page | Static Next page under `site/app/challenges/` |
+| Challenge browser | Metadata-driven catalog from `challenges/*/challenge.qmd` |
+| Dataset browser | Metadata-driven catalog from `datasets/*/dataset.qmd` |
+| Event-display tools | Handmade interactive app consuming dataset examples |

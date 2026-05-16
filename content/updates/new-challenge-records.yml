@@ -1,0 +1,11 @@
+slug: new-challenge-records
+date: May 15, 2026
+datetime: "2026-05-15"
+category: Registry
+title: Foundation-model and transfer task records added
+summary: The OpenDC list now includes panoptic segmentation, event completion, and cross-detector transfer.
+body:
+  - The current OpenDC records are planned or active. They are meant to show the task shape before any leaderboard claims are made.
+  - Panoptic segmentation covers hit-level particle type, particle instances, and event grouping for LArTPC images.
+  - Event completion is a masked detector-activity recovery task for foundation-model representations.
+  - Cross-detector transfer asks whether learned detector representations carry useful information across experiments and detector geometries.

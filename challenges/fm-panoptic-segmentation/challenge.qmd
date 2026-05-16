@@ -1,0 +1,78 @@
+---
+id: fm-panoptic-segmentation
+order: 10
+title: Panoptic Segmentation
+short_title: Panoptic Segmentation
+status: active
+summary: Segment detector hits by semantic particle class, particle instance, and interaction grouping.
+category: foundation-models
+technical_area: computer-vision
+physics_area: neutrino event reconstruction
+detector_type: LArTPC
+technical_method: Computer vision
+track: Foundation Model
+label: Open Dataset Challenge
+datasets:
+  - lartpc-fm-v1
+metrics:
+  - adjusted-rand-index
+metric:
+  label: Adjusted Rand Index
+  goal: Maximize
+  documentation: /documentation/metrics.html#adjusted-rand-index
+hero_image:
+  src: /challenges/fm-panoptic-segmentation.png
+  alt: Panoptic segmentation example from the DORAEMON proposal
+  position: center center
+  caption: Panoptic segmentation example from the DORAEMON proposal.
+current_best:
+  label: Baseline
+  score: "0.412"
+facts:
+  - label: Category
+    value: Physics reconstruction with AI methods
+  - label: Detector type
+    value: LArTPC
+  - label: Technical method
+    value: Computer vision
+  - label: Timeframe
+    value: Active protocol, dates pending
+  - label: Dataset type
+    value: Sparse LArTPC event records
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Computer vision segmentation
+links:
+  docs: null
+  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/fm-panoptic-segmentation
+  leaderboard: null
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Physics impact
+
+Panoptic segmentation turns dense detector activity into structured physics objects while preserving particle identity and interaction context for downstream reconstruction. The task borrows the semantic-plus-instance framing used in computer vision [@kirillov2019panoptic] but asks models to respect detector geometry, charge deposition, and sparse event topology.
+
+## Submission shape
+
+A valid entry should be reproducible, versioned, and evaluable on a held-out split without private post-processing. For an event with predicted clusters $\hat{C}$ and reference clusters $C$, the leaderboard will report the adjusted Rand index,
+
+$$
+\mathrm{ARI} =
+\frac{\sum_{ij}\binom{n_{ij}}{2} -
+\left[\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}\right] / \binom{n}{2}}
+{\frac{1}{2}\left[\sum_i \binom{a_i}{2} + \sum_j \binom{b_j}{2}\right] -
+\left[\sum_i \binom{a_i}{2}\sum_j \binom{b_j}{2}\right] / \binom{n}{2}}.
+$$
+
+See 
+
+## Leaderboard
+
+Until the challenge opens, the baseline score is the reference value and the leaderboard is treated as provisional. The first public protocol should include a frozen validation container, a baseline model card, and an explicit policy for detector-specific calibration features.

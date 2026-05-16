@@ -4,9 +4,16 @@ node_modules/
 .next/
 .source/
 sites/docs/out/
+site/out/
+site/public/documentation/
+site/public/challenge-protocols/
+site/public/dataset-records/
+site/.generated/
+documentation/.quarto/
+documentation/_site/
+documentation/_freeze/
 *.tsbuildinfo
 build/
-site/
 __pycache__/
 *.pyc
 context/

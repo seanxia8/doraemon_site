@@ -1,0 +1,53 @@
+---
+id: multi-source-cross-detector-records
+order: 20
+title: Multi-Source Cross-Detector Records
+status: planned
+summary: Placeholder dataset record for future cross-detector transfer benchmarks spanning multiple experiments, geometries, and event modalities.
+modality: mixed-detector
+version: v0
+data_format: Cross-detector benchmark records
+access:
+  type: pending
+  url: null
+schema_doc: schema.md
+example_paths: []
+facts:
+  - label: Status
+    value: Planned
+  - label: Modality
+    value: Mixed detector records
+  - label: Version
+    value: v0
+  - label: Access
+    value: Pending
+used_by:
+  - cross-detector-transfer
+links:
+  docs: null
+  schema: /documentation/dataset-multi-source-cross-detector-records-schema.html
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Record status
+
+This planned record is for transfer studies that compare learned detector representations across source and target detector settings. The final dataset should make the source records, target tasks, and allowed adaptation steps explicit.
+
+## Access
+
+The intended package command is:
+
+```bash
+pimm-data save multi-source-cross-detector-records
+```
+
+Until the package is released, this command is a stable placeholder for protocol drafts.
+
+## Schema notes
+
+The schema should describe source detector families, common metadata fields, held-out target tasks, split construction, and any normalization used to compare records across detector types.

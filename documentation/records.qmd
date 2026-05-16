@@ -1,0 +1,46 @@
+---
+title: Canonical Records
+description: Where challenge and dataset record pages are edited.
+aliases:
+  - challenge-fm-panoptic-segmentation.html
+  - challenge-fm-event-completion.html
+  - challenge-cross-detector-transfer.html
+  - dataset-lartpc-fm-v1.html
+  - dataset-multi-source-cross-detector-records.html
+---
+
+Challenge and dataset pages have one editable source each. The documentation
+book should link to those records rather than copy their status, access
+commands, baselines, or protocol text.
+
+This page also catches older documentation links that used to point at
+record-specific docs pages.
+
+## Challenge Records
+
+| Edit | Renders To |
+| --- | --- |
+| `challenges/<challenge-id>/challenge.qmd` | `/challenges/<challenge-id>/` |
+
+Use the challenge record for task scope, status, detector type, metrics,
+dataset links, baseline source, validation commands, citations, and math.
+
+## Dataset Records
+
+| Edit | Renders To |
+| --- | --- |
+| `datasets/<dataset-id>/dataset.qmd` | `/data-hub/<dataset-id>/` |
+
+Use the dataset record for dataset status, access commands, schema links,
+used-by relationships, citations, and dataset-specific notes.
+
+## Shared Documentation
+
+Use the documentation book for material that applies across records:
+
+- challenge rules and submission conventions
+- metric definitions
+- physics background
+- software stack notes
+- contribution workflow
+- dataset schema notes

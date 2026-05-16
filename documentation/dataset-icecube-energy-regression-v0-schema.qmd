@@ -1,0 +1,18 @@
+---
+title: IceCube Energy Regression v0 Schema Notes
+description: Pending schema notes for IceCube neutrino-energy regression submissions.
+---
+
+Schema details are pending.
+
+This page should eventually define optical-module observations, event-level features, target-energy conventions, uncertainty fields, split names, and the HDF5 submission layout expected by the validation service.
+
+## Expected coverage
+
+| Area | Notes |
+| --- | --- |
+| Files | HDF5 group layout, event identifiers, and shard naming |
+| Inputs | Optical-module charge, timing summaries, reconstructed event fields, and geometry references |
+| Targets | Neutrino energy convention and optional uncertainty fields |
+| Splits | Public training, validation, and hidden evaluation split policy |
+| Submission | Required prediction fields for `opendc eval send <submission.h5>` |

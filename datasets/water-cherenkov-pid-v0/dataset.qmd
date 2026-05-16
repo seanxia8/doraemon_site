@@ -1,0 +1,53 @@
+---
+id: water-cherenkov-pid-v0
+order: 30
+title: Water Cherenkov PID Benchmark v0
+status: planned
+summary: Placeholder dataset record for future Water Cherenkov particle-identification benchmarks based on ring topology, timing, and light-pattern features.
+modality: water-cherenkov
+version: v0
+data_format: Water Cherenkov event-display records
+access:
+  type: pending
+  url: null
+schema_doc: schema.md
+example_paths: []
+facts:
+  - label: Status
+    value: Planned
+  - label: Modality
+    value: Water Cherenkov event records
+  - label: Version
+    value: v0
+  - label: Access
+    value: Pending
+used_by:
+  - water-cherenkov-particle-id
+links:
+  docs: null
+  schema: /documentation/dataset-water-cherenkov-pid-v0-schema.html
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Record status
+
+This planned record covers Water Cherenkov particle-identification examples for OpenDC tasks. The dataset should make particle labels, event-display construction, timing fields, and detector-response assumptions visible.
+
+## Access
+
+The intended package command is:
+
+```bash
+pimm-data save water-cherenkov-pid-v0
+```
+
+Until the package is released, this command is a stable placeholder for examples and protocol drafts.
+
+## Schema notes
+
+The schema should define event-display views, timing summaries, particle-label taxonomy, calibration metadata, split names, and example loading code.

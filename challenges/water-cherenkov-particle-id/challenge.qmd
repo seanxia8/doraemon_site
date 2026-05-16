@@ -1,0 +1,68 @@
+---
+id: water-cherenkov-particle-id
+order: 40
+title: Water Cherenkov Particle Identification
+short_title: Water Cherenkov PID
+status: planned
+summary: Classify particle identity from Water Cherenkov event displays using ring topology, timing, and light-pattern features.
+category: particle-identification
+technical_area: classification
+physics_area: neutrino event reconstruction
+detector_type: Water Cherenkov
+technical_method: Computer vision
+track: Detector Reconstruction
+label: Open Dataset Challenge
+datasets:
+  - water-cherenkov-pid-v0
+metrics:
+  - macro-f1
+metric:
+  label: Macro F1
+  goal: Maximize
+  documentation: /documentation/metrics.html#classification-metrics
+facts:
+  - label: Category
+    value: Particle identification
+  - label: Detector type
+    value: Water Cherenkov
+  - label: Technical method
+    value: Computer vision
+  - label: Timeframe
+    value: Dataset definition pending
+  - label: Dataset type
+    value: Water Cherenkov event-display records
+  - label: Challenge type
+    value: Open dataset benchmark
+  - label: Technical problem
+    value: Ring-pattern classification
+links:
+  docs: null
+  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/water-cherenkov-particle-id
+  leaderboard: null
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Scope
+
+This planned challenge will evaluate particle identification from Water Cherenkov detector images and timing summaries. The benchmark follows the basic detector setting of large optical Cherenkov experiments such as Super-Kamiokande [@fukuda2003superkamiokande], but the public record will use a simplified open dataset schema.
+
+## Protocol needs
+
+The final protocol should define particle labels, calibration assumptions, train and hold-out splits, and class-balance handling. The primary metric is macro F1,
+
+$$
+F_{1,\mathrm{macro}} =
+\frac{1}{K}\sum_{k=1}^{K}
+\frac{2p_k r_k}{p_k + r_k},
+$$
+
+where $p_k$ and $r_k$ are precision and recall for class $k$.
+
+## Leaderboard
+
+The leaderboard is not open until the dataset record and baseline classifier are ready. The protocol should make detector-response assumptions visible, especially any timing smearing, dark-noise simulation, or event-display preprocessing.

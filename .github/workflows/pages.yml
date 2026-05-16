@@ -25,7 +25,9 @@ jobs:
         with:
           node-version: 22
           cache: yarn
-          cache-dependency-path: sites/docs/yarn.lock
+          cache-dependency-path: site/yarn.lock
+
+      - uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Enable Yarn
         run: |
@@ -36,17 +38,17 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Install packages
-        run: yarn --cwd sites/docs install --frozen-lockfile
+        run: yarn --cwd site install --frozen-lockfile
 
       - name: Build static site
-        run: make docs
+        run: make build QUARTO=quarto
         env:
           NEXT_PUBLIC_BASE_PATH: /doraemon_site
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: sites/docs/out
+          path: site/out
 
   deploy:
     runs-on: ubuntu-latest

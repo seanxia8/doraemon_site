@@ -1,0 +1,54 @@
+---
+id: lartpc-fm-v1
+order: 10
+title: LArTPC Foundation Model Dataset v1
+status: planned
+summary: Simulated LArTPC event-display dataset for foundation-model pretraining and downstream reconstruction benchmarks.
+modality: lartpc
+version: v1
+data_format: Sparse LArTPC event records
+access:
+  type: pending
+  url: null
+schema_doc: schema.md
+example_paths: []
+facts:
+  - label: Status
+    value: Planned
+  - label: Modality
+    value: Liquid argon time projection chamber records
+  - label: Version
+    value: v1
+  - label: Access
+    value: Pending
+used_by:
+  - fm-panoptic-segmentation
+  - fm-event-completion
+links:
+  docs: null
+  schema: /documentation/dataset-lartpc-fm-v1-schema.html
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Record status
+
+This planned record describes the first LArTPC dataset target for DORAEMON foundation-model tasks. The public release should state the detector representation, event labels, train and hold-out splits, and any simulation assumptions needed to interpret benchmark scores.
+
+## Access
+
+The intended package command is:
+
+```bash
+pimm-data save lartpc-fm-v1
+```
+
+Until the package is released, this command is a stable placeholder for examples, tutorials, and challenge protocol text.
+
+## Schema notes
+
+The schema should define sparse coordinate conventions, semantic and instance labels, event metadata, split names, and example loading code.

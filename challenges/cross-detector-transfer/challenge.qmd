@@ -1,0 +1,67 @@
+---
+id: cross-detector-transfer
+order: 30
+title: Cross-Detector Transfer
+short_title: Cross-Detector Transfer
+status: planned
+summary: Measure whether learned detector representations transfer across experiments, detector geometries, and event modalities.
+category: representation-learning
+technical_area: transfer-learning
+physics_area: detector representation learning
+detector_type: Cross-detector
+technical_method: Representation learning
+track: Representation Learning
+label: Open Dataset Challenge
+datasets:
+  - multi-source-cross-detector-records
+metrics:
+  - linear-probe-suite
+metric:
+  label: Linear Probe Suite
+  goal: Maximize
+  documentation: /documentation/metrics.html#linear-probe-suite
+facts:
+  - label: Category
+    value: Representation learning
+  - label: Detector type
+    value: Cross-detector
+  - label: Technical method
+    value: Representation learning
+  - label: Timeframe
+    value: Protocol owner needed
+  - label: Dataset type
+    value: Cross-detector benchmark records
+  - label: Challenge type
+    value: Transfer benchmark
+  - label: Technical problem
+    value: Cross-detector generalization
+links:
+  docs: null
+  baseline: https://github.com/youngsam/doraemon_site/tree/main/baselines/cross-detector-transfer
+  leaderboard: null
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Scope
+
+This planned challenge will evaluate representation transfer across detector contexts. It is intended for methods that learn broadly useful detector embeddings, including contrastive and self-supervised approaches [@oord2018representation].
+
+## Protocol needs
+
+The final protocol should specify source datasets, held-out target tasks, and the probe suite used for comparison. A minimal transfer score can average normalized probe performance across target tasks,
+
+$$
+S_{\mathrm{transfer}} =
+\frac{1}{T}\sum_{t=1}^{T}
+\frac{s_t - s_t^{\mathrm{baseline}}}
+{s_t^{\mathrm{oracle}} - s_t^{\mathrm{baseline}}}.
+$$
+
+## Leaderboard
+
+The leaderboard is not open until the dataset mix and evaluation tasks are fixed. The protocol should explicitly state which detector family is the source, which target family is held out, and whether fine-tuning is allowed.

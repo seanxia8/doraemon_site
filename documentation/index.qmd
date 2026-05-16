@@ -1,0 +1,39 @@
+---
+title: Overview
+description: Reference material for physics, rules, metrics, software, validation, and contribution.
+---
+
+Docs are the reference layer for the site. Challenge catalogs and dataset pages
+are separate surfaces: use [OpenDC](../challenges/) for challenge pages and
+[Data Hub](../data-hub/) for dataset pages.
+
+- **Challenge Rules:** shared structure, validation, and submission notes.
+- **Metrics:** definitions and rationale used by challenge pages.
+
+## What Belongs Here
+
+| Surface | Purpose |
+| --- | --- |
+| Canonical Records | Where challenge and dataset record pages are edited |
+| Physics | Detector and reconstruction background |
+| Challenge Rules | Shared structure, scoring, validation, and submissions |
+| Metrics | Definitions such as Adjusted Rand Index and panoptic quality |
+| Software Stack | Containers, streamers, notebooks, validators, repositories |
+| Contribution | How to suggest a challenge or candidate solution |
+| Dataset Schema Notes | Field conventions and submission shapes shared by datasets |
+
+## What Lives Elsewhere
+
+Challenge protocols live in `challenges/<challenge-id>/challenge.qmd` and render
+under [OpenDC](../challenges/). Dataset records live in
+`datasets/<dataset-id>/dataset.qmd` and render under [Data Hub](../data-hub/).
+Do not duplicate challenge status, dataset access, baseline links, or protocol
+text in `documentation/`; keep only shared reference material here.
+
+## Local Commands
+
+```sh
+make validate
+make build
+make serve
+```

@@ -1,0 +1,11 @@
+slug: documentation-migration
+date: May 15, 2026
+datetime: "2026-05-15"
+category: Docs
+title: Physics and protocol notes added to the docs
+summary: The docs now collect physics background, task rules, metric notes, and dataset schema notes.
+body:
+  - DORAEMON docs now include physics notes, task rules, metric definitions, software setup, and contribution guidance.
+  - Dataset schema notes are part of the same documentation set so participants can connect records in the Data Hub to the expected file formats.
+  - The first dataset notes cover the LArTPC foundation-model sample and a cross-detector placeholder record.
+  - More examples, baseline instructions, and workshop lessons should be added as the OpenDC program develops.

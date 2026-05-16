@@ -1,0 +1,18 @@
+---
+title: LArTPC FM v1 Schema Notes
+description: Pending schema notes for the LArTPC foundation-model dataset.
+---
+
+Schema details are pending.
+
+This page should eventually define file formats, coordinate conventions, labels, splits, metadata fields, and example loading code.
+
+## Expected coverage
+
+| Area | Notes |
+| --- | --- |
+| Files | Package layout, event record naming, and shard conventions |
+| Coordinates | Detector coordinate systems, pixel conventions, and geometry references |
+| Labels | Semantic classes, instance IDs, and interaction grouping |
+| Splits | Public training, validation, and hidden evaluation split policy |
+| Examples | Minimal loading code and event-display preview data |

@@ -1,0 +1,53 @@
+---
+id: icecube-energy-regression-v0
+order: 40
+title: IceCube Energy Regression Benchmark v0
+status: planned
+summary: Placeholder dataset record for future IceCube-style neutrino energy-regression benchmarks based on optical-module observations and event-level features.
+modality: icecube
+version: v0
+data_format: IceCube optical-module event records
+access:
+  type: pending
+  url: null
+schema_doc: schema.md
+example_paths: []
+facts:
+  - label: Status
+    value: Planned
+  - label: Modality
+    value: IceCube optical-module event records
+  - label: Version
+    value: v0
+  - label: Access
+    value: Pending
+used_by:
+  - icecube-energy-regression
+links:
+  docs: null
+  schema: /documentation/dataset-icecube-energy-regression-v0-schema.html
+bibliography: ../../bibliography.bib
+format:
+  html:
+    toc: true
+    number-sections: false
+    html-math-method: mathjax
+---
+
+## Record status
+
+This planned record covers IceCube-style energy-regression examples for OpenDC tasks. The dataset should define the target energy, event containment assumptions, optical-module features, and uncertainty fields before a leaderboard opens.
+
+## Access
+
+The intended package command is:
+
+```bash
+pimm-data save icecube-energy-regression-v0
+```
+
+Until the package is released, this command is a stable placeholder for examples and protocol drafts.
+
+## Schema notes
+
+The schema should define optical-module features, timing and charge summaries, reconstructed event fields, target-energy convention, split names, and example loading code.

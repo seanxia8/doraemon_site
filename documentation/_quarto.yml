@@ -1,0 +1,62 @@
+project:
+  type: book
+  output-dir: ../site/public/documentation
+
+bibliography: ../bibliography.bib
+
+book:
+  title: "DORAEMON Documentation"
+  site-url: "https://youngsam.github.io/doraemon_site/documentation/"
+  repo-url: "https://github.com/youngsam/doraemon_site"
+  repo-subdir: documentation
+  repo-actions: [source]
+  page-navigation: true
+  navbar:
+    left:
+      - text: DORAEMON Home
+        href: ../
+      - text: Challenges
+        href: ../challenges/
+      - text: Data Hub
+        href: ../data-hub/
+      - text: Software
+        href: ../software/
+  sidebar:
+    style: docked
+    search: true
+  chapters:
+    - index.qmd
+    - part: Getting Started
+      chapters:
+        - getting-started.qmd
+        - architecture.qmd
+        - records.qmd
+        - software-stack.qmd
+        - contributing.qmd
+    - part: Challenge Reference
+      chapters:
+        - challenge-reference.qmd
+        - challenge-rules.qmd
+        - metrics.qmd
+    - part: Physics Notes
+      chapters:
+        - physics.qmd
+        - particle-physics.qmd
+        - neutrinos.qmd
+        - detecting-neutrinos.qmd
+    - part: Dataset Schema Notes
+      chapters:
+        - dataset-lartpc-fm-v1-schema.qmd
+        - dataset-multi-source-cross-detector-records-schema.qmd
+        - dataset-water-cherenkov-pid-v0-schema.qmd
+        - dataset-icecube-energy-regression-v0-schema.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 3
+    link-external-newwindow: true
+    css: styles.css
