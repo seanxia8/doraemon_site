@@ -12,5 +12,5 @@ are considered for a leaderboard.
 
 ## Contribution
 
-New challenge proposals should define the task, dataset, metric, baseline, and
+Required for new challenge proposals: task, dataset, metric, baseline, and
 expected physics impact.

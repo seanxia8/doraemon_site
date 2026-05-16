@@ -3,7 +3,7 @@ export const site = {
   fullName: 'Open Dataset Challenge',
   title: 'DORAEMON | Open Dataset Challenge',
   description:
-    'DORAEMON organizes public neutrino-detector datasets, shared AI tasks, baseline models, and notes from the Open Data Challenge program.',
+    'Public neutrino-detector datasets, shared AI tasks, baseline models, and Open Data Challenge notes.',
   url: 'https://deeplearnphysics.github.io/doraemon_site',
   githubUrl: 'https://github.com/deeplearnphysics/doraemon_site',
   address: 'Stanford, California 94305',
@@ -56,21 +56,21 @@ export const whyCards = [
   {
     number: '01',
     title: 'Same task, same metric.',
-    body: 'Each OpenDC task states the input data, expected output, and score before submissions are compared.',
+    body: 'Fixed before comparison: input data, expected outputs, and scores.',
     accent: 'cardinal',
     icon: 'target',
   },
   {
     number: '02',
     title: 'Generic samples first.',
-    body: 'Initial releases use public simulated datasets that preserve the detector problems without requiring private experiment samples.',
+    body: 'Initial releases: public simulated datasets without private experiment samples.',
     accent: 'lagunita',
     icon: 'bars',
   },
   {
     number: '03',
-    title: 'Lessons stay with the data.',
-    body: 'Baselines, workshop notes, and examples should be added back to the Knowledge Hub.',
+    title: 'Knowledge Hub.',
+    body: 'Knowledge Hub material: baselines, workshop notes, and examples.',
     accent: 'poppy',
     icon: 'book',
   },
@@ -79,8 +79,8 @@ export const whyCards = [
 export const buildCards = [
   {
     eyebrow: 'OpenDC',
-    title: 'List the shared tasks.',
-    body: 'Open Data Challenges define the dataset, task, metric, baseline, and submission format.',
+    title: 'Shared tasks.',
+    body: 'Dataset, task, metric, baseline, and submission format for each Open Data Challenge.',
     href: '/challenges',
     label: 'View OpenDC',
     accent: 'cardinal',
@@ -88,8 +88,8 @@ export const buildCards = [
   },
   {
     eyebrow: 'Data Hub',
-    title: 'Describe each dataset plainly.',
-    body: 'Dataset records say what detector sample they describe, how to access it, and which task uses it.',
+    title: 'Dataset records.',
+    body: 'Detector sample, access command, and linked task for each dataset.',
     href: '/data-hub',
     label: 'Browse data',
     accent: 'palo',
@@ -97,8 +97,8 @@ export const buildCards = [
   },
   {
     eyebrow: 'Documentation',
-    title: 'Keep notes next to the work.',
-    body: 'The docs collect rules, metrics, physics notes, software setup, and contribution guidance.',
+    title: 'Reference notes.',
+    body: 'Rules, metrics, physics notes, software setup, and contribution guidance.',
     href: '/documentation/',
     label: 'Read docs',
     accent: 'lagunita',
@@ -106,8 +106,8 @@ export const buildCards = [
   },
   {
     eyebrow: 'Software',
-    title: 'Point to usable code.',
-    body: 'The software page lists model code, baselines, and data-loading utilities for OpenDC tasks.',
+    title: 'Usable code.',
+    body: 'Model code, baselines, and data-loading utilities for OpenDC tasks.',
     href: '/software',
     label: 'See software',
     accent: 'poppy',
@@ -119,22 +119,22 @@ export const protocolModules = [
   {
     number: '01',
     title: 'Dataset',
-    body: 'The record names the detector sample, format, access state, and schema notes.',
+    body: 'Detector sample, format, access state, and schema notes.',
   },
   {
     number: '02',
     title: 'Task',
-    body: 'The protocol states the input data, expected output, and evaluation split.',
+    body: 'Input data, expected output, and evaluation split.',
   },
   {
     number: '03',
     title: 'Baseline',
-    body: 'Reference solutions give participants a point of comparison before the leaderboard opens.',
+    body: 'Reference solution for comparison before the leaderboard opens.',
   },
   {
     number: '04',
     title: 'Metric',
-    body: 'Scores use common definitions so methods can be compared across submissions.',
+    body: 'Common score definitions for comparisons across submissions.',
   },
 ];
 

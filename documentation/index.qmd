@@ -22,13 +22,16 @@ are separate surfaces: use [OpenDC](../challenges/) for challenge pages and
 | Contribution | How to suggest a challenge or candidate solution |
 | Dataset Schema Notes | Field conventions and submission shapes shared by datasets |
 
-## What Lives Elsewhere
+## Records And Shared Notes
 
-Challenge protocols live in `challenges/<challenge-id>/challenge.qmd` and render
-under [OpenDC](../challenges/). Dataset records live in
-`datasets/<dataset-id>/dataset.qmd` and render under [Data Hub](../data-hub/).
+Challenge protocol source: `challenges/<challenge-id>/challenge.qmd`.
+Rendered pages: [OpenDC](../challenges/).
+
+Dataset record source: `datasets/<dataset-id>/dataset.qmd`.
+Rendered pages: [Data Hub](../data-hub/).
+
 Do not duplicate challenge status, dataset access, baseline links, or protocol
-text in `documentation/`; keep only shared reference material here.
+text in `documentation/`. Keep only shared reference material here.
 
 ## Local Commands
 

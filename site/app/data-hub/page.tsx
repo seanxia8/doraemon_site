@@ -128,7 +128,7 @@ export default function DataHubPage() {
             </ButtonLink>
           </>
         }
-        body="Public or planned samples, formats, access status, and links to the tasks that use them."
+        body="Public or planned samples, formats, access status, and linked tasks."
         eyebrow="Data Hub"
         title="Dataset records for OpenDC."
       />
@@ -137,7 +137,7 @@ export default function DataHubPage() {
           <SectionHeader
             eyebrow="Datasets"
             title="Public dataset records."
-            body="Each record says what detector sample it describes, how to access it, and which task uses it."
+            body="Detector sample, access command, and linked task for each dataset."
           />
           <FilterableRecordList
             facets={facets}

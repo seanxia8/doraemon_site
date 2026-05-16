@@ -109,7 +109,7 @@ export default function HomePage() {
         <Container>
           <SectionHeader
             title="Compare methods on the same neutrino-detector tasks."
-            body="DORAEMON keeps the dataset, task definition, metric, baseline, and notes together."
+            body="Dataset, task definition, metric, baseline, and notes in one place."
           />
           <div className="three-grid">
             {whyCards.map((card) => (
@@ -131,7 +131,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Project pieces"
             title="OpenDC, Data Hub, and notes in one place."
-            body="The public site lists AI-ready datasets, task protocols, baselines, and lessons as they become available."
+            body="AI-ready datasets, task protocols, baselines, and lessons from the OpenDC program."
           />
           <div className="cards-grid">
             {buildCards.map((card) => (

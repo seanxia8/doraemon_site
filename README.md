@@ -2,7 +2,7 @@
 
 This repo contains the static public website for the DORAEMON open dataset challenge.
 
-The public app lives in `site/`, documentation source lives in `documentation/`, and challenge and dataset records live in Quarto source at the repo root.
+Website app: `site/`. Documentation source: `documentation/`. Challenge and dataset records: Quarto files in `challenges/` and `datasets/`.
 
 ## Where To Edit
 
@@ -22,7 +22,7 @@ The public app lives in `site/`, documentation source lives in `documentation/`,
 
 ## Adding Documentation
 
-Add a `.qmd` file under the relevant `documentation/` subdirectory, then list it in `documentation/_quarto.yml` so it appears in the documentation sidebar.
+Add a `.qmd` file under the relevant `documentation/` subdirectory, then add the file path to `documentation/_quarto.yml` for the documentation sidebar.
 
 ```text
 documentation/physics/my-page.qmd
@@ -52,7 +52,7 @@ challenges/<challenge-id>/challenge.qmd
 datasets/<dataset-id>/dataset.qmd
 ```
 
-The site discovers records by scanning `challenges/*/challenge.qmd` and `datasets/*/dataset.qmd`, then generates `/challenges`, `/challenges/<id>`, `/data-hub`, and `/data-hub/<id>` at static build time. Use the `order` field in front matter to control display order. Both challenge and dataset pages use YAML front matter for structured metadata, then render the Quarto body for links, citations, and math.
+Static routes are generated from `challenges/*/challenge.qmd` and `datasets/*/dataset.qmd`: `/challenges`, `/challenges/<id>`, `/data-hub`, and `/data-hub/<id>`. Use the `order` field in front matter to control display order. Structured metadata goes in YAML front matter; links, citations, and math go in the Quarto body.
 
 You can scaffold a new editable record with:
 
@@ -65,7 +65,7 @@ The scaffold commands create QMD templates with the fields required by validatio
 
 Useful optional variables include `SUMMARY`, `ORDER`, `STATUS`, `MODALITY`, `DATA_FORMAT`, `DETECTOR_TYPE`, `TECHNICAL_AREA`, `TECHNICAL_METHOD`, and `METRIC`.
 
-These record QMDs are the canonical source for status, summaries, datasets, access commands, baselines, validation details, and record-specific prose. Shared definitions should live in the relevant `documentation/` subdirectory and be linked from the record.
+These record QMDs are the canonical source for status, summaries, datasets, access commands, baselines, validation details, and record-specific prose. Shared definitions: relevant `documentation/` subdirectory, linked from the record.
 
 ## Adding Updates
 
@@ -83,13 +83,13 @@ date: May 15, 2026
 datetime: "2026-05-15"
 category: Site
 title: My update title
-summary: One sentence shown on update lists and in the RSS feed.
+summary: Short sentence for update pages and the RSS feed.
 body:
   - First paragraph.
   - Second paragraph.
 ```
 
-The site uses these files for `/updates`, `/updates/<slug>`, the homepage latest-news section, and the RSS feed.
+Used for `/updates`, `/updates/<slug>`, the homepage latest-news section, and the RSS feed.
 
 ## Editing Software Cards
 
@@ -105,7 +105,7 @@ Each entry needs:
   href: https://github.com/GitHubOwner/repository-name
 ```
 
-The category defines the card color and icon through the `categories` map at the top of `content/software/repositories.yml`. Current categories are `Training`, `Evaluation`, and `Datasets`.
+Card color and icon are set by the `categories` map at the top of `content/software/repositories.yml`. Current categories are `Training`, `Evaluation`, and `Datasets`.
 
 ## Local Setup
 

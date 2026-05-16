@@ -20,7 +20,7 @@ doraemon_site/
 - Each web surface should be replaceable without rewriting challenge or dataset metadata.
 - Challenge and dataset metadata should be validated before the docs build.
 - Documentation should stay focused on reference material, participation, and maintenance.
-- Notebooks, validators, visualizers, leaderboards, and challenge runners can live beside the docs rather than inside them.
+- Notebooks, validators, visualizers, leaderboards, and challenge runners: beside the docs, not inside them.
 - Challenge and dataset records should have one canonical editable file each.
 - The documentation book should not restate per-record status, access commands, baselines, or protocol text.
 
