@@ -10,7 +10,6 @@ data_format: Cross-detector benchmark records
 access:
   type: pending
   url: null
-schema_doc: schema.md
 example_paths: []
 facts:
   - label: Status
@@ -25,7 +24,7 @@ used_by:
   - cross-detector-transfer
 links:
   docs: null
-  schema: /documentation/dataset-multi-source-cross-detector-records-schema.html
+  schema: /documentation/datasets/multi-source-cross-detector-records-schema.html
 bibliography: ../../bibliography.bib
 format:
   html:

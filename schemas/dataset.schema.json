@@ -57,9 +57,6 @@
       },
       "additionalProperties": true
     },
-    "schema_doc": {
-      "type": "string"
-    },
     "example_paths": {
       "type": "array",
       "items": {

@@ -10,7 +10,6 @@ data_format: Water Cherenkov event-display records
 access:
   type: pending
   url: null
-schema_doc: schema.md
 example_paths: []
 facts:
   - label: Status
@@ -25,7 +24,7 @@ used_by:
   - water-cherenkov-particle-id
 links:
   docs: null
-  schema: /documentation/dataset-water-cherenkov-pid-v0-schema.html
+  schema: /documentation/datasets/water-cherenkov-pid-v0-schema.html
 bibliography: ../../bibliography.bib
 format:
   html:

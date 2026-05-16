@@ -164,7 +164,7 @@ export default function HomePage() {
           </div>
           <div className="news-list">
             {updateItems.map((item) => (
-              <article className="news-row news-row-aims" key={item.slug}>
+              <article className="news-row news-row-drm" key={item.slug}>
                 <div className="news-row-meta">
                   <time className="news-date" dateTime={item.datetime}>
                     {item.date}

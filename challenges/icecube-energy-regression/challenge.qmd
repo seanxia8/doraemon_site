@@ -19,7 +19,7 @@ metrics:
 metric:
   label: Median Absolute Log Error
   goal: Minimize
-  documentation: /documentation/metrics.html#regression-metrics
+  documentation: /documentation/opendc/metrics.html#regression-metrics
 facts:
   - label: Category
     value: Energy reconstruction

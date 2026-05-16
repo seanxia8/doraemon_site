@@ -10,7 +10,6 @@ data_format: IceCube optical-module event records
 access:
   type: pending
   url: null
-schema_doc: schema.md
 example_paths: []
 facts:
   - label: Status
@@ -25,7 +24,7 @@ used_by:
   - icecube-energy-regression
 links:
   docs: null
-  schema: /documentation/dataset-icecube-energy-regression-v0-schema.html
+  schema: /documentation/datasets/icecube-energy-regression-v0-schema.html
 bibliography: ../../bibliography.bib
 format:
   html:

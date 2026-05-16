@@ -1,3 +1,11 @@
+"""Create starter QMD records for new challenges and datasets.
+
+This script is for the `make new-challenge` and `make new-dataset` targets. It
+creates the canonical `challenge.qmd` or `dataset.qmd` file with validated
+front matter, starter prose, and optional reciprocal links between records so
+contributors do not have to update both sides by hand.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -172,7 +180,6 @@ def dataset_metadata(args: argparse.Namespace, used_by: list[str]) -> dict[str, 
             "type": args.access_type,
             "url": None,
         },
-        "schema_doc": "schema.md",
         "example_paths": [],
         "facts": [
             {"label": "Status", "value": title_from_slug(args.status)},
@@ -217,13 +224,6 @@ TODO: Describe record fields, split names, labels or targets, and example loadin
 """
 
 
-def schema_body(dataset_id: str) -> str:
-    return f"""# {title_from_slug(dataset_id)} Schema
-
-TODO: Define the dataset fields, dtypes, coordinate conventions, target labels, and split names.
-"""
-
-
 def scaffold_challenge(args: argparse.Namespace) -> None:
     validate_slug(args.id, "challenge id")
     dataset_ids = split_values(args.dataset)
@@ -263,11 +263,6 @@ def scaffold_dataset(args: argparse.Namespace) -> None:
     dataset_dir = ROOT / "datasets" / args.id
     metadata = dataset_metadata(args, used_by)
     write_qmd(dataset_dir / "dataset.qmd", metadata, dataset_body(args.id, metadata["title"]), args.force)
-
-    schema_path = dataset_dir / "schema.md"
-    if not schema_path.exists() or args.force:
-        schema_path.write_text(schema_body(args.id), encoding="utf-8")
-        print(f"Created {schema_path.relative_to(ROOT)}")
 
     if not args.no_sync_related:
         for challenge_path in existing_challenge_paths:
@@ -310,7 +305,7 @@ def build_parser() -> argparse.ArgumentParser:
     challenge.add_argument("--metric", default="todo-metric")
     challenge.add_argument("--metric-label")
     challenge.add_argument("--metric-goal", choices=["Maximize", "Minimize"], default="Maximize")
-    challenge.add_argument("--metric-docs", default="/documentation/metrics.html")
+    challenge.add_argument("--metric-docs", default="/documentation/opendc/metrics.html")
     challenge.set_defaults(func=scaffold_challenge)
 
     dataset = subparsers.add_parser("dataset", parents=[common_options])

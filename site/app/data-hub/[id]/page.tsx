@@ -81,16 +81,14 @@ export default async function DatasetDetailPage({ params }: PageProps) {
                   <dt>Format</dt>
                   <dd>{dataset.format}</dd>
                 </div>
-                <div>
-                  <dt>Schema</dt>
-                  <dd>
-                    {dataset.links?.schema ? (
-                      <Link href={dataset.links.schema}>{dataset.schema_doc}</Link>
-                    ) : (
-                      dataset.schema_doc
-                    )}
-                  </dd>
-                </div>
+                {dataset.links?.schema ? (
+                  <div>
+                    <dt>Schema</dt>
+                    <dd>
+                      <Link href={dataset.links.schema}>Schema notes</Link>
+                    </dd>
+                  </div>
+                ) : null}
               </dl>
             </div>
           </aside>

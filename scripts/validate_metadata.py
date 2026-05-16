@@ -1,3 +1,12 @@
+"""Validate DORAEMON record metadata and documentation wiring.
+
+This script is run by `make validate` and at the start of `make build`. It
+checks challenge and dataset QMD front matter against the JSON schemas, verifies
+cross-links such as `challenge.datasets` and `dataset.used_by`, and makes sure
+the Quarto documentation sidebar points at real source files without duplicating
+canonical challenge or dataset records.
+"""
+
 from __future__ import annotations
 
 import json
@@ -127,6 +136,12 @@ def validate_documentation_sources(challenge_ids: set[str], dataset_ids: set[str
     chapters = flatten_quarto_chapters(book_config.get("chapters"))
     for chapter in chapters:
         chapter_path = Path(chapter)
+        if not (ROOT / "documentation" / chapter_path).exists():
+            errors.append(
+                "documentation/_quarto.yml: "
+                f"'{chapter}' does not exist under documentation/"
+            )
+
         is_challenge_record_page = chapter_path.name in {
             f"challenge-{challenge_id}.qmd" for challenge_id in challenge_ids
         }
@@ -140,14 +155,17 @@ def validate_documentation_sources(challenge_ids: set[str], dataset_ids: set[str
                 "edit challenges/*/challenge.qmd or datasets/*/dataset.qmd instead"
             )
 
-    duplicate_record_pages = [
-        ROOT / "documentation" / f"challenge-{challenge_id}.qmd"
-        for challenge_id in challenge_ids
-    ]
-    duplicate_record_pages.extend(
-        ROOT / "documentation" / f"dataset-{dataset_id}.qmd"
-        for dataset_id in dataset_ids
+    duplicate_record_names = {
+        f"challenge-{challenge_id}.qmd" for challenge_id in challenge_ids
+    }
+    duplicate_record_names.update(
+        f"dataset-{dataset_id}.qmd" for dataset_id in dataset_ids
     )
+    duplicate_record_pages = [
+        page
+        for page in (ROOT / "documentation").rglob("*.qmd")
+        if page.name in duplicate_record_names
+    ]
 
     forbidden_frontmatter_keys = {
         "challengeId",
@@ -254,10 +272,6 @@ def main() -> int:
         metadata_path = dataset["_metadata_path"]
         dataset_path = metadata_path.parent
         dataset_id = dataset["id"]
-
-        schema_doc = dataset.get("schema_doc")
-        if schema_doc and not (dataset_path / schema_doc).exists():
-            errors.append(f"{metadata_path.relative_to(ROOT)}: schema_doc '{schema_doc}' does not exist")
 
         for challenge_id in dataset.get("used_by", []):
             if challenge_id not in challenge_ids:

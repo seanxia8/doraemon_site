@@ -9,13 +9,13 @@ The main rule is simple: public challenge and dataset pages are edited in their 
 
 ## Common Tasks
 
-- Edit shared docs in `documentation/`.
-- Add pages by creating `.qmd` files and listing them in `documentation/_quarto.yml`.
+- Edit shared docs in the relevant `documentation/` subdirectory.
+- Add pages by creating `.qmd` files in the relevant docs folder and listing them in `documentation/_quarto.yml`.
 - Add challenge metadata and protocol prose in `challenges/<challenge-id>/challenge.qmd`.
 - Add dataset metadata and notes in `datasets/<dataset-id>/dataset.qmd`.
 - Use the `order` field in challenge and dataset front matter when the public display order matters.
 - Put citations and math directly in the challenge or dataset record body when they belong to one record.
-- Put reusable rules, metric definitions, physics background, and schema conventions in `documentation/`.
+- Put reusable rules, metric definitions, physics background, and schema conventions in the relevant `documentation/` subdirectory.
 
 ## Single-Source Records
 
@@ -33,7 +33,7 @@ datasets/<dataset-id>/dataset.qmd
 
 Those files provide structured YAML front matter for cards, filters, status pills, facts, datasets, metrics, baselines, and links. Their Quarto bodies provide the record-specific prose that appears on the public detail pages.
 
-Avoid creating `documentation/challenge-*.qmd` or `documentation/dataset-*.qmd` pages that restate record metadata. If a challenge needs a shared explanation, add it to the relevant reference page and link to it from the record.
+Avoid creating `documentation/**/challenge-*.qmd` or `documentation/**/dataset-*.qmd` pages that restate record metadata. If a challenge needs a shared explanation, add it to the relevant reference page and link to it from the record.
 
 ## Checks
 

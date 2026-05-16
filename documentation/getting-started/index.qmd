@@ -9,5 +9,5 @@ make a safe contribution.
 ## Pages
 
 - [Site Architecture](architecture.html): how docs, challenge pages, Data Hub pages, metadata, and future surfaces fit together.
-- [Software Stack](software-stack.html): containers, streamers, notebooks, validators, and model repositories.
+- [Software Stack](../software/): containers, streamers, notebooks, validators, and model repositories.
 - [Contributing](contributing.html): how to add or update documentation and metadata.

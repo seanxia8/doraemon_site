@@ -138,17 +138,17 @@
   white-space: nowrap;
 }
 
-.news-row-aims {
+.news-row-drm {
   grid-template-columns: 10rem minmax(0, 1fr) auto;
   padding: 2rem 0;
 }
 
-.news-row-aims .button {
+.news-row-drm .button {
   align-self: center;
   justify-self: end;
 }
 
-.news-row-aims:hover {
+.news-row-drm:hover {
   background: transparent;
 }
 

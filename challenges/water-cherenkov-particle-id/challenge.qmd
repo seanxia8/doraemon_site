@@ -19,7 +19,7 @@ metrics:
 metric:
   label: Macro F1
   goal: Maximize
-  documentation: /documentation/metrics.html#classification-metrics
+  documentation: /documentation/opendc/metrics.html#classification-metrics
 facts:
   - label: Category
     value: Particle identification

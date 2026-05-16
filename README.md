@@ -10,20 +10,22 @@ The public app lives in `site/`, documentation source lives in `documentation/`,
 | --- | --- |
 | Public website app | `site/` |
 | General documentation | `documentation/` |
-| Physics notes | `documentation/physics.qmd` and related `.qmd` files |
-| Challenge rules or metrics | `documentation/challenge-reference.qmd`, `documentation/challenge-rules.qmd`, `documentation/metrics.qmd` |
-| Challenge metadata and protocol | `challenges/<challenge-id>/challenge.qmd`; see `documentation/records.qmd` for the editing model |
-| Dataset metadata and notes | `datasets/<dataset-id>/dataset.qmd`; see `documentation/records.qmd` for the editing model |
-| Dataset schema notes | `documentation/dataset-*-schema.qmd` |
+| Getting started and maintenance docs | `documentation/getting-started/` |
+| Physics notes | `documentation/physics/` |
+| Challenge rules or metrics | `documentation/opendc/` |
+| Software notes | `documentation/software/` |
+| Challenge metadata and protocol | `challenges/<challenge-id>/challenge.qmd`; see `documentation/getting-started/records.qmd` for the editing model |
+| Dataset metadata and notes | `datasets/<dataset-id>/dataset.qmd`; see `documentation/getting-started/records.qmd` for the editing model |
+| Dataset schema notes | `documentation/datasets/` |
 | Updates/news articles | `content/updates/*.yml` |
 | Software repository cards | `content/software/repositories.yml` |
 
 ## Adding Documentation
 
-Add a `.qmd` file under `documentation/`, then list it in `documentation/_quarto.yml` so it appears in the documentation sidebar.
+Add a `.qmd` file under the relevant `documentation/` subdirectory, then list it in `documentation/_quarto.yml` so it appears in the documentation sidebar.
 
 ```text
-documentation/my-page.qmd
+documentation/physics/my-page.qmd
 ```
 
 Start the file with:
@@ -63,7 +65,7 @@ The scaffold commands create QMD templates with the fields required by validatio
 
 Useful optional variables include `SUMMARY`, `ORDER`, `STATUS`, `MODALITY`, `DATA_FORMAT`, `DETECTOR_TYPE`, `TECHNICAL_AREA`, `TECHNICAL_METHOD`, and `METRIC`.
 
-These record QMDs are the canonical source for status, summaries, datasets, access commands, baselines, validation details, and record-specific prose. Shared definitions should live in `documentation/` and be linked from the record.
+These record QMDs are the canonical source for status, summaries, datasets, access commands, baselines, validation details, and record-specific prose. Shared definitions should live in the relevant `documentation/` subdirectory and be linked from the record.
 
 ## Adding Updates
 
@@ -160,6 +162,6 @@ The deployed artifact is `site/out`.
 
 ## Build Internals
 
-`make documentation` renders the Quarto book under `documentation/`, then applies `scripts/renumber_documentation.py` so generated section numbers match the public documentation grouping.
+`make documentation` renders the Quarto book under `documentation/`, then applies `scripts/renumber_documentation.py` so generated section numbers match the public documentation grouping across nested documentation folders.
 
 `make record-pages` renders challenge and dataset QMD records with Quarto, writes full HTML copies to `site/public/`, and extracts embeddable fragments into `site/.generated/`. Fragment extraction uses Python's standard HTML parser for the Quarto document body. The documentation renumbering pass is still a narrow post-processing step over Quarto HTML, so changes to Quarto's generated numbering markup should be checked with `make documentation`.

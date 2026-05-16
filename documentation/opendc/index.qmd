@@ -8,10 +8,10 @@ focused on the task, dataset, baseline, and leaderboard state, then link back to
 these shared definitions when needed.
 
 Per-challenge protocol text lives in `challenges/<challenge-id>/challenge.qmd`
-and renders under [OpenDC](../challenges/). This section should only contain
+and renders under [OpenDC](../../challenges/). This section should only contain
 definitions that multiple challenges can reuse.
 
 ## Pages
 
-- [Challenge Rules](challenge-rules.html): shared structure, validation, and submission expectations.
+- [Challenge Rules](rules.html): shared structure, validation, and submission expectations.
 - [Metrics](metrics.html): scoring definitions and rationale used by challenge pages.

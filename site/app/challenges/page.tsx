@@ -126,10 +126,10 @@ export default function ChallengesPage() {
         className="opendc-hero"
         actions={
           <>
-            <ButtonLink href="/documentation/challenge-reference.html">
+            <ButtonLink href="/documentation/opendc/">
               Challenge documentation
             </ButtonLink>
-            {/* <ButtonLink href="/documentation/metrics.html" variant="secondary">
+            {/* <ButtonLink href="/documentation/opendc/metrics.html" variant="secondary">
               Metrics
             </ButtonLink> */}
           </>

@@ -80,7 +80,6 @@ export default function DataHubPage() {
       searchTerms: [
         dataset.id,
         dataset.modality,
-        dataset.schema_doc,
         dataset.access?.url,
         ...relatedChallengeLabels,
       ].filter((item): item is string => Boolean(item)),
@@ -121,10 +120,10 @@ export default function DataHubPage() {
       <PageHero
         actions={
           <>
-            <ButtonLink href="/documentation/records.html">
+            <ButtonLink href="/documentation/getting-started/records.html">
               Record guide
             </ButtonLink>
-            <ButtonLink href="/documentation/dataset-lartpc-fm-v1-schema.html" variant="secondary">
+            <ButtonLink href="/documentation/datasets/lartpc-fm-v1-schema.html" variant="secondary">
               Schema notes
             </ButtonLink>
           </>

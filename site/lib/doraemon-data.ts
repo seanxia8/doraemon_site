@@ -74,7 +74,6 @@ export type DatasetRecord = OrderedRecord & {
     type: string;
     url?: string | null;
   };
-  schema_doc?: string;
   example_paths?: string[];
   facts?: Fact[];
   used_by?: string[];

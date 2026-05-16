@@ -1,3 +1,12 @@
+"""Apply DORAEMON's grouped documentation numbering after Quarto renders.
+
+Quarto numbers book chapters globally by default. The public docs use an
+grouping like `1.1`, `1.2`, `2.1`, and `2.2`, where the
+first number is the sidebar part and the second number is the page within that
+part. This script reads `documentation/_quarto.yml` and rewrites the generated
+HTML under `site/public/documentation/` after `quarto render`.
+"""
+
 from __future__ import annotations
 
 import re
@@ -131,7 +140,7 @@ def main() -> None:
         raise SystemExit(f"Documentation output directory not found: {DOCS_DIR}")
 
     numbers = section_numbers()
-    for path in DOCS_DIR.glob("*.html"):
+    for path in DOCS_DIR.rglob("*.html"):
         path.write_text(
             renumber_html(path.read_text(encoding="utf-8"), numbers),
             encoding="utf-8",

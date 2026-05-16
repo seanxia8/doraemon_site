@@ -1,20 +1,11 @@
 ---
 title: Canonical Records
 description: Where challenge and dataset record pages are edited.
-aliases:
-  - challenge-fm-panoptic-segmentation.html
-  - challenge-fm-event-completion.html
-  - challenge-cross-detector-transfer.html
-  - dataset-lartpc-fm-v1.html
-  - dataset-multi-source-cross-detector-records.html
 ---
 
 Challenge and dataset pages have one editable source each. The documentation
 book should link to those records rather than copy their status, access
 commands, baselines, or protocol text.
-
-This page also catches older documentation links that used to point at
-record-specific docs pages.
 
 ## Challenge Records
 

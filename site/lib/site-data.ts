@@ -26,8 +26,8 @@ export const footerPages = [
 
 export const footerMore = [
   { href: '/updates', label: 'Updates' },
-  { href: '/documentation/challenge-reference.html', label: 'OpenDC Reference' },
-  { href: '/documentation/metrics.html', label: 'Metrics' },
+  { href: '/documentation/opendc/', label: 'OpenDC Reference' },
+  { href: '/documentation/opendc/metrics.html', label: 'Metrics' },
   { href: site.githubUrl, label: 'GitHub' },
 ];
 
@@ -163,7 +163,7 @@ export const communityCards = [
   {
     title: 'OpenDC protocol',
     body: 'Rules, metrics, and submission requirements for current and planned tasks.',
-    href: '/documentation/challenge-reference.html',
+    href: '/documentation/opendc/',
     label: 'Open reference',
     accent: 'cardinal',
     icon: 'book',
@@ -179,7 +179,7 @@ export const communityCards = [
   {
     title: 'Contribution path',
     body: 'How to propose datasets, tasks, baselines, examples, and validation improvements.',
-    href: '/documentation/contributing.html',
+    href: '/documentation/getting-started/contributing.html',
     label: 'Contribute',
     accent: 'lagunita',
     icon: 'chat',

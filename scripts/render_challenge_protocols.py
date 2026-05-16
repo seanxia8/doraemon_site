@@ -1,3 +1,12 @@
+"""Render record QMD files into public HTML and embeddable fragments.
+
+This script is run by `make record-pages`. It renders every
+`challenges/*/challenge.qmd` and `datasets/*/dataset.qmd` file with Quarto,
+stores the full rendered pages under `site/public/`, and extracts the main
+Quarto document body into `site/.generated/` so the Next app can embed that
+content inside challenge and dataset detail pages.
+"""
+
 from __future__ import annotations
 
 import argparse

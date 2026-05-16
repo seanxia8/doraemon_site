@@ -28,7 +28,7 @@ export default function SoftwarePage() {
             <ButtonLink href={site.githubUrl} variant="secondary">
               GitHub
             </ButtonLink>
-            <ButtonLink href="/documentation/software-stack.html" variant="ghost">
+            <ButtonLink href="/documentation/software/" variant="ghost">
               Software docs
               <Icon name="arrow" size={14} />
             </ButtonLink>

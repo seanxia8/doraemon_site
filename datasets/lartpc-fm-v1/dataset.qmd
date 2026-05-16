@@ -10,7 +10,6 @@ data_format: Sparse LArTPC event records
 access:
   type: pending
   url: null
-schema_doc: schema.md
 example_paths: []
 facts:
   - label: Status
@@ -26,7 +25,7 @@ used_by:
   - fm-event-completion
 links:
   docs: null
-  schema: /documentation/dataset-lartpc-fm-v1-schema.html
+  schema: /documentation/datasets/lartpc-fm-v1-schema.html
 bibliography: ../../bibliography.bib
 format:
   html:

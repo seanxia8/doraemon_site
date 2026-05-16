@@ -19,7 +19,7 @@ metrics:
 metric:
   label: Masked-hit Recovery
   goal: Maximize
-  documentation: /documentation/metrics.html#masked-hit-recovery
+  documentation: /documentation/opendc/metrics.html#masked-hit-recovery
 facts:
   - label: Category
     value: Foundation model evaluation

@@ -19,7 +19,7 @@ metrics:
 metric:
   label: Adjusted Rand Index
   goal: Maximize
-  documentation: /documentation/metrics.html#adjusted-rand-index
+  documentation: /documentation/opendc/metrics.html#adjusted-rand-index
 hero_image:
   src: /challenges/fm-panoptic-segmentation.png
   alt: Panoptic segmentation example from the DORAEMON proposal

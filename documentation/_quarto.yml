@@ -28,28 +28,30 @@ book:
     - index.qmd
     - part: Getting Started
       chapters:
-        - getting-started.qmd
-        - architecture.qmd
-        - records.qmd
-        - software-stack.qmd
-        - contributing.qmd
+        - getting-started/index.qmd
+        - getting-started/architecture.qmd
+        - getting-started/records.qmd
+        - getting-started/contributing.qmd
     - part: Challenge Reference
       chapters:
-        - challenge-reference.qmd
-        - challenge-rules.qmd
-        - metrics.qmd
+        - opendc/index.qmd
+        - opendc/rules.qmd
+        - opendc/metrics.qmd
     - part: Physics Notes
       chapters:
-        - physics.qmd
-        - particle-physics.qmd
-        - neutrinos.qmd
-        - detecting-neutrinos.qmd
+        - physics/index.qmd
+        - physics/particle-physics.qmd
+        - physics/neutrinos.qmd
+        - physics/detecting-neutrinos.qmd
+    - part: Software
+      chapters:
+        - software/index.qmd
     - part: Dataset Schema Notes
       chapters:
-        - dataset-lartpc-fm-v1-schema.qmd
-        - dataset-multi-source-cross-detector-records-schema.qmd
-        - dataset-water-cherenkov-pid-v0-schema.qmd
-        - dataset-icecube-energy-regression-v0-schema.qmd
+        - datasets/lartpc-fm-v1-schema.qmd
+        - datasets/multi-source-cross-detector-records-schema.qmd
+        - datasets/water-cherenkov-pid-v0-schema.qmd
+        - datasets/icecube-energy-regression-v0-schema.qmd
 
 format:
   html:

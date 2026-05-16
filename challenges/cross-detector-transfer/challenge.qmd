@@ -19,7 +19,7 @@ metrics:
 metric:
   label: Linear Probe Suite
   goal: Maximize
-  documentation: /documentation/metrics.html#linear-probe-suite
+  documentation: /documentation/opendc/metrics.html#linear-probe-suite
 facts:
   - label: Category
     value: Representation learning
