@@ -35,6 +35,7 @@ book:
     - part: Challenge Reference
       chapters:
         - opendc/index.qmd
+        - opendc/research-challenges.qmd
         - opendc/rules.qmd
         - opendc/metrics.qmd
     - part: Physics Notes
