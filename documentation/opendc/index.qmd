@@ -12,5 +12,6 @@ multiple challenges.
 
 ## Pages
 
+- [Open Problems and Challenges](research-challenges.html): open problems in physics and AI/ML research, and the related open challenges.
 - [Challenge Rules](rules.html): shared structure, validation, and submission expectations.
 - [Metrics](metrics.html): scoring definitions and rationale used by challenge pages.
