@@ -7,3 +7,4 @@ Our research focus is an application of machine learning techniques to analyze i
 1. [ParticlePhysics](particle-physics.html) ... the sub-field of physics our research belongs to.
 2. [Neutrinos](neutrinos.html) ... ghost particles we hunt everyday.
 3. [Detecting neutrinos](detecting-neutrinos.html) ... how to hunt the ghost.
+4. [Neutrino oscillations](neutrino-oscillations.html) ... an interactive calculator for how neutrinos change flavor.

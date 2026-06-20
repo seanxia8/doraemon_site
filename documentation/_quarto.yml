@@ -44,6 +44,7 @@ book:
         - physics/particle-physics.qmd
         - physics/neutrinos.qmd
         - physics/detecting-neutrinos.qmd
+        - physics/neutrino-oscillations.qmd
     - part: Software
       chapters:
         - software/index.qmd

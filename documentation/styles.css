@@ -66,6 +66,12 @@ main.content {
   max-width: 860px;
 }
 
+main.content p,
+main.content li {
+  text-align: justify;
+  hyphens: auto;
+}
+
 main.content img {
   border: 1px solid #d5d5d4;
   border-radius: 8px;

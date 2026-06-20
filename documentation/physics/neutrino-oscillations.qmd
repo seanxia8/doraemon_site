@@ -1,0 +1,394 @@
+---
+title: Neutrino Oscillations
+description: An interactive look at how neutrinos change flavor as they travel, from the two-flavor picture to the full three-flavor PMNS framework.
+toc: false
+execute:
+  echo: false
+---
+
+A neutrino produced in one flavor ($\nu_e$, $\nu_\mu$, or $\nu_\tau$) can be detected
+later as a *different* flavor. This is **neutrino oscillation**, and it is direct
+evidence that neutrinos have mass. The reason is quantum mechanical: the flavor
+states a neutrino is produced and detected in are not the same as the mass states
+that propagate through space. A flavor state is a superposition of mass states,
+each travelling with a slightly different phase, and the interference between those
+phases is what we observe as a changing flavor composition along the beam.
+
+The two sections below let you build intuition interactively:
+
+- **Probability vs neutrino energy $E_\nu$ at a fixed baseline $L$** (left): this is
+  what a real experiment with a fixed detector distance actually measures, the
+  oscillation pattern imprinted on the energy spectrum.
+- **Probability vs baseline $L$ at a fixed energy** (right): the complementary view,
+  showing how the flavor composition develops as the neutrino travels.
+
+Start with the two-flavor model for the core idea, then explore the realistic
+three-flavor picture that the long-baseline experiments (T2K, NOvA, DUNE,
+Hyper-Kamiokande) actually measure.
+
+## The two-flavor picture {#sec-two-flavor}
+
+With only two flavors, oscillation is governed by a single mixing angle $\theta$ and
+a single mass-squared splitting $\Delta m^2$. The probability that a neutrino born
+as flavor $\alpha$ is detected as the *other* flavor after travelling a baseline $L$
+with energy $E$ is
+
+$$
+P_{\alpha \to \beta} = \sin^2(2\theta)\,\sin^2\!\left(1.267\,\frac{\Delta m^2\,[\text{eV}^2]\;L\,[\text{km}]}{E\,[\text{GeV}]}\right),
+$$
+
+and the survival probability is $P_{\alpha\to\alpha} = 1 - P_{\alpha\to\beta}$. Two
+things set the picture: $\sin^2(2\theta)$ fixes the *amplitude* of the oscillation
+(how much flavor can be converted), and $\Delta m^2 / E$ fixes the *wavelength*. Pick
+an experiment preset, then tweak the sliders.
+
+```{ojs}
+osc = {
+  const cx   = (re, im = 0) => ({re, im});
+  const cadd = (a, b) => ({re: a.re + b.re, im: a.im + b.im});
+  const cmul = (a, b) => ({re: a.re * b.re - a.im * b.im, im: a.re * b.im + a.im * b.re});
+  const cconj = (a) => ({re: a.re, im: -a.im});
+  const cexp = (t) => ({re: Math.cos(t), im: Math.sin(t)}); // e^{i t}
+  const K = 1.267; // for Δm² in eV², L in km, E in GeV
+
+  // Two-flavor transition (appearance) probability. E in GeV.
+  function P2(L, E, dm2, s2t) {
+    return s2t * Math.sin(K * dm2 * L / E) ** 2;
+  }
+
+  // Standard PMNS matrix (rows = e,μ,τ ; cols = mass states 1,2,3) as complex entries.
+  function pmns(th12, th13, th23, dcp) {
+    const s12 = Math.sin(th12), c12 = Math.cos(th12);
+    const s13 = Math.sin(th13), c13 = Math.cos(th13);
+    const s23 = Math.sin(th23), c23 = Math.cos(th23);
+    const em = cexp(-dcp), ep = cexp(dcp);
+    return [
+      [cx(c12 * c13), cx(s12 * c13), cmul(cx(s13), em)],
+      [cadd(cx(-s12 * c23), cmul(cx(-c12 * s23 * s13), ep)),
+       cadd(cx(c12 * c23),  cmul(cx(-s12 * s23 * s13), ep)),
+       cx(s23 * c13)],
+      [cadd(cx(s12 * s23),  cmul(cx(-c12 * c23 * s13), ep)),
+       cadd(cx(-c12 * s23), cmul(cx(-s12 * c23 * s13), ep)),
+       cx(c23 * c13)]
+    ];
+  }
+
+  // Three-flavor vacuum oscillation P(ν_a → ν_b). a,b ∈ {0:e,1:μ,2:τ}. E in GeV.
+  function P3(a, b, L, E, p) {
+    const U = pmns(p.th12, p.th13, p.th23, p.anti ? -p.dcp : p.dcp);
+    let P = a === b ? 1 : 0;
+    const pairs = [[1, 0, p.dm21], [2, 0, p.dm31], [2, 1, p.dm31 - p.dm21]];
+    for (const [i, j, dm] of pairs) {
+      const D = K * dm * L / E;
+      const term = cmul(cmul(cconj(U[a][i]), U[b][i]), cmul(U[a][j], cconj(U[b][j])));
+      P += -4 * term.re * Math.sin(D) ** 2 + 2 * term.im * Math.sin(2 * D);
+    }
+    return P;
+  }
+
+  return {P2, P3};
+}
+
+// Energy is stored internally in GeV (the 1.267 factor needs GeV) but shown in MeV.
+toMeV = (Egev) => Egev * 1000
+fmtMeV = (Egev) => `${+(Egev * 1000).toPrecision(3)}`
+// A round slider step (1/2/5 × 10^k) ~ span/200, so preset defaults land on clean values.
+niceStep = (span) => {
+  const mag = 10 ** Math.floor(Math.log10(span / 200));
+  const n = span / 200 / mag;
+  return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * mag;
+}
+// Two-line plot title: bold heading on top, parameter value (no brackets) below.
+plotTitle = (main, sub) => html`<span style="display:block; line-height:1.25">${main}<br>${sub}</span>`
+
+// Lay a set of Inputs out in a responsive multi-column grid instead of one tall stack.
+// Widen the inputs (and trim the label column) so the numeric value boxes show the
+// full number rather than truncating to "0....".
+gridForm = (inputs) => {
+  const form = Inputs.form(inputs);
+  form.style.display = "grid";
+  form.style.gridTemplateColumns = "repeat(auto-fit, minmax(340px, 1fr))";
+  form.style.columnGap = "28px";
+  form.style.rowGap = "4px";
+  form.style.setProperty("--label-width", "108px");
+  form.style.setProperty("--input-width", "210px");
+  // Drive a --pct custom property on each range so the blue fill renders in every
+  // browser (WebKit does not paint the lower track from accent-color).
+  form.querySelectorAll('input[type="range"]').forEach((inp) => {
+    const paint = () => {
+      const min = +inp.min, max = +inp.max;
+      inp.style.setProperty("--pct", (max > min ? (100 * (+inp.value - min)) / (max - min) : 0) + "%");
+    };
+    paint();
+    inp.addEventListener("input", paint);
+  });
+  return form;
+}
+
+// Render two plots side by side, each boxed at a fixed width so a long title cannot
+// stretch the figure and force a wrap. Wraps to a single column on narrow screens.
+panelW = (w) => Math.max(300, Math.min(620, Math.floor(((w || 900) - 40) / 2)))
+panel = (fig, w) => html`<div style="width:${w}px; max-width:100%; overflow:hidden">${fig}</div>`
+sidebyside = (figA, figB, w) => html`<div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center; align-items:flex-start">${panel(figA, w)}${panel(figB, w)}</div>`
+```
+
+```{ojs}
+html`<style>
+#quarto-document-content input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #1f77b4 var(--pct, 0%), #cfd3d6 var(--pct, 0%));
+  cursor: pointer;
+}
+#quarto-document-content input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px; height: 15px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: #1f77b4;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+}
+#quarto-document-content input[type="range"]::-moz-range-track {
+  height: 6px; border-radius: 3px; background: transparent;
+}
+#quarto-document-content input[type="range"]::-moz-range-progress {
+  height: 6px; border-radius: 3px; background: #1f77b4;
+}
+#quarto-document-content input[type="range"]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #1f77b4; border: 2px solid #fff; cursor: pointer;
+}
+</style>`
+```
+
+```{ojs}
+tf_presets = [
+  {name: "DUNE: accelerator νμ",  L: 1300, E: 2.5,   Lmax: 3000, Emin: 0.2,    Emax: 8,    dm2: 2.5e-3, s2t: 0.97},
+  {name: "T2K / Hyper-K: accelerator νμ", L: 295, E: 0.6, Lmax: 1200, Emin: 0.1, Emax: 3, dm2: 2.5e-3, s2t: 1.0},
+  {name: "NOvA: accelerator νμ",  L: 810,  E: 2.0,   Lmax: 2000, Emin: 0.2,    Emax: 6,    dm2: 2.5e-3, s2t: 1.0},
+  {name: "KamLAND: reactor ν̄e",  L: 180,  E: 0.004, Lmax: 400,  Emin: 0.0015, Emax: 0.01, dm2: 7.5e-5, s2t: 0.85},
+  {name: "Daya Bay: reactor θ13", L: 1.6,  E: 0.004, Lmax: 5,    Emin: 0.0015, Emax: 0.01, dm2: 2.5e-3, s2t: 0.085}
+]
+viewof tf_pre = Inputs.select(tf_presets, {label: "Experiment preset", format: d => d.name})
+```
+
+```{ojs}
+viewof tf = {
+  const eStep = niceStep(toMeV(tf_pre.Emax - tf_pre.Emin));
+  const eMin = Math.floor(toMeV(tf_pre.Emin) / eStep) * eStep;
+  const eMax = Math.ceil(toMeV(tf_pre.Emax) / eStep) * eStep;
+  return gridForm({
+    s2t:    Inputs.range([0, 1],     {value: tf_pre.s2t,             step: 0.01, label: "sin²(2θ)"}),
+    logdm2: Inputs.range([-4.5, -2], {value: Math.log10(tf_pre.dm2), step: 0.01, label: "log₁₀ Δm² [eV²]"}),
+    L:      Inputs.range([0, tf_pre.Lmax], {value: tf_pre.L,        step: niceStep(tf_pre.Lmax), label: "Baseline L [km]"}),
+    E:      Inputs.range([eMin, eMax],     {value: toMeV(tf_pre.E), step: eStep,                 label: "Energy E [MeV]"})
+  });
+}
+tf_s2t = tf.s2t
+tf_L = tf.L
+tf_E = tf.E / 1000  // GeV for the physics
+tf_dm2 = 10 ** tf.logdm2
+```
+
+```{ojs}
+md`**Settings:** sin²(2θ) = ${tf_s2t.toFixed(2)}, Δm² = ${tf_dm2.toExponential(2)} eV². At L = ${tf_L.toFixed(0)} km and E = ${fmtMeV(tf_E)} MeV the survival probability is **${(1 - osc.P2(tf_L, tf_E, tf_dm2, tf_s2t)).toFixed(3)}**.`
+```
+
+```{ojs}
+tf_dataE = {
+  const out = [], n = 600;
+  for (let k = 0; k <= n; k++) {
+    const Eg = tf_pre.Emin + (tf_pre.Emax - tf_pre.Emin) * k / n; // GeV
+    const app = osc.P2(tf_L, Eg, tf_dm2, tf_s2t);
+    out.push({E: toMeV(Eg), P: 1 - app, ch: "survival (να→να)"});
+    out.push({E: toMeV(Eg), P: app,     ch: "appearance (να→νβ)"});
+  }
+  return out;
+}
+tf_dataL = {
+  const out = [], n = 600;
+  for (let k = 0; k <= n; k++) {
+    const L = tf_pre.Lmax * k / n;
+    const app = osc.P2(L, tf_E, tf_dm2, tf_s2t);
+    out.push({L, P: 1 - app, ch: "survival (να→να)"});
+    out.push({L, P: app,     ch: "appearance (να→νβ)"});
+  }
+  return out;
+}
+tf_color = ({legend: true, domain: ["survival (να→να)", "appearance (να→νβ)"], range: ["#1f77b4", "#d62728"]})
+{
+  const w = panelW(width);
+  return sidebyside(
+    Plot.plot({
+      width: w, height: 330, marginLeft: 48,
+      title: plotTitle("Probability vs neutrino energy", `L = ${tf_L.toFixed(0)} km`),
+      x: {label: "Neutrino energy Eν (MeV) →"},
+      y: {label: "↑ Probability", domain: [0, 1], grid: true},
+      color: tf_color,
+      marks: [
+        Plot.ruleY([0]),
+        Plot.line(tf_dataE, {x: "E", y: "P", stroke: "ch", strokeWidth: 2}),
+        Plot.ruleX([toMeV(tf_E)], {stroke: "#888", strokeDasharray: "5 4"})
+      ]
+    }),
+    Plot.plot({
+      width: w, height: 330, marginLeft: 48,
+      title: plotTitle("Probability vs baseline", `E = ${fmtMeV(tf_E)} MeV`),
+      x: {label: "Baseline L (km) →"},
+      y: {label: "↑ Probability", domain: [0, 1], grid: true},
+      color: tf_color,
+      marks: [
+        Plot.ruleY([0]),
+        Plot.line(tf_dataL, {x: "L", y: "P", stroke: "ch", strokeWidth: 2}),
+        Plot.ruleX([tf_L], {stroke: "#888", strokeDasharray: "5 4"})
+      ]
+    }),
+    w
+  );
+}
+```
+
+The energy view (left) is the one to study: an experiment sits at a *fixed* baseline
+and reconstructs the neutrino energy event by event, so the dip in the survival curve
+is the oscillation signal it measures. The first (deepest) dip, the "oscillation
+maximum", sits at $E \approx 0.8\,\Delta m^2\,L$, which is exactly why each beam
+energy is matched to its baseline. Set `sin²(2θ) = 1` and the dip reaches zero (full
+conversion); lower it and the dip becomes shallower.
+
+## The three-flavor picture {#sec-three-flavor}
+
+Nature has three neutrino flavors, and the full description uses the **PMNS matrix**
+$U$, parameterized by three mixing angles ($\theta_{12}, \theta_{13}, \theta_{23}$),
+two independent mass splittings ($\Delta m^2_{21}, \Delta m^2_{31}$), and a
+**CP-violating phase $\delta_{CP}$**. The vacuum oscillation probability is
+
+$$
+P_{\alpha\to\beta} = \delta_{\alpha\beta}
+- 4\sum_{i>j}\mathrm{Re}\!\left(U^*_{\alpha i}U_{\beta i}U_{\alpha j}U^*_{\beta j}\right)\sin^2\Delta_{ij}
++ 2\sum_{i>j}\mathrm{Im}\!\left(U^*_{\alpha i}U_{\beta i}U_{\alpha j}U^*_{\beta j}\right)\sin 2\Delta_{ij},
+$$
+
+with $\Delta_{ij} = 1.267\,\Delta m^2_{ij}\,L/E$. The experiment preset sets the
+baseline and energy; the mixing parameters start from current global-fit values and
+stay put when you change preset. The plots show all three channels for a $\nu_\mu$
+beam: the survival ($\nu_\mu\to\nu_\mu$) plus the two appearance channels. The
+$\nu_\mu\to\nu_e$ appearance channel is the one that carries the CP signal.
+
+```{ojs}
+th_presets = [
+  {name: "DUNE",               L: 1300, E: 2.5,   Lmax: 3000, Emin: 0.2,    Emax: 8},
+  {name: "T2K / Hyper-K",      L: 295,  E: 0.6,   Lmax: 1200, Emin: 0.1,    Emax: 3},
+  {name: "NOvA",               L: 810,  E: 2.0,   Lmax: 2000, Emin: 0.2,    Emax: 6},
+  {name: "JUNO: reactor ν̄e",  L: 53,   E: 0.004, Lmax: 120,  Emin: 0.0015, Emax: 0.01}
+]
+viewof th_pre  = Inputs.select(th_presets, {label: "Experiment preset", format: d => d.name})
+viewof th_anti = Inputs.toggle({label: "Antineutrinos (flip δ_CP sign)", value: false})
+```
+
+```{ojs}
+// Baseline & energy snap to the preset; mixing parameters persist across presets.
+viewof th_geo = {
+  const eStep = niceStep(toMeV(th_pre.Emax - th_pre.Emin));
+  const eMin = Math.floor(toMeV(th_pre.Emin) / eStep) * eStep;
+  const eMax = Math.ceil(toMeV(th_pre.Emax) / eStep) * eStep;
+  return gridForm({
+    L: Inputs.range([0, th_pre.Lmax], {value: th_pre.L,        step: niceStep(th_pre.Lmax), label: "Baseline L [km]"}),
+    E: Inputs.range([eMin, eMax],     {value: toMeV(th_pre.E), step: eStep,                 label: "Energy E [MeV]"})
+  });
+}
+viewof th_mix = gridForm({
+  t12:     Inputs.range([0, 45],     {value: 33.4, step: 0.1, label: "θ₁₂ [°]"}),
+  t13:     Inputs.range([0, 15],     {value: 8.6,  step: 0.1, label: "θ₁₃ [°]"}),
+  t23:     Inputs.range([20, 70],    {value: 49.0, step: 0.1, label: "θ₂₃ [°]"}),
+  dcp:     Inputs.range([-180, 180], {value: -90,  step: 1,   label: "δ_CP [°]"}),
+  logdm21: Inputs.range([-5, -3.5],  {value: Math.log10(7.4e-5), step: 0.01, label: "log₁₀ Δm²₂₁ [eV²]"}),
+  logdm31: Inputs.range([-3, -2],    {value: Math.log10(2.5e-3), step: 0.01, label: "log₁₀ Δm²₃₁ [eV²]"})
+})
+th_L = th_geo.L
+th_E = th_geo.E / 1000  // GeV for the physics
+th_params = ({
+  th12: th_mix.t12 * Math.PI / 180, th13: th_mix.t13 * Math.PI / 180, th23: th_mix.t23 * Math.PI / 180,
+  dcp: th_mix.dcp * Math.PI / 180, dm21: 10 ** th_mix.logdm21, dm31: 10 ** th_mix.logdm31, anti: th_anti
+})
+```
+
+```{ojs}
+md`**Settings:** δ_CP = ${th_mix.dcp}°${th_anti ? " (antineutrino mode)" : ""}. At L = ${th_L.toFixed(0)} km and E = ${fmtMeV(th_E)} MeV the νμ→νe appearance probability is **${osc.P3(1, 0, th_L, th_E, th_params).toFixed(4)}**.`
+```
+
+```{ojs}
+th_lab = th_anti ? ["ν̄μ→ν̄e", "ν̄μ→ν̄μ", "ν̄μ→ν̄τ"] : ["νμ→νe", "νμ→νμ", "νμ→ντ"]
+th_dataE = {
+  const out = [], n = 700;
+  for (let k = 0; k <= n; k++) {
+    const Eg = th_pre.Emin + (th_pre.Emax - th_pre.Emin) * k / n; // GeV
+    out.push({E: toMeV(Eg), P: osc.P3(1, 0, th_L, Eg, th_params), ch: th_lab[0]});
+    out.push({E: toMeV(Eg), P: osc.P3(1, 1, th_L, Eg, th_params), ch: th_lab[1]});
+    out.push({E: toMeV(Eg), P: osc.P3(1, 2, th_L, Eg, th_params), ch: th_lab[2]});
+  }
+  return out;
+}
+th_dataL = {
+  const out = [], n = 700;
+  for (let k = 0; k <= n; k++) {
+    const L = th_pre.Lmax * k / n;
+    out.push({L, P: osc.P3(1, 0, L, th_E, th_params), ch: th_lab[0]});
+    out.push({L, P: osc.P3(1, 1, L, th_E, th_params), ch: th_lab[1]});
+    out.push({L, P: osc.P3(1, 2, L, th_E, th_params), ch: th_lab[2]});
+  }
+  return out;
+}
+th_color = ({legend: true, domain: th_lab, range: ["#d62728", "#1f77b4", "#2ca02c"]})
+{
+  const w = panelW(width);
+  return sidebyside(
+    Plot.plot({
+      width: w, height: 350, marginLeft: 48,
+      title: plotTitle("Probability vs neutrino energy", `L = ${th_L.toFixed(0)} km`),
+      x: {label: "Neutrino energy Eν (MeV) →"},
+      y: {label: "↑ Probability", domain: [0, 1], grid: true},
+      color: th_color,
+      marks: [
+        Plot.ruleY([0]),
+        Plot.line(th_dataE, {x: "E", y: "P", stroke: "ch", strokeWidth: 2}),
+        Plot.ruleX([toMeV(th_E)], {stroke: "#888", strokeDasharray: "5 4"})
+      ]
+    }),
+    Plot.plot({
+      width: w, height: 350, marginLeft: 48,
+      title: plotTitle("Probability vs baseline", `E = ${fmtMeV(th_E)} MeV`),
+      x: {label: "Baseline L (km) →"},
+      y: {label: "↑ Probability", domain: [0, 1], grid: true},
+      color: th_color,
+      marks: [
+        Plot.ruleY([0]),
+        Plot.line(th_dataL, {x: "L", y: "P", stroke: "ch", strokeWidth: 2}),
+        Plot.ruleX([th_L], {stroke: "#888", strokeDasharray: "5 4"})
+      ]
+    }),
+    w
+  );
+}
+```
+
+The $\nu_\mu\to\nu_e$ appearance channel is small (a few percent) but it is the
+keystone measurement for the next generation of experiments. On the energy plot, drag
+the $\delta_{CP}$ slider and watch the $\nu_\mu\to\nu_e$ spectrum shift, then flip the
+**antineutrino** toggle and watch it shift the *other* way. That difference between
+neutrinos and antineutrinos is **CP violation in the lepton sector**, and measuring
+it is one of the headline goals of DUNE and Hyper-Kamiokande. Notice too that
+$\theta_{13}$ controls how large the appearance can ever get (set it to zero and the
+channel essentially vanishes), while $\theta_{23}$ governs the depth of the
+$\nu_\mu\to\nu_\mu$ survival dip.
+
+::: {.callout-note}
+This calculator uses **vacuum** oscillation. Real long-baseline neutrinos travel
+through the Earth, where coherent forward scattering off electrons (the MSW matter
+effect) modifies the probabilities. The vacuum curves capture the essential physics
+and the role of every parameter, but are not a substitute for a full matter-effect
+calculation.
+:::
