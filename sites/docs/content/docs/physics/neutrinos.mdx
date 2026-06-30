@@ -2,22 +2,72 @@
 title: Neutrinos
 ---
 
-Neutrinos are only weakly interacting, and it is hard to detect. How ard to detect? To put into a perspective, a light-year thick lead has 50% chance of stopping (or "catching") neutrinos. This is one reason why neutrinos are one of the least understood particles and lots of mysteries!
+## The Weak Interaction
 
-![Neutrino stopping probability through lead](/docs/physics/images/StoppingNu.png)
+Weak interactions proceed through two channels: the **Charged-Current (CC)**, mediated by $W^\pm$, which converts the incoming neutrino into a charged lepton of the same flavor while changing the target's quark content, e.g. $\nu_\mu + n \rightarrow \mu^- + p$; the **Neutral-Current (NC)**, mediated by the $Z$, which is flavor-blind and leaves particle identity unchanged, e.g. $\nu_\mu + n \rightarrow \nu_\mu + n$. This distinction is experimentally crucial: CC interactions tag neutrino flavor via the outgoing charged lepton, while NC interactions are indistinguishable across $\nu_e$, $\nu_\mu$, $\nu_\tau$.
 
-Neutrinos were first postulated by Wolfgang Pauli in order to explain a nuclear beta decay in 1930 (original letter + translation [**here**](/docs/physics/images/pauli_letter.pdf) ). Three major nuclear decay modes include an **alpha**, **beta**, and **gamma decays**, emitting an alpha particle (Helium nucleus), an electron, and a gamma ray (photon) respectively as a decay product. Detecting the kinetic energy of an alpha particle or an electron is relatively straightforward using an experimental apparatus because they are electrically charged. An alpha decay is a two-body decay. The conservation of energy and momentum results in a mono-energetic peak of an outcoming alpha particle, unique to a parent isotope (this fact is used to identify radioactive elements in the alpha-particle spectroscopy). A beta decay spectrum, on the other hand, is wide and spread, nothing like a mono-energetic peak observed for alpha particles. Back in 1930, however, physicists observed only an electron and resulting nucleus as decay products. A famous physicist Niels Bohr even suggested that, perhaps, energy is not conserved in an individual beta decay process. Pauli's attempt was to introduce a neutral, rarely interacting ghost particle (practically undetectable at that time) in a beta decay. With this particle, known as a neutrino today, a beta decay is a three-body process and could explain a wide energy spectrum of a decay electron. Furthermore, this particle considered to have **zero or undetectablly light mass**. For a neutrino to be emitted, at least the energy worth its mass needs to be taken away from the process. Yet, the observed beta decay spectra suggest that an electron may take away all of the available energy (within the experimental resolution). This implied that the mass of a ghost neutrino must be zero or less than the resolution limited by the experimental aparatus.
+Unlike QED, the weak interaction violates parity (spatial inversion: $\vec{x}\rightarrow -\vec{x}$): **it couples only to left-handed particles and right-handed anti-particles**, encoded in the $V-A$ structure of the weak current. This was confirmed by C.S.Wu and her team that the beta decay of polarized Co-60 nuclei prefers the direction opposite to the external applied field (link).
 
-![Beta decay spectrum](/docs/physics/images/betadecay.png)
+Perhaps a more interesting symmetry to consider is the charge-conjugate-parity (CP) symmetry. We already know that CP is not conserved ($K_L$ decay, link), while the question remains on its magnitude in the lepton sector. Due to thermal equilibrium the universe started as a perfect balance of matter and antimatter, however the origin of this asymmetry remains one of the deepest unsolved problems in physics--that nature fundamentally prefers matter over antimatter and results in everything exists today. Therefore understanding how CP is violated serves as a critical foundation towards the baryogenesis or leptogenesis scenarios of the universe. Neutrinos, in the lepton sector, point toward Leptogenesis as the favored scenario.. There are many ingredients in the Leptogenesis, among which the **long-baseline neutrino oscillation experiments provide direct sensitivity to leptonic CP violation**, and $0\nu\beta\beta$-decay experiments probe whether neutrinos are their own antiparticles (Majorana fermions), a necessary condition for most Leptogenesis scenarios.
 
-Fast forward many decades, we know a lot more about neutrinos today. There are three types of neutrinos (electron, muon, and tau _flavor_ of neutrinos). A muon-neutrino with energy more than the muon mass can interact with a neutron to produce a muon and proton (but it cannot produce an electron). Similarly, an electron-neutrino can produce an electron through the same process and would not produce a muon. This is called a **lepton flavor conservation** in an weak interaction. Furthermore, neutrinos turned out to be massive particles (i.e. they have non-zero mass) and exhibit an intriguing phenomenon, called **neutrino oscillation**, through which a neutrino can change its flavor (i.e. an electron neutrino could become a muon neutrino). Multiple Nobel prizes have been awarded to neutrino physics experiments including the first detection of neutrinos by Reins and Cowan to the most recent, discovery of neutrino oscillation and massive neutrinos by Super-Kamiokande ans SNO experiments.
+## Basics of Neutrinos
 
-## Why studying neutrinos?
+Neutrinos are neutral leptons (a figure of PDG quark/leptons) that interact with matter via weak interactions (link to the previous section about weak interactions). So far three active flavors---$\nu_e$, $\nu_\mu$, $\nu_\tau$---are confirmed, along with a special phenomenon called "neutrino oscillation".
 
-Despite the progress made in the recent years, many questions about neutrinos remain unanswered. We know neutrinos have mass and the relative mass difference among three neutrinos. **But what is their absolute mass scale? Do neutrinos and anti-neutrinos behave same in neutrino oscillation? Is a neutrino its own anti-particle?** A possible consequence of answers to these questions is an explanation for why our present universe is dominated by matter particles and filled with little anti-matters. Where did anti-matters disappear after the Big Bang, at which there should have been 50-50 fraction of matter and anti-matters? Neutrinos might be a key to explain why we exist today.
+### Neutrino Oscillation in vacuum
 
-Furthermore, understanding how neutrinos are produced and travel through the space-time (during which they participate in the oscillation) helps us understand many physics phenomena in our universe. While it is difficult to detect, neutrinos are the second most abundant particles in the universe known to date (the most abundant are photons) and they are produced in everywhere: the beginning of the universe, supernova, stars including the Sun, cosmic rays, nuclear decays inside the Earth, nuclear reactors and particle accelerators, and even from bananas. To put into a perspective, there are about **65 billion neutrinos from the Sun passing through your thumb nail every second**. That's just the Sun!
+From the Standard Model and experimental observations we have three neutrino flavor eigenstates ($\nu_e$, $\nu_\mu$, $\nu_\tau$) that the weak interaction operators act on. However, the simple time-independent Hamiltonian eigenstates of a neutrino, in the absence of any potential, are the neutrino mass eigenstates. By the superposition principle, one state can be described as a linear superposition of others. This mixing of neutrino mass eigenstates into flavor states is described by the complex conjugate of Pontecorvo-Maki-Nakagawa-Sakata (PMNS) matrix:
+$$
+\ket{\nu_a} = \sum_{m}U^{*}_{\alpha m}\ket{\nu_m}
+$$
+where 
 
-![Neutrino sources](/docs/physics/images/NuSource.png)
+$$
+U_{\mathrm{PMNS}}  =
+\begin{pmatrix}
+U_{e1} & U_{e2} & U_{e3} \\
+U_{\mu1} & U_{\mu2} & U_{\mu3} \\
+U_{\tau1} & U_{\tau2} & U_{\tau3}
+\end{pmatrix}
+$$
+is a rotational matrix described by three mixing angles between the mass states ($\theta_{12}$, $\theta_{13}$, and $\theta_{23}$), and one Dirac CP phase $\delta_{\mathrm{CP}}$. Two additional Majorana phases $\alpha_{1}$ and $\alpha_{2}$ also exist if neutrinos are Majorana fermions.
 
-There are so many of them, and they carry information about the physics behind their source. If we understand how they are produced + how they propagate to our lab, and if we could efficiently detect them, we can study the physics of their source. It is just like how you observe light (photons) and study about stars in the nightsky. Unlike photons, that can be easily blocked by an obstacle between the source and an observer (us), most of neutrinos carry "raw" information without any interruption thanks to its ghostly nature (i.e. participate only in the weak interactions). A great example is the **Solar Model**, our understanding of how the Sun burns today, which was confirmed by observing neutrino flux from the Sun. Through this process, the neutrino oscillation physics was also studied in details and a great progress was made (a half of a Nobel prize awarded to the SNO experiment).
+The physical consequence of this mixing becomes apparent when we track how a flavor eigenstate evolves in time. Including the time-dependence into the mass eigenstate superposition for a neutrino flavor $a$ we have
+$$
+\ket{\nu_{a}(t)} = \sum_{i} U^{*}_{a i} e^{-i(E_i+m^{2}_{i}/2E_i)t} \ket{\nu_i(0)}\,\,\, (a = e, \mu, \tau)
+$$
+since
+
+$$
+\ket{\nu_{i}(t)} = e^{-i (E_i+m^{2}_{i}/2E_i) t} \ket{\nu_{i}(0)}
+$$
+Therefore the neutrino oscillation---the phenomenon that a neutrino of flavor $a$ at generation turns into flavor $b$ at detection---in vacuum is expressed as
+
+$$
+\braket{\nu_b | \nu_a(t)} = \sum_{i,j}U_{b j}e^{-i(E_i+\frac{m_i^2}{2E_i})t}U^{*}_{a i}\braket{\nu_j|\nu_i}
+$$
+Assuming relativistic neutrinos, we can rewrite the oscillation probability in terms of the neutrino travel distance and energy:
+$$
+P(a\rightarrow b) = |\braket{\nu_b | \nu_a(t)}|^2 \propto \Bigg(\frac{\Delta{m}^2_{ij} L}{E}\Bigg)
+$$
+in which 
+$$
+\Delta{m}^2_{ij} = m^2_{i} - m^2_{j}
+$$
+The case where $m_3$ is the heaviest eigenstate ($\Delta m_{31}^2>0$) is called **Normal Ordering (NO)**; the case where $m_3$ is the lightest  ($\Delta m_{31}^2<0$) is called **Inverted Ordering (IO)**.
+
+It remains an open question about the exact value of $\delta_{\mathrm{CP}}$---whether it is conserved ($\sin\delta_{\mathrm{CP}}=0$) or maximally violated  ($\sin\delta_{\mathrm{CP}}=1$) or somewhere in between. This is one of the most critical tasks for the next generation long baseline neutrino oscillation experiments such as DUNE and HK, which are so far the most promising path to this measurement. 
+
+### Matter effects	
+
+A neutrino traveling through a medium coherently forward-scatters off background particles via weak interactions, effectively modifying the potential experienced by each flavor eigenstate. This modifies the effective oscillation parameters and can significantly alter the flavor composition at detection — an effect known as the Mikheyev-Smirnov-Wolfenstein (MSW) effect.
+
+Of the two weak interaction channels, the Neutral-Current (NC) one is flavor-blind and can occur to any active neutrino flavor, thus it only induces a common phase factor in the free Hamiltonian that usually does not affect the neutrino oscillation experiments. On the other hand, due to the existence of bound electrons in matter, $\nu_e$ has the option of the Charged-Current (CC) channel via $W$-bosons that is not available to either $\nu_\mu$ or $\nu_\tau$.
+
+The extra scattering probability of $\nu_e$ induces a modification only to the electron part of the Hamiltonian of neutrino flavor eigenbasis
+$$
+V_{e} = \pm\sqrt{2}G_{F}N_{e}
+$$
+where $G_{F}$ is the weak interaction coupling constant, and $N_{e}$ the density of background electrons. This effective potential is positive for $\nu_e$ and negative for $\bar\nu_e$. 
+
+The matter effects cause degenerate results to the $\delta_{\mathrm{CP}}$ measurement, since they both modify the $\nu_e$ and $\bar\nu_e$ appearance probabilities in a similar way. On the other hand, the matter effect is strongly correlated with mass ordering — making atmospheric neutrino oscillations, where neutrinos traverse the full Earth diameter, a particularly powerful probe of NO vs. IO. 

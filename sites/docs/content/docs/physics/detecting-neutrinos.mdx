@@ -2,38 +2,84 @@
 title: Detecting neutrinos
 ---
 
-Despite all the excitement about neutrinos, we cannot learn anything without being able to detect them, which is a challenging task because they interact so rarely (recall a one-light-year thick lead brick)! It is unlikely to have a single ultimate detector design for all types of neutrinos in the nature we wish to study. The plot below shows the **flux** (i.e. the intensity) and the **energy** of neutrinos coming from various sources. Both axes spans a large region in the logarithmic scale. Detecting them all efficiently is extremely challenging and would certainly require multiple detector technologies. Here, we will briefly discuss basic design principles for neutrino detectors used for studying neutrino oscillation physics and go over a few example detectors.
+Now we have established the basics of neutrino physics and how neutrinos interact with matter---the key principles that motivate building particle detectors and observe the neutrino interactions. Here we will introduce two designs of neutrino detectors: **Liquid Argon Time Projection Chamber (LArTPC)** and **Water Cherenkov (WC) Detector**, along with the common instrumentation and readout infrastructure shared across detector technologies.
 
-![Neutrino flux and energy spectrum](/docs/physics/images/NuSpectrum.png)
+### LArTPC
 
-## First neutrino detection
+When a charged particle traverses liquid argon, it ionizes the argon atoms along its path and forms electron-ion pairs. Under an applied electric field, the free electrons drift toward the anode to be registered before recombining with the ions — producing charge signals in the correspondence with the ionizing particle trajectories. The amount of ionization per unit length, $dE/dx$, depends on the particle's type, charge, and momentum (Bethe-Bloch, link), and is a key handle for particle identification. However, not all free electrons survive to the anode plane: some recombine with argon ions, a process that depends on both the local electric field strength and the ionization density. Recombination is itself a source of detector systematic uncertainty.
 
-Although neutrinos rarely interact, we can take an advantage of the fact that they often come in a large number (i.e. billions from the Sun through your thumbnail). Even if only one in a million neutrinos interact, if we place our detector under a flux of billion neutrinos passing through, we expect about 1,000 neutrino events!
+#### Wire and Pixelated Planes
 
-The very **first detection of neutrinos by Reins and Cowan**, reported in 1956, followed the same principle. In their experiment, they looked for electron anti-neutrinos produced by a nuclear reactor core. The detector was placed in the underground, close to a nuclear reactor core, with enough concrete shielding to avoid other radiations such as neutrons and gamma rays. They used Cadomonium-doped water as a target in their detector. Electron anti-neutrinos interact with a proton in the water and produce a positron and a neutron, a reaction called **Inverse Beta Decay** (IBD). The positron annihilates with an electron immediately, emitting two gamma rays. Cadominium in the water captures a neutron micro-seconds later to emit high energy gamma rays. These gamma rays were then detected by **Photomultiplier Tubes (PMTs)** and liquid scintillator tanks sandwhicing the target water tank. By looking for two signals (i.e. a positron annihilation and a delayed neutron capture) in time coincidence (micro-seconds apart), they could reject much of the background signals. This method (IBD in a liquid scintillator) invented by Reins and Cowan is used by present neutrino experiments. You can read more interesting details about [Reins-Cowan experiment here](https://library.lanl.gov/cgi-bin/getfile?00326606.pdf).
+There are two charge registration strategies in LArTPC: with wire planes or with pixelated collectors.
 
-![Reins and Cowan detector setup](/docs/physics/images/ReinsCowan.png)
+##### Wire LArTPC
 
-## Detector design principles
+Each wire plane records a 2D projection of the charge deposition as a function of wire position and drift time. With multiple non-parallel wire planes at different orientations, these 2D projections can be combined to reconstruct a full 3D image of the particle interaction. The reconstructed 3D charge distribution encodes both $dE/dx$ along each track and the overall topology of the event. This constitutes the challenges in LArTPC event reconstruction: from the 2D wire readouts, via intermediate steps to classify trajectories and cluster particles/interactions, to infer the end physics quantities such as particle ID and momentum for physics analyses.
 
-Much progress has been made in the R&D of neutrino detectors alongside the advancement in our understanding about neutrinos, including the discovery of neutrino oscillation. An important key **scalability**: we want a detector technology that can be scaled to a large volume, hence increasing a chance of detection. For studying neutrino oscillation, there are additional factors. Neutrino oscillation is characterized by the energy of neutrino and the distance of travel. So, the detector needs a good **energy resolution** to be able to infer the neutrino energy with high precision, and the location needs to be measured accurately. Furthermore, in order to identify that a neutrino flavor has oscillated (or not), we need a detector with a capability of **particle type identification** so that we can distinguish electron and muon neutrinos. So three important factors:
+##### Pixel LArTPC
 
-* A scalable (in volume) detector technology
-* Good energy resolution
-* Capability to identify particle types
+Blablabla.....
 
-### Two-detector design
+#### Scintillation Light in LArTPC
 
-There is another important design pattern that is applicable for oscillation experiments with an accessible neutrino source (e.g. a nuclear reactor core or a particle accelerator). To quantify a neutrino oscillation, we need to quantify how many neutrinos changed the flavor after the oscillation took place. This can be done precisely if we place one detector next to a neutrino source (**near detector**), and another detector separated by some distance (**far detector**) for oscillation to happen. The detector mesures the neutrino flux per flavor _before_ the oscillation, and the far detector measures _after_. Then the oscillation can be quantified by taking a difference. Experiments our group participate also follow this two-detector design including the [Short Baseline Neutrino (SBN) program](https://sbn.fnal.gov/index.html), [Deep Underground Neutrino Experiment (DUNE)](https://www.dunescience.org/), and [T2K](https://en.wikipedia.org/wiki/T2K_experiment).
+Liquid argon is also an efficient scintillator. Charged particles excite argon atoms, which form short-lived excited dimers called **excimers**. These excimers decay and emit vacuum ultraviolet (VUV) photons at 128 nm in two components: a **fast component** ($\sim$ 5 ns) from the singlet state and a **slow component** ($\sim$ 1.5 μs) from the triplet state. The scintillation light response time is much faster than the charge drift time (usually on the order of mili-seconds) and thus can be a powerful trigger for an interaction in the detector---the absolute time of the interaction that is essential for anchoring the 3D reconstruction in the drift direction.
 
-## Example: Super-Kamiokande
+In practice, the 128 nm VUV photons are invisible to standard photosensors and are strongly absorbed by most materials, including the argon itself if any impurities are present. A **wavelength shifter** — typically tetraphenyl butadiene (TPB) — is coated on detector surfaces to absorb the VUV photons and re-emit them in the visible range ($\sim$ 430 nm).
 
-The **Super-Kamiokande** (left in the image below) is a modern **Water-Cherenkov detector** (i.e. detects Cherenkov light produced by charged particles traversing in a medium). The detector consists of the target, 50 kiloton of purified water, and 11,000 large PMTs surrounding the target. This is a huge leap from the detectors employed by Reins and Cowan! PMTs are sensitive to photons with a certain band of wavelength (typically overlapping with the visible wavelgnths to human eyes). The photons emitted by Cherenkov radiation has a wavelength determined by an opening angle between its direction and the motion of the emitting particle. As a result, only PMTs that are within the certain angular range will detect photons within their sensitive wavelength, and this can be seen as a **Cherenkov ring** in the image below. An electron is 200 times lighter than a muon, and its direction is more affected by scattering process. This results in a fuzzier ring for electrons (below middle) compared to muons (below right), and this allows the Super-Kamiokande detector to distinguish those two particle types. Super-Kamiokande serves as a far detector for the T2K neutrino oscillation experiment in Japan.
+### WC Detectors
 
-![Super-Kamiokande detector and Cherenkov ring examples](/docs/physics/images/SuperK.png)
+When a charged particle travels through water faster than the speed of light in that medium ($v > c/n$, where $n \approx 1.33$ is the refractive index of water), it emits **Cherenkov radiation** — a coherent electromagnetic shockwave analogous to a sonic boom. The photons are emitted at a characteristic angle $\cos\theta_C = 1/\beta n$ relative to the particle's direction, forming a cone that projects as a ring on the surrounding detector walls. The geometry of this ring — its radius, sharpness, and opening angle — encodes the particle's velocity, direction, and vertex position.
 
-## Example: MicroBooNE
+Particle identification in WC detectors relies on the morphology of the Cherenkov ring. A muon, being heavy and minimally ionizing, produces a sharp, well-defined ring as it travels in a straight line. An electron, by contrast, initiates an electromagnetic shower immediately, producing a fuzzy, diffuse ring from the overlapping Cherenkov cones of many secondary particles. Photons from $\pi^0 \rightarrow \gamma\gamma$ decays produce two such fuzzy rings that can overlap and mimic an electron — one of the major background to $\nu_e$ appearance measurements. Reconstruction of the interaction vertex, particle direction, and visible energy proceeds by fitting the observed hit pattern and timing across the PMT array to these ring hypotheses.
 
-**Liquid Argon Time Projection Chamber (LArTPC)** is another detector technology that is actively pursued for neutrino experiments today. Like the Water Cherenkov detectors, LArTPCs are scalable in volume (Ar is cheap!), and have a good capability in reconstructing the energy and type of detected particles. As you can see in an example data taken by **MicroBooNE** LArTPC experiment below, we can observe the details of a particle trajectory including small branches of atomic electrons knocked out along a long trajectory (likely a muon or pion). The color scale of an image reflects the amount of energy deposited per pixel, and is used to infer the energy loss per unit length, or dE/dX, which is a function of particle mass (hence type) and momentum. LArTPCs can record a lot more physics features than the Water Cherenkov detectors. While it is truly beautiful, a _big_ image data with every detail of complex particle trajectories also presents challenges in efficiently identifying neutrino interactions. To put into a perspective, The MicroBooNE detector records 87-tonne volume in an image of 80 mega-pixels. The **Deep Underground Neutrino Experiment (DUNE)** will be recording 40 kilo-ton of LAr volume. Our group leads the development of a high quality and efficiency data analysis techniques for LArTPC detectors using **Computer Vision** and **Machine Learning**.
+------
 
-![MicroBooNE LArTPC event display](/docs/physics/images/LArTPC.png)
+#### Photomultiplier Tubes (PMTs)
+
+Both LArTPC and WC detectors rely on **photomultiplier tubes (PMTs)** to detect photons. A photon striking the photocathode ejects a photoelectron via the photoelectric effect, which is then accelerated through a series of **dynodes** — electrodes at successively higher voltages — each of which produces secondary electron emission. The resulting amplified charge pulse at the anode constitutes the detector's raw light signal. The response to a single photon is called the **single photoelectron (SPE)** response, and its precise characterization — amplitude, width, and gain — is a critical calibration input.
+
+The key performance parameters of a PMT are its **quantum efficiency** (the probability that an incident photon produces a photoelectron), its **gain** (the total charge amplification), and its **timing resolution** (the spread in transit time from photon arrival to anode pulse, known as transit time spread or TTS). 
+
+------
+
+#### Electronics, Trigger, and Data Acquisition
+
+The analog signals are digitized by **Analog-to-Digital Converters (ADCs)**, which sample the continuous voltage waveform and produce a discrete time series of integer counts. **Time-to-Digital Converters (TDCs)** record the precise timing of threshold-crossing events. The raw output of both is a **waveform**: a digitized record of voltage versus time for each channel, from which physics quantities — charge, timing, hit multiplicity — must be extracted by downstream software.
+
+The **trigger system** is the first layer of online event selection: it determines whether to write the data on tape based on the pre-defined condition. It can be the detector realtime condition, e.g. number of hit PMTs, or physics knowledge, e.g. 1 $\mu s$ prior to the beam arrival time. The **Data Acquisition (DAQ)** system then reads out the full detector within a defined time window around the trigger, buffers the data, and writes it to permanent storage. The design of the trigger directly determines what physics is accessible.
+
+### Detector Effects
+
+No detector is ideal. Every physical process that converts a neutrino interaction into a recorded waveform introduces distortions — some correctable, others subtle and difficult to model. Understanding these effects is not a secondary concern: they determine the fidelity of the experimental results. Any mis-modeling here propagates directly into reconstruction and ultimately into the physics measurement.
+
+------
+
+#### Geometric Effects
+
+The physical layout of a detector introduces acceptance non-uniformities that are easy to underestimate. In LArTPCs, the cathode can deform under its own weight or thermal contraction, producing local field distortions that cause drifting electrons to arrive at different positions at the anode. In WC detectors, PMTs do not cover the full detector wall and the local coverage varies, e.g. between the edge and center of a detector. Interactions near PMT edges or in poorly covered regions are reconstructed with degraded vertex and energy resolution, creating position-dependent biases that must be mapped and corrected.
+
+------
+
+#### TPC-Specific Effects
+
+In a multi-wire TPC, each wire records the integrated charge from all ionization passing nearby — it does not resolve individual electrons along the drift direction. When a particle travels in the direction parallel to a wire, it can create many fake intersections with other wires in the time-wire 2D plane and result in **ghost points** — spurious space points that do not correspond to any real particle trajectory. The process to remove such false signals is called **de-ghosting**, and is of the great importance since this is the very first step in wire LArTPC event reconstruction.
+
+Drifting electrons are subject to two additional smearing effects. **Longitudinal diffusion** spreads the electron packet along the drift direction as it travels, broadening the recorded time profile of each hit and degrading position resolution in that axis. **Transverse diffusion** spreads the packet perpendicular to the drift, smearing charge across neighboring wires. Additionally, the wire readout electronics introduce a known **bipolar waveform bias**: the induction wires record a bipolar signal as the charge cloud passes by rather than a simple unipolar pulse, which complicates hit finding and charge integration if not carefully deconvolved.
+
+------
+
+#### Water Cherenkov-Specific Effects
+
+Cherenkov photons produced in a WC detector are subject to **scattering**, which redirects them without absorption, and **absorption**, which removes them entirely. Photons arriving at the PMTs and the supporting structures will also be **reflected**, causing delayed time signals hidden in the prompt ones. Scattering smears the apparent origin of photons arriving at the PMT,  biasing vertex reconstruction. Absorption and reflections modify the detected photon yield, affecting energy resolution. Both effects depend on the wavelength of the photon and the optical purity of the water, which varies with time as the water recirculation and purification system operates. Precise knowledge of the wavelength-dependent scattering and absorption lengths is therefore a time-varying calibration requirement, not a fixed detector constant.
+
+------
+
+#### Common Instrumental Effects
+
+Every photosensor introduces its own smearing. PMTs have an intrinsic **transit time spread (TTS)** — a stochastic jitter in the time between photon arrival and anode pulse — that limits timing resolution and broadens reconstructed hit times. At low light levels, the PMT's SPE response has a finite width, meaning that even a single photon produces a distribution of measured charges rather than a fixed value. **In LArTPCs using wavelength shifters, the re-emission process itself introduces a timing delay and an additional smearing in photon arrival time that must be modeled.** The downstream digitization electronics — ADCs, cables — add further contributions. **Baseline noise, gain non-linearity, and inter-channel cross-talk** all distort the raw waveform before any physics reconstruction begins.
+
+------
+
+#### Operational Effects
+
+Several effects arise not from the detector design itself but from operational conditions that evolve over time. In LArTPCs, **impurities** capture drifting electrons before they reach the anode plane, reducing the collected charge in proportion to the drift distance and the impurity concentration. This **electron lifetime** must be continuously monitored and corrected for, and any drift in purity between calibration runs introduces a time-dependent systematic. In all detectors, photosensors produce **dark noise** — spurious pulses from thermal electron emission at the photocathode — at a low but non-negligible rate, which can fake low-energy hits or raise the effective trigger threshold. Finally, **dead channels** — wires, pixels, or PMTs that have failed or been disabled — create regions of the detector with no sensitivity, producing characteristic gaps in reconstructed events that must be accounted for in both the MC simulation and the data analysis.
