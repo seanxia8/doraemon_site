@@ -1,0 +1,18 @@
+---
+title: Multi-Source Cross-Detector Schema Notes
+description: Pending schema notes for cross-detector transfer benchmark records.
+---
+
+Schema details are pending.
+
+This page should eventually define source experiment records, coordinate conventions, held-out target tasks, metadata fields, splits, and example loading code.
+
+## Expected coverage
+
+| Area | Notes |
+| --- | --- |
+| Sources | Experiment, detector, simulation, and selection provenance |
+| Coordinates | Per-detector geometry and coordinate normalization conventions |
+| Tasks | Held-out target tasks and probe labels |
+| Splits | Source, target, validation, and hidden evaluation policies |
+| Examples | Minimal loading code for cross-detector batches |

@@ -1,0 +1,11 @@
+slug: rewrite-static-site
+date: May 15, 2026
+datetime: "2026-05-15"
+category: Site
+title: DORAEMON public pages start with OpenDC records
+summary: Initial public pages for Open Data Challenge tasks, dataset records, docs, and software links.
+body:
+  - Public pages for Open Data Challenge tasks and supporting datasets.
+  - "Initial records: detector foundation-model work, panoptic segmentation, event completion, and cross-detector transfer."
+  - "Public task pages: dataset, expected output, metric, baseline status, and related notes."
+  - Future additions can be folded into the Data Hub, docs, and software pages as datasets, baselines, workshop notes, and model links mature.

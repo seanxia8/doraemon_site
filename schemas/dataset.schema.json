@@ -9,12 +9,16 @@
     "summary",
     "modality",
     "version",
+    "data_format",
     "access"
   ],
   "properties": {
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "order": {
+      "type": "number"
     },
     "title": {
       "type": "string",
@@ -36,6 +40,10 @@
       "type": "string",
       "minLength": 1
     },
+    "data_format": {
+      "type": "string",
+      "minLength": 1
+    },
     "access": {
       "type": "object",
       "required": ["type"],
@@ -49,13 +57,16 @@
       },
       "additionalProperties": true
     },
-    "schema_doc": {
-      "type": "string"
-    },
     "example_paths": {
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "null"]
       }
     }
   },

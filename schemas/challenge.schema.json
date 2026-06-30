@@ -9,6 +9,7 @@
     "summary",
     "category",
     "technical_area",
+    "detector_type",
     "datasets",
     "metrics"
   ],
@@ -17,13 +18,16 @@
       "type": "string",
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
+    "order": {
+      "type": "number"
+    },
     "title": {
       "type": "string",
       "minLength": 1
     },
     "status": {
       "type": "string",
-      "enum": ["draft", "active", "completed", "archived"]
+      "enum": ["planned", "active"]
     },
     "summary": {
       "type": "string",
@@ -40,6 +44,15 @@
     "physics_area": {
       "type": "string"
     },
+    "detector_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "detector_types": false,
+    "technical_method": {
+      "type": "string",
+      "minLength": 1
+    },
     "datasets": {
       "type": "array",
       "items": {
@@ -55,6 +68,30 @@
       },
       "minItems": 1,
       "uniqueItems": true
+    },
+    "hero_image": {
+      "type": "object",
+      "required": ["src", "alt"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "position": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "image": {
+      "type": "string"
     },
     "links": {
       "type": "object",

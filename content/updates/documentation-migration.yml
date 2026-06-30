@@ -1,0 +1,11 @@
+slug: documentation-migration
+date: May 15, 2026
+datetime: "2026-05-15"
+category: Docs
+title: Physics and protocol notes added to the docs
+summary: Physics background, task rules, metric notes, and dataset schema notes, now in the docs.
+body:
+  - "New documentation pages: physics notes, task rules, metric definitions, software setup, and contribution guidance."
+  - Dataset schema notes are in the same documentation set, with links from Data Hub records to expected file formats.
+  - "Initial dataset notes: the LArTPC foundation-model sample and a cross-detector placeholder record."
+  - "Future additions: examples, baseline instructions, and workshop lessons."

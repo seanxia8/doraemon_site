@@ -1,0 +1,17 @@
+---
+title: Challenge Reference
+description: Shared rules, scoring definitions, and benchmark conventions used by challenge pages.
+---
+
+Shared challenge material for task pages: reusable definitions, conventions,
+and links.
+
+Per-challenge protocol source: `challenges/<challenge-id>/challenge.qmd`.
+Rendered pages: [OpenDC](../../challenges/). Scope: definitions used by
+multiple challenges.
+
+## Pages
+
+- [Open Problems and Challenges](research-challenges.html): open problems in physics and AI/ML research, and the related open challenges.
+- [Challenge Rules](rules.html): shared structure, validation, and submission expectations.
+- [Metrics](metrics.html): scoring definitions and rationale used by challenge pages.

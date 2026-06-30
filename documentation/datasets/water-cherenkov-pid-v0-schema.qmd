@@ -1,0 +1,18 @@
+---
+title: Water Cherenkov PID v0 Schema Notes
+description: Pending schema notes for Water Cherenkov particle-identification submissions.
+---
+
+Schema details are pending.
+
+This page should eventually define event-display tensors, timing summaries, particle-label fields, split names, and the HDF5 submission layout expected by the validation service.
+
+## Expected coverage
+
+| Area | Notes |
+| --- | --- |
+| Files | HDF5 group layout, event keys, and shard naming |
+| Inputs | Ring images, timing summaries, calibration metadata, and geometry references |
+| Targets | Particle labels and class taxonomy |
+| Splits | Public training, validation, and hidden evaluation split policy |
+| Submission | Required prediction fields for `opendc eval send <submission.h5>` |
