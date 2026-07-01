@@ -2,9 +2,55 @@
 title: "Physics: overview"
 ---
 
-Our research focus is an application of machine learning techniques to analyze image of _neutrinos_ recorded using a particle imaging detector technology called _LArTPC_. OK, what on the earth does this mean? What are we actually looking for? Neutrinos? That sounds cute, but what is this all about exactly?
+```{=html}
+<script>
+window.CosmicConfig = {
+  bg: 'images/nsf-noirlab-ocean-of-stars.png',
 
-1. [ParticlePhysics](particle-physics.html) ... the sub-field of physics our research belongs to.
-2. [Neutrinos](neutrinos.html) ... ghost particles we hunt everyday.
-3. [Detecting neutrinos](detecting-neutrinos.html) ... how to hunt the ghost.
-4. [Neutrino oscillations](neutrino-oscillations.html) ... an interactive calculator for how neutrinos change flavor.
+  // optional: override the dark overlay on the background image
+  // overlay: 'rgba(2,6,20,0.35)',
+
+  // optional: override the hint text below the star canvas
+  // hint: 'Drag a star anywhere · Click to focus · Click again to explore',
+
+  stars: [
+    {
+      lines: ['Oscillation'],
+      sub:   'ghost particles we hunt everyday',
+      url:   'neutrinos.html',
+      color: '#60c8ff',
+      x: -200, y: -90, z: 80,
+      vx: 0.22, vy: 0.14, vz: 0.50
+    },
+    {
+      lines: ['Interaction'],
+      sub:   'how the ghost interacts with matter',
+      url:   'neutrino-nucleon-interaction.html',
+      color: '#b09ffa',
+      x: 190, y: -50, z: 260,
+      vx: -0.18, vy: 0.16, vz: -0.45
+    },
+    {
+      lines: ['Detection'],
+      sub:   'how to hunt the ghost',
+      url:   'detecting-neutrinos.html',
+      color: '#4ade80',
+      x: -20, y: 155, z: 150,
+      vx: 0.16, vy: -0.18, vz: 0.38
+    }
+  ]
+};
+</script>
+```
+
+::: {#cosmic-intro}
+Neutrinos are among the most abundant particles in the universe — and among the least understood. They decoupled from the primordial plasma just one second after the Big Bang, and have been streaming freely through space ever since. For context, photons took another 377,000 years to decouple, producing the Cosmic Microwave Background we still measure today. Neutrinos carry information about the cosmos from much earlier — if only we could read it.
+
+They are everywhere. Thousands of billions of solar neutrinos pass through every person on Earth every second. A single core-collapse supernova emits $\mathcal{O}(10^{58})$ neutrinos in the last seconds of the star's collapse. Cosmic rays, natural radioactive decay, and nuclear reactors all produce neutrinos continuously.
+
+This abundance is both the opportunity and the challenge. Neutrinos interact so rarely with matter that detecting even a small fraction requires detectors ranging from the size of buildings to cubic kilometers. Yet that same weakness makes them extraordinary messengers — they carry their source's fingerprint across cosmic distances. Understanding their masses, their mixing, and their asymmetries may be central to the fundamental understanding of nature.
+
+Our research applies machine learning to images of neutrino interactions recorded by particle imaging detectors: Liquid Argon TPCs and Water Cherenkov Detectors. Click on the moving stars to check each section in more details.
+:::
+
+{{< include ../_cosmic-layout.qmd >}}

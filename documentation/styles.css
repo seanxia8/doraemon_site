@@ -2,6 +2,10 @@
   --bs-primary: #175e54;
   --bs-link-color: #006cb8;
   --bs-link-hover-color: #007c92;
+  /* Left nav / right TOC widths — overridden live by the drag handles
+     in sidebar-resize.html and restored from localStorage on load. */
+  --doraemon-nav-width: 260px;
+  --doraemon-toc-width: 210px;
 }
 
 .navbar {
@@ -63,7 +67,92 @@
 }
 
 main.content {
-  max-width: 860px;
+  max-width: 100%;
+}
+
+/*
+ * Quarto's built-in grid reserves calc(750px - 3em) for the body column
+ * and splits the left/right sidebar tracks as bare `fr` units — which
+ * shrinks them whenever the body-content track grows. Redefine the
+ * page grid so the nav and TOC tracks size from --doraemon-nav-width /
+ * --doraemon-toc-width (each with a floor via minmax so they can still
+ * compress on tighter viewports), the body track gets most of the
+ * reclaimed space, and any true leftover collapses into the outer
+ * flexible margins instead of stealing from the sidebars.
+ */
+@media (min-width: 992px) {
+  body.docked .page-columns {
+    grid-template-columns:
+      [screen-start] 1.5em
+      [screen-start-inset] minmax(0, 1fr)
+      [page-start page-start-inset body-start-outset] minmax(180px, var(--doraemon-nav-width))
+      [body-start] 1em
+      [body-content-start] minmax(420px, calc(1150px - 3em))
+      [body-content-end] 1.5em
+      [body-end] 16px
+      [body-end-outset] minmax(140px, var(--doraemon-toc-width))
+      [page-end-inset] 16px
+      [page-end] minmax(0, 1fr)
+      [screen-end-inset] 1.5em
+      [screen-end];
+  }
+
+  main.content {
+    grid-column: body-start / body-end;
+    padding-left: 0.5rem;
+  }
+
+  #quarto-sidebar.sidebar-navigation,
+  #quarto-margin-sidebar {
+    position: relative;
+  }
+}
+
+/* Drag handles injected by sidebar-resize.html */
+.doraemon-resize-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background-color .1s ease;
+  z-index: 2;
+}
+
+.doraemon-resize-handle:hover,
+.doraemon-resize-handle:focus-visible {
+  background-color: rgba(23, 94, 84, .25);
+  outline: none;
+}
+
+.doraemon-resize-handle-nav {
+  right: 0;
+}
+
+.doraemon-resize-handle-toc {
+  left: 0;
+}
+
+body.doraemon-resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+/* Portrait / narrow phones: drop both sidebars entirely, full-width body */
+@media (max-width: 499.98px) {
+  #quarto-sidebar,
+  #quarto-margin-sidebar,
+  .quarto-btn-toggle,
+  #quarto-sidebar-glass {
+    display: none !important;
+  }
+
+  main.content {
+    grid-column: 1 / -1 !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 main.content p,

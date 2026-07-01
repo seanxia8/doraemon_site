@@ -1,0 +1,237 @@
+---
+title: Neutrino Interacting with Nucleons
+description: Overview for neutrino-nucleon interaction.
+
+---
+
+At the quark level, the weak vertex is pointlike — quarks have no internal structure to resolve. Form factors arise instead at the **nucleon** level, where the proton or neutron is a composite object: the unknown internal quark dynamics are absorbed into momentum-transfer-dependent vector and axial-vector form factors: $F_V(Q^2)$ and $F_A(Q^2)$. The $F_A(Q^2)$ is often parameterized with an empirical axial mass $M_A$. These nucleon-level form factors remain an active source of theoretical and experimental uncertainty in modeling neutrino-nucleon cross sections.
+
+## Interaction Channels and Complications {.unnumbered}
+
+Neutrino-nucleus interactions are categorized by the momentum transfer $Q^2$ and the effective target. At the lowest energies, **Coherent Elastic Neutrino-Nucleus Scattering (CEνNS)** proceeds via NC exchange: the neutrino scatters off the entire nucleus as a single object, and the nucleus recoils as a whole without breaking apart, leaving no other observable final state. As energy increases to around $\sim$ 1 GeV, **Quasi-Elastic (QE)** scattering dominates: the neutrino scatters off a single nucleon, ejecting it cleanly, e.g. $\nu_\mu + n \rightarrow \mu^- + p$. This is the workhorse channel for long-baseline oscillation experiments, as the simple final state makes neutrino energy reconstruction tractable. At higher $Q^2$, **Resonance (RES)** production excites the nucleon into a short-lived resonant state — most commonly the $\Delta(1232)$ — which decays and produces pions. At the highest momentum transfers, **Deep Inelastic Scattering (DIS)** resolves the individual quarks inside the nucleon, producing a hadronic shower.
+
+Representative diagrams for each channel — CEνNS is necessarily NC (a CC vertex would change the nucleus's charge and break the coherence that defines the process); QE, RES, and DIS all have both CC and NC variants, shown here as CC:
+
+```{=html}
+<div style="display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin:1.6rem 0 1.2rem;">
+
+<!-- ── CEνNS diagram (NC) ──────────────────────────────────────────── -->
+<figure style="margin:0;text-align:center;">
+<svg viewBox="0 0 340 196" width="310" height="179" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fcevns" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <!-- reaction label -->
+  <text x="170" y="17" text-anchor="middle" font-size="13" fill="#555"
+        font-family="Georgia,Times New Roman,serif">
+    <tspan font-style="italic">&#957;</tspan><tspan> + A &#8594; </tspan><tspan font-style="italic">&#957;</tspan><tspan> + A</tspan>
+  </text>
+  <!-- incoming ν -->
+  <line x1="52" y1="75" x2="160" y2="75" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fcevns)"/>
+  <!-- outgoing ν -->
+  <line x1="180" y1="75" x2="276" y2="75" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fcevns)"/>
+  <!-- incoming A -->
+  <line x1="52" y1="135" x2="160" y2="135" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fcevns)"/>
+  <!-- outgoing A -->
+  <line x1="180" y1="135" x2="276" y2="135" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fcevns)"/>
+  <!-- vertices -->
+  <circle cx="170" cy="75"  r="3.5" fill="#2c3e50"/>
+  <circle cx="170" cy="135" r="3.5" fill="#2c3e50"/>
+  <!-- Z⁰ wavy propagator -->
+  <path d="M170,78.5 Q181,83 170,87.5 Q159,92 170,96.5 Q181,101 170,105.5 Q159,110 170,114.5 Q181,119 170,123.5 Q159,128 170,131.5"
+        stroke="#2471a3" stroke-width="2.2" fill="none"/>
+  <!-- Z⁰ label -->
+  <text x="185" y="109" font-size="14" fill="#2471a3" font-style="italic"
+        font-family="Georgia,Times New Roman,serif">Z</text>
+  <text x="197" y="104" font-size="11" fill="#2471a3" font-family="sans-serif">0</text>
+  <!-- particle labels — placed at edges with clear gap from line endpoints -->
+  <text x="4"   y="70" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#957;</text>
+  <text x="296" y="70" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#957;</text>
+  <text x="4"   y="130" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">A</text>
+  <text x="296" y="130" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">A</text>
+  <!-- caption -->
+  <text x="170" y="188" text-anchor="middle" font-size="12.5" font-weight="bold"
+        fill="#2c3e50" font-family="sans-serif">CE&#957;NS &#8212; NC</text>
+</svg>
+</figure>
+
+<!-- ── QE diagram (CC) ──────────────────────────────────────────────── -->
+<figure style="margin:0;text-align:center;">
+<svg viewBox="0 0 340 196" width="310" height="179" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fqe" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <!-- reaction label -->
+  <text x="170" y="17" text-anchor="middle" font-size="13" fill="#555"
+        font-family="Georgia,Times New Roman,serif">
+    <tspan font-style="italic">&#957;</tspan><tspan font-size="9" dy="3">&#956;</tspan><tspan dy="-3"> + n &#8594; </tspan><tspan font-style="italic">&#956;</tspan><tspan font-size="9" dy="-3">&#8722;</tspan><tspan dy="3"> + p</tspan>
+  </text>
+  <!-- incoming ν_μ -->
+  <line x1="52" y1="75" x2="160" y2="75" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fqe)"/>
+  <!-- outgoing μ⁻ -->
+  <line x1="180" y1="75" x2="276" y2="75" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fqe)"/>
+  <!-- incoming n -->
+  <line x1="52" y1="135" x2="160" y2="135" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fqe)"/>
+  <!-- outgoing p -->
+  <line x1="180" y1="135" x2="276" y2="135" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fqe)"/>
+  <!-- vertices -->
+  <circle cx="170" cy="75"  r="3.5" fill="#2c3e50"/>
+  <circle cx="170" cy="135" r="3.5" fill="#2c3e50"/>
+  <!-- W⁺ wavy propagator -->
+  <path d="M170,78.5 Q181,83 170,87.5 Q159,92 170,96.5 Q181,101 170,105.5 Q159,110 170,114.5 Q181,119 170,123.5 Q159,128 170,131.5"
+        stroke="#c0392b" stroke-width="2.2" fill="none"/>
+  <!-- W⁺ label -->
+  <text x="185" y="109" font-size="14" fill="#c0392b" font-style="italic"
+        font-family="Georgia,Times New Roman,serif">W</text>
+  <text x="198" y="104" font-size="11" fill="#c0392b" font-family="sans-serif">+</text>
+  <!-- particle labels — placed at edges with clear gap from line endpoints -->
+  <text x="4"   y="70" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#957;</text>
+  <text x="16"  y="77" font-size="10" fill="#2c3e50" font-family="Georgia,serif">&#956;</text>
+  <text x="296" y="70" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#956;</text>
+  <text x="308" y="66" font-size="10" fill="#2c3e50" font-family="sans-serif">&#8722;</text>
+  <text x="4"   y="130" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">n</text>
+  <text x="296" y="130" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">p</text>
+  <!-- caption -->
+  <text x="170" y="188" text-anchor="middle" font-size="12.5" font-weight="bold"
+        fill="#2c3e50" font-family="sans-serif">Quasi-Elastic (QE) &#8212; CC</text>
+</svg>
+</figure>
+
+<!-- ── RES diagram (CC): ν_μ + n → μ⁻ + Δ⁺(1232) → μ⁻ + p + π⁺ ────────── -->
+<!-- viewBox 420×220: lepton row y=58, hadron row y=140 (82px apart to
+     leave room for the Δ decay fan below/above the hadron row) -->
+<figure style="margin:0;text-align:center;">
+<svg viewBox="0 0 420 220" width="383" height="201" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fres" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2c3e50"/>
+    </marker>
+    <marker id="fresd" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#8e44ad"/>
+    </marker>
+  </defs>
+  <!-- reaction label -->
+  <text x="210" y="16" text-anchor="middle" font-size="13" fill="#555"
+        font-family="Georgia,Times New Roman,serif">
+    <tspan font-style="italic">&#957;</tspan><tspan font-size="9" dy="3">&#956;</tspan><tspan dy="-3"> + n &#8594; </tspan><tspan font-style="italic">&#956;</tspan><tspan font-size="9" dy="-3">&#8722;</tspan><tspan dy="3"> + </tspan><tspan font-style="italic">&#916;</tspan><tspan font-size="9" dy="-3">+</tspan><tspan dy="3">(1232)</tspan>
+  </text>
+  <!-- incoming ν_μ -->
+  <line x1="55" y1="58" x2="150" y2="58" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fres)"/>
+  <!-- vertex A (lepton–W vertex) -->
+  <circle cx="160" cy="58" r="3.5" fill="#2c3e50"/>
+  <!-- outgoing μ⁻: long, clear run to the right edge since no other line shares this row -->
+  <line x1="170" y1="58" x2="344" y2="58" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fres)"/>
+  <!-- incoming n -->
+  <line x1="55" y1="140" x2="150" y2="140" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fres)"/>
+  <!-- vertex B (nucleon–W vertex) -->
+  <circle cx="160" cy="140" r="3.5" fill="#2c3e50"/>
+  <!-- W⁺ propagator, vertical, spans the 82px row gap -->
+  <path d="M160,61.5 Q171,66.2 160,70.9 Q149,75.6 160,80.2 Q171,84.9 160,89.6 Q149,94.3 160,99.0 Q171,103.7 160,108.4 Q149,113.1 160,117.8 Q171,122.4 160,127.1 Q149,131.8 160,136.5"
+        stroke="#c0392b" stroke-width="2.2" fill="none"/>
+  <!-- W⁺ label placed near vertex A, away from the Δ label cluster near vertex B -->
+  <text x="176" y="82" font-size="14" fill="#c0392b" font-style="italic"
+        font-family="Georgia,Times New Roman,serif">W</text>
+  <text x="189" y="77" font-size="11" fill="#c0392b" font-family="sans-serif">+</text>
+  <!-- Δ⁺ resonance propagator (short internal fermion line, thicker + distinct color) -->
+  <line x1="170" y1="140" x2="250" y2="140" stroke="#8e44ad" stroke-width="3" marker-end="url(#fresd)"/>
+  <text x="199" y="130" font-size="14" fill="#8e44ad" font-style="italic"
+        font-family="Georgia,Times New Roman,serif">&#916;</text>
+  <text x="212" y="125" font-size="11" fill="#8e44ad" font-family="sans-serif">+</text>
+  <!-- vertex C (Δ decay vertex) -->
+  <circle cx="250" cy="140" r="3.5" fill="#2c3e50"/>
+  <!-- Δ → p + π⁺ decay fan, diverging enough that neither line nor label
+       crosses the μ⁻ row above or the caption below -->
+  <line x1="250" y1="140" x2="344" y2="95"  stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fres)"/>
+  <line x1="250" y1="140" x2="344" y2="185" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fres)"/>
+  <!-- particle labels -->
+  <text x="4"   y="53"  font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#957;</text>
+  <text x="16"  y="60"  font-size="10" fill="#2c3e50" font-family="Georgia,serif">&#956;</text>
+  <text x="354" y="53"  font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#956;</text>
+  <text x="366" y="49"  font-size="10" fill="#2c3e50" font-family="sans-serif">&#8722;</text>
+  <text x="4"   y="135" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">n</text>
+  <text x="354" y="90"  font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#960;</text>
+  <text x="366" y="85"  font-size="10" fill="#2c3e50" font-family="sans-serif">+</text>
+  <text x="354" y="180" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">p</text>
+  <!-- caption -->
+  <text x="210" y="213" text-anchor="middle" font-size="12.5" font-weight="bold"
+        fill="#2c3e50" font-family="sans-serif">Resonance Production (RES) &#8212; CC</text>
+</svg>
+</figure>
+
+<!-- ── DIS diagram (CC): ν_μ + N → μ⁻ + X, struck quark shown explicitly ── -->
+<!-- Same lepton/hadron row geometry as RES (58 / 140) so the W propagator
+     is identical; nucleon and hadronic shower drawn as shaded blobs so no
+     line has to represent the full complexity of hadronization. -->
+<figure style="margin:0;text-align:center;">
+<svg viewBox="0 0 420 220" width="383" height="201" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fdis" markerWidth="10" markerHeight="7" refX="9" refY="3.5"
+            orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <!-- reaction label -->
+  <text x="210" y="16" text-anchor="middle" font-size="13" fill="#555"
+        font-family="Georgia,Times New Roman,serif">
+    <tspan font-style="italic">&#957;</tspan><tspan font-size="9" dy="3">&#956;</tspan><tspan dy="-3"> + N &#8594; </tspan><tspan font-style="italic">&#956;</tspan><tspan font-size="9" dy="-3">&#8722;</tspan><tspan dy="3"> + X</tspan>
+  </text>
+  <!-- incoming ν_μ -->
+  <line x1="55" y1="58" x2="150" y2="58" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fdis)"/>
+  <!-- vertex A -->
+  <circle cx="160" cy="58" r="3.5" fill="#2c3e50"/>
+  <!-- outgoing μ⁻ -->
+  <line x1="170" y1="58" x2="344" y2="58" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fdis)"/>
+  <!-- W⁺ propagator, vertical, identical to the RES diagram -->
+  <path d="M160,61.5 Q171,66.2 160,70.9 Q149,75.6 160,80.2 Q171,84.9 160,89.6 Q149,94.3 160,99.0 Q171,103.7 160,108.4 Q149,113.1 160,117.8 Q171,122.4 160,127.1 Q149,131.8 160,136.5"
+        stroke="#c0392b" stroke-width="2.2" fill="none"/>
+  <text x="176" y="82" font-size="14" fill="#c0392b" font-style="italic"
+        font-family="Georgia,Times New Roman,serif">W</text>
+  <text x="189" y="77" font-size="11" fill="#c0392b" font-family="sans-serif">+</text>
+  <!-- vertex B (struck-quark–W vertex) -->
+  <circle cx="160" cy="140" r="3.5" fill="#2c3e50"/>
+  <!-- incoming nucleon, drawn as a blob so the internal quark content
+       doesn't need its own crowded set of lines -->
+  <ellipse cx="95" cy="140" rx="32" ry="20" fill="#eef1f2" stroke="#888" stroke-width="1.2"/>
+  <text x="88" y="145" font-size="14" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">N</text>
+  <!-- struck quark line, pulled out of the nucleon blob to the vertex -->
+  <line x1="127" y1="140" x2="150" y2="140" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fdis)"/>
+  <text x="133" y="127" font-size="11" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">q</text>
+  <!-- outgoing struck quark, feeding into the hadronic shower blob -->
+  <line x1="170" y1="140" x2="268" y2="152" stroke="#2c3e50" stroke-width="1.8" marker-end="url(#fdis)"/>
+  <text x="200" y="132" font-size="11" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">q&#8242;</text>
+  <!-- hadronic shower ("X") -->
+  <ellipse cx="320" cy="162" rx="55" ry="30" fill="#eef1f2" stroke="#888" stroke-width="1.2"/>
+  <text x="313" y="169" font-size="17" fill="#2c3e50" font-weight="bold" font-family="Georgia,serif">X</text>
+  <!-- particle labels -->
+  <text x="4"   y="53" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#957;</text>
+  <text x="16"  y="60" font-size="10" fill="#2c3e50" font-family="Georgia,serif">&#956;</text>
+  <text x="354" y="53" font-size="15" fill="#2c3e50" font-style="italic" font-family="Georgia,serif">&#956;</text>
+  <text x="366" y="49" font-size="10" fill="#2c3e50" font-family="sans-serif">&#8722;</text>
+  <!-- caption -->
+  <text x="210" y="213" text-anchor="middle" font-size="12.5" font-weight="bold"
+        fill="#2c3e50" font-family="sans-serif">Deep Inelastic Scattering (DIS) &#8212; CC</text>
+</svg>
+</figure>
+
+</div>
+```
+
+In practice, the nucleus is a correlated many-body system, and this complicates every interaction channel. Nucleons move with [Fermi momentum](https://en.wikipedia.org/wiki/Fermi_energy), are bound by [nuclear potentials](https://en.wikipedia.org/wiki/Nuclear_force), and can interact with each other before the neutrino even arrives. After the primary interaction, the outgoing [hadrons](https://en.wikipedia.org/wiki/Hadron) must still traverse the nuclear medium and may rescatter, be absorbed, or produce additional particles — a process called **Final State Interactions (FSI)**. Multi-nucleon processes such as [two-particle-two-hole (2p2h)](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.88.113007) excitations add further contributions. These nuclear effects directly distort the observable final state, making interaction channel categorization and neutrino energy reconstruction systematically uncertain.
+
+The current state of neutrino-nucleons interactions is a messy state. The major neutrino interaction generators — **GENIE**, **NuWro**, **NEUT**, and **GiBUU** — each implement different models for nuclear effects, FSI, and form factors. They disagree with each other, and **they disagree with experimental data**. Tensions between generators and data persist across energy regimes, and no single generator has emerged as the reliable ground truth. This uncertainty propagates directly into every oscillation measurement.
+
+## Flux, Cross Section, and Neutrino Energy {.unnumbered}
+
+In an accelerator experiment (DUNE, Hyper-K), the neutrino flux and the neutrino-nucleus cross section are never measured independently. What is observed is always their product: the event rate. This fundamental degeneracy is at the root of the systematic uncertainty budget in every neutrino oscillation measurement, since an error in the assumed cross section model is indistinguishable from an error in the flux normalization.
+
+At accelerator experiments, the neutrino beam is produced primarily through $\pi \rightarrow \mu\nu$ decay — protons strike a target, producing pions, which are focused by magnetic horns and decay in a long decay pipe. The resulting neutrino flux inherits all uncertainties from hadron production, horn focusing efficiency, and secondary interactions in the target. 
+
+Reconstructing the neutrino energy $E_\nu$ is another uncertainty that couples directly to the cross section model. In an ideal world, $E_\nu$ can be estimated purely from the outgoing particle kinematics under the assumption of a stationary, free nucleon target. But nuclear effects — Fermi motion, binding energy, FSI, and multi-nucleon contributions — all violate this assumption. Different generators predict different energy reconstruction biases, and since oscillation probabilities depend on $L/E_\nu$ a systematic shift in reconstructed energy directly mimics or masks an oscillation signal.

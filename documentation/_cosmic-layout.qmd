@@ -1,0 +1,551 @@
+```{=html}
+<style>
+/* ── Cosmic layout — scoped via body.cosmic-active ──────────────────────
+   Background controlled by --cosmic-bg-img CSS variable (set via JS).
+   Navbar and sidebar colours are intentionally left unchanged.          */
+
+body.cosmic-active {
+  background-color: #020814 !important; /* fallback if image fails */
+}
+
+/*
+ * Fixed pseudo-element covers the full viewport at all times, regardless of
+ * page height, scroll position, or screen orientation — avoids the black
+ * gap that appears in portrait mode when background-size:cover is applied
+ * directly to body (which scales the image to the body's scrollable height).
+ */
+body.cosmic-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #020814;
+  background-image:
+    linear-gradient(var(--cosmic-overlay, rgba(2,6,20,0.28)),
+                    var(--cosmic-overlay, rgba(2,6,20,0.28))),
+    var(--cosmic-bg-img, none);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/* ── Full width ─────────────────────────────────────────────────────────
+   Three layers to override:
+   1. styles.css:    main.content { max-width: 2560px }
+   2. Quarto CSS:    body-content column capped at calc(2540px - 4em)
+   3. Strategy:      span main.content from body-start → page-end
+                     (right of sidebar → right page margin), and hide the
+                     empty right TOC sidebar so there is no overlap.       */
+body.cosmic-active main.content {
+  max-width: 100% !important;
+}
+body.cosmic-active #quarto-margin-sidebar {
+  display: none !important;
+}
+@media (min-width: 992px) {
+  body.cosmic-active main.content,
+  body.cosmic-active .page-navigation {
+    grid-column: body-start / page-end !important;
+    padding-left: 1.5rem !important;   /* gap between sidebar and content */
+  }
+}
+
+/* transparent pass-through — content area only, NOT navbar or sidebar */
+body.cosmic-active #quarto-content,
+body.cosmic-active .quarto-container-page,
+body.cosmic-active .page-columns,
+body.cosmic-active .page-rows-contents,
+body.cosmic-active #quarto-document-content,
+body.cosmic-active main.content,
+body.cosmic-active .quarto-title-meta,
+body.cosmic-active #quarto-margin-sidebar,
+body.cosmic-active .row-height-fixed {
+  background: transparent !important;
+}
+
+/* ── Title block + breadcrumb: subtle frosted box, slightly different from intro ── */
+body.cosmic-active #title-block-header,
+body.cosmic-active .quarto-title-block {
+  background: rgba(200, 210, 232, 0.52) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(155, 175, 215, 0.40) !important;
+  padding: 0.85rem 1.4rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+body.cosmic-active .quarto-title h1.title,
+body.cosmic-active .quarto-title-block .title {
+  color: rgba(12, 22, 48, 0.95) !important;
+  text-shadow: none !important;
+}
+
+body.cosmic-active .quarto-page-breadcrumbs .breadcrumb-item a,
+body.cosmic-active .quarto-page-breadcrumbs .breadcrumb-item,
+body.cosmic-active .quarto-page-breadcrumbs .breadcrumb-item.active {
+  color: rgba(30, 55, 100, 0.82) !important;
+  text-decoration: none;
+}
+body.cosmic-active .quarto-page-breadcrumbs .breadcrumb-item a:hover {
+  color: rgba(30, 55, 100, 1.0) !important;
+  text-decoration: underline;
+}
+
+/* ── Responsive grid — layout is controlled by JS (updateLayout) ── */
+#cosmic-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* JS overrides this */
+  gap: 1.25rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Intro text box — light grey, 70 % opaque ── */
+#cosmic-intro {
+  background: rgba(235, 235, 235, 0.70);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 12px;
+  border: 1px solid rgba(180, 180, 180, 0.45);
+  padding: 1.5rem 2rem;
+}
+
+#cosmic-intro p {
+  margin: 0;
+  color: rgba(20, 30, 50, 0.95) !important;
+  font-size: 1.02rem !important;
+  line-height: 1.72;
+  text-align: left !important;
+  hyphens: none !important;
+}
+
+#cosmic-intro p + p { margin-top: 0.75rem; }
+
+/* ── Star canvas ── */
+#cosmic-cv-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;   /* JS overrides based on layout mode */
+}
+
+#cosmic-cv {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+/* hint is drawn on the canvas; credit is a fixed overlay */
+#cosmic-credit {
+  position: fixed;
+  bottom: 8px;
+  right: 14px;
+  font-size: 0.68rem;
+  color: rgba(210, 225, 245, 0.88);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 50;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.90), 0 0 12px rgba(0,0,0,0.70);
+}
+
+/* ── Bottom page navigation: same frosted box as title same width ── */
+body.cosmic-active .page-navigation {
+  display: flex !important;
+  justify-content: space-between !important;
+  /* margin-left matches main.content's padding-left so the box aligns with
+     the title block and has the same visual gap from the sidebar */
+  margin-left: 1.5rem !important;
+  width: calc(100% - 1.5rem) !important;
+  box-sizing: border-box !important;
+  background: rgba(200, 210, 232, 0.52) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(155, 175, 215, 0.40) !important;
+  padding: 0.55rem 1.4rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+body.cosmic-active .page-navigation .pagination-link,
+body.cosmic-active .page-navigation .nav-page-text,
+body.cosmic-active .page-navigation .chapter-number,
+body.cosmic-active .page-navigation .chapter-title,
+body.cosmic-active .page-navigation a {
+  color: rgba(12, 22, 48, 0.90) !important;
+  text-decoration: none;
+}
+body.cosmic-active .page-navigation a:hover {
+  color: rgba(12, 22, 48, 1.0) !important;
+  text-decoration: underline;
+}
+</style>
+
+<div id="cosmic-cv-wrap">
+  <canvas id="cosmic-cv"></canvas>
+</div>
+<div id="cosmic-credit"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Config ───────────────────────────────────────────────────────────── */
+  const cfg = window.CosmicConfig || {};
+
+  /* ── Background image via CSS custom property ─────────────────────────── */
+  if (cfg.bg) {
+    document.documentElement.style.setProperty('--cosmic-bg-img', `url('${cfg.bg}')`);
+  }
+  if (cfg.overlay) {
+    document.documentElement.style.setProperty('--cosmic-overlay', cfg.overlay);
+  }
+  document.body.classList.add('cosmic-active');
+
+  /* ── Credit (image attribution) ──────────────────────────────────────── */
+  document.getElementById('cosmic-credit').textContent =
+    cfg.credit || 'Image: NOIRLab / NSF / AURA';
+
+  const HINT_TEXT = cfg.hint || 'Drag a star anywhere  ·  Click to focus  ·  Click again to explore';
+  const HINT_BOTTOM = 28; // px reserved at canvas bottom for hint text
+
+  /* ── Responsive grid: wrap #cosmic-intro + #cosmic-cv-wrap ───────────── */
+  const introEl = document.getElementById('cosmic-intro');
+  const cvWrap  = document.getElementById('cosmic-cv-wrap');
+  let   grid    = null;
+  if (introEl && cvWrap) {
+    grid = document.createElement('div');
+    grid.id = 'cosmic-grid';
+    introEl.parentNode.insertBefore(grid, introEl);
+    grid.appendChild(introEl);
+    grid.appendChild(cvWrap);
+  }
+
+  /* ── Auto layout: portrait → stacked, landscape → side-by-side ────────── */
+  function updateLayout() {
+    if (!grid) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const cw = grid.offsetWidth;          // actual content column width
+    const portrait = vh > vw;             // viewport is taller than wide
+
+    if (portrait || cw < 560) {
+      // stacked: canvas below text
+      grid.style.gridTemplateColumns = '1fr';
+      grid.style.columnGap = '0';
+      cvWrap.style.height = (cw < 420 ? '340px' : '420px');
+    } else {
+      // side-by-side: text left, stars right, proportional to available width
+      grid.style.gridTemplateColumns = '42% 56%';
+      grid.style.columnGap = '2%';
+      cvWrap.style.height = (cw < 800 ? '440px' : '500px');
+    }
+  }
+  updateLayout();
+  window.addEventListener('resize', updateLayout);
+
+  /* ── Canvas ───────────────────────────────────────────────────────────── */
+  const cv  = document.getElementById('cosmic-cv');
+  const ctx = cv.getContext('2d');
+
+  function resize() {
+    cv.width  = cv.offsetWidth;
+    cv.height = cv.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── 3-D projection ───────────────────────────────────────────────────── */
+  const FL = 520;
+
+  function proj(x, y, z) {
+    const s = FL / (FL + z);
+    return { sx: cv.width / 2 + x * s, sy: cv.height / 2 + y * s, s };
+  }
+
+  /* ── Background depth particles ──────────────────────────────────────── */
+  const dust = Array.from({ length: 80 }, () => ({
+    x:   (Math.random() - 0.5) * 1400,
+    y:   (Math.random() - 0.5) * 900,
+    z:   Math.random() * 700 + 80,
+    vx:  (Math.random() - 0.5) * 1.8,
+    vy:  (Math.random() - 0.5) * 1.2,
+    vz:  (Math.random() - 0.5) * 2.5,
+    r:   Math.random() * 1.1 + 0.3,
+    a:   Math.random() * 0.3 + 0.08,
+    hue: Math.random() < 0.2 ? (Math.random() < 0.5 ? 210 : 260) : -1,
+  }));
+
+  /* ── Navigation stars ─────────────────────────────────────────────────── */
+  const BASE_R  = 88;
+  const FOCUS_Z = -200;
+  const BOUNDS  = { x: 340, y: 220, zMin: 40, zMax: 500 };
+
+  const NAV = (cfg.stars || []).map(s => ({
+    lines:  Array.isArray(s.lines) ? s.lines : [String(s.lines)],
+    sub:    s.sub   || '',
+    url:    s.url   || '#',
+    color:  s.color || '#ffffff',
+    x: s.x ?? 0,  y: s.y ?? 0,  z: s.z ?? 200,
+    vx: s.vx ?? 0.2, vy: s.vy ?? 0.1, vz: s.vz ?? 0.4,
+    focusT: 0,
+    oz: s.z ?? 200,
+  }));
+
+  let focusIdx  = -1;
+  let dragIdx   = -1;
+  let dragOfsX  = 0, dragOfsY = 0;
+  let dragMoved = false;
+
+  /* ── Tick ─────────────────────────────────────────────────────────────── */
+  function tick() {
+    for (const d of dust) {
+      d.x += d.vx * 0.38; d.y += d.vy * 0.38; d.z += d.vz * 0.38;
+      if (Math.abs(d.x) > 800)   d.vx *= -1;
+      if (Math.abs(d.y) > 550)   d.vy *= -1;
+      if (d.z < 60 || d.z > 820) d.vz *= -1;
+    }
+    for (let i = 0; i < NAV.length; i++) {
+      const n = NAV[i];
+      if (i === dragIdx) continue;
+      if (i === focusIdx) {
+        n.x += (0       - n.x) * 0.05;
+        n.y += (0       - n.y) * 0.05;
+        n.z += (FOCUS_Z - n.z) * 0.06;
+        n.focusT = Math.min(n.focusT + 0.04, 1);
+      } else {
+        const tz = focusIdx >= 0 ? n.oz + 150 : n.oz;
+        n.z += (tz - n.z) * 0.015;
+        if (focusIdx < 0) {
+          n.x += n.vx * 0.45; n.y += n.vy * 0.45;
+          if (n.z < BOUNDS.zMin || n.z > BOUNDS.zMax) n.vz *= -1;
+          // Screen-space bounds: keep star centre inside canvas (accounting for radius)
+          const { sx, sy, s } = proj(n.x, n.y, n.z);
+          const pad = BASE_R * s + 12;
+          if (sx < pad || sx > cv.width  - pad)              n.vx *= -1;
+          if (sy < pad || sy > cv.height - pad - HINT_BOTTOM) n.vy *= -1;
+        }
+        n.focusT = Math.max(n.focusT - 0.05, 0);
+      }
+    }
+  }
+
+  /* ── Draw ─────────────────────────────────────────────────────────────── */
+  function drawStar(n, i, dimmed) {
+    const { sx, sy, s } = proj(n.x, n.y, n.z);
+    const r  = BASE_R * s;
+    const ft = n.focusT;
+    ctx.save();
+    ctx.globalAlpha = dimmed ? 0.32 : 1.0;
+
+    // glow
+    const glowR = r * (2.0 + ft * 3.0);
+    const glow  = ctx.createRadialGradient(sx, sy, r * 0.1, sx, sy, glowR);
+    glow.addColorStop(0, n.color + (ft > 0.3 ? '55' : '30'));
+    glow.addColorStop(1, n.color + '00');
+    ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+    ctx.fillStyle = glow; ctx.fill();
+
+    // body
+    ctx.beginPath(); ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(3,8,26,${0.78 + ft * 0.18})`;
+    ctx.fill();
+    ctx.strokeStyle = n.color;
+    ctx.lineWidth = 1.6 + ft;
+    ctx.stroke();
+
+    // pulse ring
+    if (ft > 0.05 || i === dragIdx) {
+      const pulse = r + 7 + Math.sin(performance.now() * 0.0025) * 5;
+      ctx.beginPath(); ctx.arc(sx, sy, pulse, 0, Math.PI * 2);
+      ctx.strokeStyle = n.color + Math.floor(Math.max(ft, 0.4) * 88).toString(16).padStart(2, '0');
+      ctx.lineWidth = 1; ctx.stroke();
+    }
+
+    // label
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const fSz = Math.max(Math.round(10 + s * 6), 9);
+    if (ft < 0.4) {
+      ctx.font = `bold ${fSz}px system-ui,sans-serif`;
+      ctx.fillStyle = `rgba(220,235,255,${Math.min(0.4 + s * 0.7, 0.95)})`;
+      ctx.fillText(n.lines[0], sx, sy);
+    } else {
+      const bigSz = Math.min(Math.round(r * 0.22), 15);
+      const lh    = bigSz + 4;
+      ctx.font    = `bold ${bigSz}px system-ui,sans-serif`;
+      ctx.fillStyle = n.color;
+      const subVisible = ft > 0.65;
+      const baseY = sy - (n.lines.length * lh) / 2 - (subVisible ? bigSz * 0.85 : 0);
+      n.lines.forEach((l, j) => ctx.fillText(l, sx, baseY + j * lh));
+      if (subVisible) {
+        const t2 = Math.min((ft - 0.65) / 0.35, 1);
+        ctx.font = `${Math.round(bigSz * 0.76)}px system-ui,sans-serif`;
+        ctx.fillStyle = `rgba(185,210,255,${t2 * 0.78})`;
+        ctx.fillText(n.sub, sx, sy + r * 0.28);
+        ctx.font = `bold ${Math.round(bigSz * 0.82)}px system-ui,sans-serif`;
+        ctx.fillStyle = `rgba(255,255,255,${t2 * 0.9})`;
+        ctx.fillText('→ explore', sx, sy + r * 0.62);
+      }
+    }
+    ctx.restore();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    tick();
+
+    // dust
+    for (const d of dust) {
+      const { sx, sy, s } = proj(d.x, d.y, d.z);
+      if (sx < -4 || sx > cv.width + 4 || sy < -4 || sy > cv.height + 4) continue;
+      ctx.beginPath(); ctx.arc(sx, sy, Math.max(d.r * s, 0.3), 0, Math.PI * 2);
+      const a = Math.min(d.a * s * 1.5, 0.5);
+      ctx.fillStyle = d.hue >= 0 ? `hsla(${d.hue},50%,92%,${a})` : `rgba(255,255,255,${a})`;
+      ctx.fill();
+    }
+
+    // stars back-to-front
+    const order = NAV.map((_, i) => i).sort((a, b) => NAV[b].z - NAV[a].z);
+    for (const i of order) {
+      drawStar(NAV[i], i, focusIdx >= 0 && i !== focusIdx && i !== dragIdx);
+    }
+
+    // hint text at bottom centre of canvas
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.font = '12px system-ui,sans-serif';
+    ctx.fillStyle = 'rgba(200,215,255,0.62)';
+    ctx.shadowColor = 'rgba(0,0,0,0.6)';
+    ctx.shadowBlur  = 4;
+    ctx.fillText(HINT_TEXT, cv.width / 2, cv.height - 8);
+    ctx.restore();
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ── Hit test ─────────────────────────────────────────────────────────── */
+  function hitTest(mx, my) {
+    const order = NAV.map((_, i) => i).sort((a, b) => NAV[a].z - NAV[b].z);
+    for (const i of order) {
+      const { sx, sy, s } = proj(NAV[i].x, NAV[i].y, NAV[i].z);
+      if (Math.hypot(mx - sx, my - sy) <= BASE_R * s + 10) return i;
+    }
+    return -1;
+  }
+
+  function canvasXY(e) {
+    const r = cv.getBoundingClientRect();
+    return [e.clientX - r.left, e.clientY - r.top];
+  }
+
+  function toWorld(sx, sy, z) {
+    const s = FL / (FL + z);
+    return [(sx - cv.width / 2) / s, (sy - cv.height / 2) / s];
+  }
+
+  /* ── Mouse ────────────────────────────────────────────────────────────── */
+  cv.addEventListener('mousedown', e => {
+    const [mx, my] = canvasXY(e);
+    const i = hitTest(mx, my);
+    if (i < 0) return;
+    dragIdx = i; dragMoved = false;
+    const { sx, sy } = proj(NAV[i].x, NAV[i].y, NAV[i].z);
+    dragOfsX = mx - sx; dragOfsY = my - sy;
+    cv.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (dragIdx < 0) {
+      const [mx, my] = canvasXY(e);
+      cv.style.cursor = hitTest(mx, my) >= 0 ? 'grab' : 'default';
+      return;
+    }
+    const [mx, my] = canvasXY(e);
+    dragMoved = true;
+    const n = NAV[dragIdx];
+    const sc    = FL / (FL + n.z);
+    const pad   = BASE_R * sc + 12;
+    const rawSx = mx - dragOfsX, rawSy = my - dragOfsY;
+    // clamp to canvas so star stays reachable
+    const tSx = Math.max(pad, Math.min(cv.width  - pad,              rawSx));
+    const tSy = Math.max(pad, Math.min(cv.height - pad - HINT_BOTTOM, rawSy));
+    const [wx, wy] = toWorld(tSx, tSy, n.z);
+    n.x = wx; n.y = wy;
+    const ratio = Math.min(
+      Math.hypot(tSx - cv.width / 2, tSy - cv.height / 2) / (Math.min(cv.width, cv.height) * 0.5), 1
+    );
+    n.z  += (FOCUS_Z * (1 - ratio) + 350 * ratio - n.z) * 0.06;
+    n.oz  = n.z;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (dragIdx < 0) return;
+    const i = dragIdx; dragIdx = -1;
+    cv.style.cursor = 'default';
+    if (!dragMoved) {
+      if (focusIdx === i) { window.location.href = NAV[i].url; }
+      else { if (focusIdx >= 0) NAV[focusIdx].focusT = 0; focusIdx = i; }
+    } else {
+      NAV[i].ox = NAV[i].x; NAV[i].oy = NAV[i].y;
+      if (focusIdx === i) focusIdx = -1;
+    }
+  });
+
+  cv.addEventListener('click', e => {
+    if (dragMoved) return;
+    const [mx, my] = canvasXY(e);
+    if (hitTest(mx, my) < 0 && focusIdx >= 0) focusIdx = -1;
+  });
+
+  /* ── Touch ────────────────────────────────────────────────────────────── */
+  let tDrag = -1, tMoved = false, tOfsX = 0, tOfsY = 0;
+
+  cv.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const t = e.touches[0], r = cv.getBoundingClientRect();
+    const mx = t.clientX - r.left, my = t.clientY - r.top;
+    const i = hitTest(mx, my); if (i < 0) return;
+    tDrag = i; tMoved = false;
+    const { sx, sy } = proj(NAV[i].x, NAV[i].y, NAV[i].z);
+    tOfsX = mx - sx; tOfsY = my - sy;
+  }, { passive: false });
+
+  cv.addEventListener('touchmove', e => {
+    e.preventDefault(); if (tDrag < 0) return;
+    const t = e.touches[0], r = cv.getBoundingClientRect();
+    const mx = t.clientX - r.left, my = t.clientY - r.top;
+    tMoved = true;
+    const n = NAV[tDrag];
+    const sc    = FL / (FL + n.z);
+    const pad   = BASE_R * sc + 12;
+    const rawSx = mx - tOfsX, rawSy = my - tOfsY;
+    const tSx = Math.max(pad, Math.min(cv.width  - pad,              rawSx));
+    const tSy = Math.max(pad, Math.min(cv.height - pad - HINT_BOTTOM, rawSy));
+    const [wx, wy] = toWorld(tSx, tSy, n.z);
+    n.x = wx; n.y = wy;
+    const ratio = Math.min(
+      Math.hypot(tSx - cv.width / 2, tSy - cv.height / 2) / (Math.min(cv.width, cv.height) * 0.5), 1
+    );
+    n.z += (FOCUS_Z * (1 - ratio) + 350 * ratio - n.z) * 0.06;
+    n.oz = n.z;
+  }, { passive: false });
+
+  cv.addEventListener('touchend', e => {
+    e.preventDefault(); if (tDrag < 0) return;
+    const i = tDrag; tDrag = -1;
+    if (!tMoved) {
+      if (focusIdx === i) { window.location.href = NAV[i].url; }
+      else { if (focusIdx >= 0) NAV[focusIdx].focusT = 0; focusIdx = i; }
+    } else {
+      NAV[i].ox = NAV[i].x; NAV[i].oy = NAV[i].y;
+      if (focusIdx === i) focusIdx = -1;
+    }
+  }, { passive: false });
+
+})();
+</script>
+```

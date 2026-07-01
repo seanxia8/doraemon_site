@@ -1,0 +1,11 @@
+<script>
+(function () {
+  try {
+    var nav = localStorage.getItem('doraemon-nav-width');
+    var toc = localStorage.getItem('doraemon-toc-width');
+    var root = document.documentElement;
+    if (nav) root.style.setProperty('--doraemon-nav-width', nav + 'px');
+    if (toc) root.style.setProperty('--doraemon-toc-width', toc + 'px');
+  } catch (e) {}
+})();
+</script>

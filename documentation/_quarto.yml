@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: ../site/public/documentation
+  resources:
+    - "physics/images/"
 
 bibliography: ../bibliography.bib
 
@@ -41,10 +43,10 @@ book:
     - part: Physics Notes
       chapters:
         - physics/index.qmd
-        - physics/particle-physics.qmd
         - physics/neutrinos.qmd
+        - physics/neutrino-oscillation-calculator.qmd
+        - physics/neutrino-nucleon-interaction.qmd
         - physics/detecting-neutrinos.qmd
-        - physics/neutrino-oscillations.qmd
     - part: Software
       chapters:
         - software/index.qmd
@@ -64,3 +66,5 @@ format:
     number-depth: 3
     link-external-newwindow: true
     css: styles.css
+    include-in-header: sidebar-resize-init.html
+    include-after-body: sidebar-resize.html

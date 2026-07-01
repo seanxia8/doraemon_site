@@ -1,32 +1,35 @@
 ---
-title: Detecting neutrinos
+title: Detecting Neutrinos
+description: Overview for experimental techniques to detect neutrinos and the challenges.
 ---
 
 Now we have established the basics of neutrino physics and how neutrinos interact with matter---the key principles that motivate building particle detectors and observe the neutrino interactions. Here we will introduce two designs of neutrino detectors: **Liquid Argon Time Projection Chamber (LArTPC)** and **Water Cherenkov (WC) Detector**, along with the common instrumentation and readout infrastructure shared across detector technologies.
 
-### LArTPC
+## LArTPC {.unnumbered}
 
-When a charged particle traverses liquid argon, it ionizes the argon atoms along its path and forms electron-ion pairs. Under an applied electric field, the free electrons drift toward the anode to be registered before recombining with the ions — producing charge signals in the correspondence with the ionizing particle trajectories. The amount of ionization per unit length, $dE/dx$, depends on the particle's type, charge, and momentum (Bethe-Bloch, link), and is a key handle for particle identification. However, not all free electrons survive to the anode plane: some recombine with argon ions, a process that depends on both the local electric field strength and the ionization density. Recombination is itself a source of detector systematic uncertainty.
-
-#### Wire and Pixelated Planes
+When a charged particle traverses liquid argon, it ionizes the argon atoms along its path and forms electron-ion pairs. Under an applied electric field, the free electrons drift toward the anode to be registered before recombining with the ions — producing charge signals in the correspondence with the ionizing particle trajectories. The amount of ionization per unit length, $dE/dx$, depends on the particle's type, charge, and momentum ([Bethe-Bloch](https://pdg.lbl.gov/2022/reviews/rpp2022-rev-passage-particles-matter.pdf)), and is a key handle for particle identification. However, not all free electrons survive to the anode plane: some recombine with argon ions, a process that depends on both the local electric field strength and the ionization density. Recombination is itself a source of detector systematic uncertainty.
 
 There are two charge registration strategies in LArTPC: with wire planes or with pixelated collectors.
 
-##### Wire LArTPC
+### Wire LArTPC {.unnumbered}
 
 Each wire plane records a 2D projection of the charge deposition as a function of wire position and drift time. With multiple non-parallel wire planes at different orientations, these 2D projections can be combined to reconstruct a full 3D image of the particle interaction. The reconstructed 3D charge distribution encodes both $dE/dx$ along each track and the overall topology of the event. This constitutes the challenges in LArTPC event reconstruction: from the 2D wire readouts, via intermediate steps to classify trajectories and cluster particles/interactions, to infer the end physics quantities such as particle ID and momentum for physics analyses.
 
-##### Pixel LArTPC
+::: {style="text-align: center; margin-top: 1.5rem; margin-bottom: 1.5rem;"}
+![Neutrino interaction in a LArTPC. The anode wire planes are denoted as "U, V, and W". The neutrino interaction is shown on the left-hand side, while the signal recorded from the drifting electrons by the wire planes is shown on the right. Credit: [DUNE](https://wp.lancs.ac.uk/dune/dune-uk/experimental-setup/)](images/lartpc_scheme.png){style="width: max(500px, min(60%, 100%));"}
+:::
+
+### Pixel LArTPC {.unnumbered}
 
 Blablabla.....
 
-#### Scintillation Light in LArTPC
+### Scintillation Light in LArTPC {.unnumbered}
 
 Liquid argon is also an efficient scintillator. Charged particles excite argon atoms, which form short-lived excited dimers called **excimers**. These excimers decay and emit vacuum ultraviolet (VUV) photons at 128 nm in two components: a **fast component** ($\sim$ 5 ns) from the singlet state and a **slow component** ($\sim$ 1.5 μs) from the triplet state. The scintillation light response time is much faster than the charge drift time (usually on the order of mili-seconds) and thus can be a powerful trigger for an interaction in the detector---the absolute time of the interaction that is essential for anchoring the 3D reconstruction in the drift direction.
 
 In practice, the 128 nm VUV photons are invisible to standard photosensors and are strongly absorbed by most materials, including the argon itself if any impurities are present. A **wavelength shifter** — typically tetraphenyl butadiene (TPB) — is coated on detector surfaces to absorb the VUV photons and re-emit them in the visible range ($\sim$ 430 nm).
 
-### WC Detectors
+## WC Detectors {.unnumbered}
 
 When a charged particle travels through water faster than the speed of light in that medium ($v > c/n$, where $n \approx 1.33$ is the refractive index of water), it emits **Cherenkov radiation** — a coherent electromagnetic shockwave analogous to a sonic boom. The photons are emitted at a characteristic angle $\cos\theta_C = 1/\beta n$ relative to the particle's direction, forming a cone that projects as a ring on the surrounding detector walls. The geometry of this ring — its radius, sharpness, and opening angle — encodes the particle's velocity, direction, and vertex position.
 
@@ -34,7 +37,7 @@ Particle identification in WC detectors relies on the morphology of the Cherenko
 
 ------
 
-#### Photomultiplier Tubes (PMTs)
+### Photomultiplier Tubes (PMTs) {.unnumbered}
 
 Both LArTPC and WC detectors rely on **photomultiplier tubes (PMTs)** to detect photons. A photon striking the photocathode ejects a photoelectron via the photoelectric effect, which is then accelerated through a series of **dynodes** — electrodes at successively higher voltages — each of which produces secondary electron emission. The resulting amplified charge pulse at the anode constitutes the detector's raw light signal. The response to a single photon is called the **single photoelectron (SPE)** response, and its precise characterization — amplitude, width, and gain — is a critical calibration input.
 
@@ -42,25 +45,25 @@ The key performance parameters of a PMT are its **quantum efficiency** (the prob
 
 ------
 
-#### Electronics, Trigger, and Data Acquisition
+### Electronics, Trigger, and Data Acquisition {.unnumbered}
 
 The analog signals are digitized by **Analog-to-Digital Converters (ADCs)**, which sample the continuous voltage waveform and produce a discrete time series of integer counts. **Time-to-Digital Converters (TDCs)** record the precise timing of threshold-crossing events. The raw output of both is a **waveform**: a digitized record of voltage versus time for each channel, from which physics quantities — charge, timing, hit multiplicity — must be extracted by downstream software.
 
 The **trigger system** is the first layer of online event selection: it determines whether to write the data on tape based on the pre-defined condition. It can be the detector realtime condition, e.g. number of hit PMTs, or physics knowledge, e.g. 1 $\mu s$ prior to the beam arrival time. The **Data Acquisition (DAQ)** system then reads out the full detector within a defined time window around the trigger, buffers the data, and writes it to permanent storage. The design of the trigger directly determines what physics is accessible.
 
-### Detector Effects
+## Detector Effects {.unnumbered}
 
 No detector is ideal. Every physical process that converts a neutrino interaction into a recorded waveform introduces distortions — some correctable, others subtle and difficult to model. Understanding these effects is not a secondary concern: they determine the fidelity of the experimental results. Any mis-modeling here propagates directly into reconstruction and ultimately into the physics measurement.
 
 ------
 
-#### Geometric Effects
+### Geometric Effects {.unnumbered}
 
 The physical layout of a detector introduces acceptance non-uniformities that are easy to underestimate. In LArTPCs, the cathode can deform under its own weight or thermal contraction, producing local field distortions that cause drifting electrons to arrive at different positions at the anode. In WC detectors, PMTs do not cover the full detector wall and the local coverage varies, e.g. between the edge and center of a detector. Interactions near PMT edges or in poorly covered regions are reconstructed with degraded vertex and energy resolution, creating position-dependent biases that must be mapped and corrected.
 
 ------
 
-#### TPC-Specific Effects
+### TPC-Specific Effects {.unnumbered}
 
 In a multi-wire TPC, each wire records the integrated charge from all ionization passing nearby — it does not resolve individual electrons along the drift direction. When a particle travels in the direction parallel to a wire, it can create many fake intersections with other wires in the time-wire 2D plane and result in **ghost points** — spurious space points that do not correspond to any real particle trajectory. The process to remove such false signals is called **de-ghosting**, and is of the great importance since this is the very first step in wire LArTPC event reconstruction.
 
@@ -68,18 +71,18 @@ Drifting electrons are subject to two additional smearing effects. **Longitudina
 
 ------
 
-#### Water Cherenkov-Specific Effects
+### Water Cherenkov-Specific Effects {.unnumbered}
 
 Cherenkov photons produced in a WC detector are subject to **scattering**, which redirects them without absorption, and **absorption**, which removes them entirely. Photons arriving at the PMTs and the supporting structures will also be **reflected**, causing delayed time signals hidden in the prompt ones. Scattering smears the apparent origin of photons arriving at the PMT,  biasing vertex reconstruction. Absorption and reflections modify the detected photon yield, affecting energy resolution. Both effects depend on the wavelength of the photon and the optical purity of the water, which varies with time as the water recirculation and purification system operates. Precise knowledge of the wavelength-dependent scattering and absorption lengths is therefore a time-varying calibration requirement, not a fixed detector constant.
 
 ------
 
-#### Common Instrumental Effects
+### Common Instrumental Effects {.unnumbered}
 
 Every photosensor introduces its own smearing. PMTs have an intrinsic **transit time spread (TTS)** — a stochastic jitter in the time between photon arrival and anode pulse — that limits timing resolution and broadens reconstructed hit times. At low light levels, the PMT's SPE response has a finite width, meaning that even a single photon produces a distribution of measured charges rather than a fixed value. **In LArTPCs using wavelength shifters, the re-emission process itself introduces a timing delay and an additional smearing in photon arrival time that must be modeled.** The downstream digitization electronics — ADCs, cables — add further contributions. **Baseline noise, gain non-linearity, and inter-channel cross-talk** all distort the raw waveform before any physics reconstruction begins.
 
 ------
 
-#### Operational Effects
+### Operational Effects {.unnumbered}
 
 Several effects arise not from the detector design itself but from operational conditions that evolve over time. In LArTPCs, **impurities** capture drifting electrons before they reach the anode plane, reducing the collected charge in proportion to the drift distance and the impurity concentration. This **electron lifetime** must be continuously monitored and corrected for, and any drift in purity between calibration runs introduces a time-dependent systematic. In all detectors, photosensors produce **dark noise** — spurious pulses from thermal electron emission at the photocathode — at a low but non-negligible rate, which can fake low-energy hits or raise the effective trigger threshold. Finally, **dead channels** — wires, pixels, or PMTs that have failed or been disabled — create regions of the detector with no sensitivity, producing characteristic gaps in reconstructed events that must be accounted for in both the MC simulation and the data analysis.

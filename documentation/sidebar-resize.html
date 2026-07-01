@@ -1,0 +1,106 @@
+<script>
+(function () {
+  var MIN_NAV = 180, MAX_NAV = 420, DEFAULT_NAV = 260;
+  var MIN_TOC = 140, MAX_TOC = 340, DEFAULT_TOC = 210;
+
+  function clamp(v, lo, hi) {
+    return Math.min(hi, Math.max(lo, v));
+  }
+
+  function currentWidth(varName, fallback) {
+    var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(varName));
+    return Number.isFinite(v) ? v : fallback;
+  }
+
+  function setWidth(varName, px) {
+    document.documentElement.style.setProperty(varName, px + 'px');
+  }
+
+  function attach(handle, varName, storageKey, min, max, sign) {
+    var dragging = false;
+    var startX = 0;
+    var startWidth = 0;
+
+    function move(e) {
+      if (!dragging) return;
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      setWidth(varName, clamp(startWidth + (clientX - startX) * sign, min, max));
+    }
+
+    function stop() {
+      if (!dragging) return;
+      dragging = false;
+      document.body.classList.remove('doraemon-resizing');
+      try {
+        localStorage.setItem(storageKey, String(currentWidth(varName, startWidth)));
+      } catch (e) {}
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', stop);
+    }
+
+    handle.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      startX = e.clientX;
+      startWidth = currentWidth(varName, min);
+      document.body.classList.add('doraemon-resizing');
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', stop);
+      e.preventDefault();
+    });
+
+    handle.addEventListener('dblclick', function () {
+      var def = storageKey === 'doraemon-nav-width' ? DEFAULT_NAV : DEFAULT_TOC;
+      setWidth(varName, def);
+      try {
+        localStorage.removeItem(storageKey);
+      } catch (e) {}
+    });
+
+    handle.addEventListener('keydown', function (e) {
+      var step = 10;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      var delta = (e.key === 'ArrowRight' ? step : -step) * sign;
+      var next = clamp(currentWidth(varName, min) + delta, min, max);
+      setWidth(varName, next);
+      try {
+        localStorage.setItem(storageKey, String(next));
+      } catch (e2) {}
+    });
+  }
+
+  function makeHandle(id, className) {
+    var el = document.createElement('div');
+    el.id = id;
+    el.className = 'doraemon-resize-handle ' + className;
+    el.setAttribute('role', 'separator');
+    el.setAttribute('aria-orientation', 'vertical');
+    el.setAttribute('aria-label', 'Resize sidebar');
+    el.setAttribute('tabindex', '0');
+    return el;
+  }
+
+  function init() {
+    var nav = document.getElementById('quarto-sidebar');
+    var toc = document.getElementById('quarto-margin-sidebar');
+
+    if (nav && !document.getElementById('doraemon-nav-handle')) {
+      var navHandle = makeHandle('doraemon-nav-handle', 'doraemon-resize-handle-nav');
+      nav.appendChild(navHandle);
+      attach(navHandle, '--doraemon-nav-width', 'doraemon-nav-width', MIN_NAV, MAX_NAV, 1);
+    }
+
+    if (toc && !document.getElementById('doraemon-toc-handle')) {
+      var tocHandle = makeHandle('doraemon-toc-handle', 'doraemon-resize-handle-toc');
+      toc.insertBefore(tocHandle, toc.firstChild);
+      attach(tocHandle, '--doraemon-toc-width', 'doraemon-toc-width', MIN_TOC, MAX_TOC, -1);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
